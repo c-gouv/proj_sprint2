@@ -31,25 +31,22 @@ Produtores de trigo e empresas de transporte de trigo;
 
 ## 🖇️ Colaboradores
 
-Higor Tupinambá: <a href="https://github.com/higortupi/fitteyatech" target="_blank"><img align="center" height="30" width="40" alt="logo GitHub" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
+Erick Gomes: <a href="https://github.com/higortupi/fitteyatech" target="_blank"><img align="center" height="30" width="40" alt="logo GitHub" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
 </a>
 
-Henrique Olivier: <a href="https://github.com/higortupi/fitteyatech" target="_blank"><img align="center" height="30" width="40" alt="logo GitHub" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
+Pedro Piovani: <a href="https://github.com/higortupi/fitteyatech" target="_blank"><img align="center" height="30" width="40" alt="logo GitHub" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
 </a>
 
-Daniel Dalbelo: <a href="https://github.com/higortupi/fitteyatech" target="_blank"><img align="center" height="30" width="40" alt="logo GitHub" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
+Isaque Borges: <a href="https://github.com/higortupi/fitteyatech" target="_blank"><img align="center" height="30" width="40" alt="logo GitHub" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
 </a>
 
-Felippe Augusto: <a href="https://github.com/higortupi/fitteyatech" target="_blank"><img align="center" height="30" width="40" alt="logo GitHub" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
+Kauã Gouvea: <a href="https://github.com/higortupi/fitteyatech" target="_blank"><img align="center" height="30" width="40" alt="logo GitHub" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
 </a>
 
-Felipe Rocha: <a href="https://github.com/higortupi/fitteyatech" target="_blank"><img align="center" height="30" width="40" alt="logo GitHub" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
+Joao Victor: <a href="https://github.com/higortupi/fitteyatech" target="_blank"><img align="center" height="30" width="40" alt="logo GitHub" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
 </a>
 
-Anilmar Choque: <a href="https://github.com/higortupi/fitteyatech" target="_blank"><img align="center" height="30" width="40" alt="logo GitHub" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
-</a>
-
-Guilherme Neris: <a href="https://github.com/higortupi/fitteyatech" target="_blank"><img align="center" height="30" width="40" alt="logo GitHub" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
+Lucas Godoi: <a href="https://github.com/higortupi/fitteyatech" target="_blank"><img align="center" height="30" width="40" alt="logo GitHub" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
 </a>
 
 

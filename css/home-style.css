@@ -19,7 +19,8 @@ h1 {
     font-size: 4vw;
 }
 p {
-    margin-top: 5.5vh
+    margin-top: 5.5vh;
+    font-weight: 200;
 }
 .mainBt {
     /* box-shadow: 0 4px 1.5vw 0 #915921; */

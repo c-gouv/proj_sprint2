@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitteya Tech | Home</title>
+    <link rel="stylesheet" href="../css/default.css">
+    <link rel="stylesheet" href="../css/contato.css">
+    <link rel="shortcut icon" href="../img/banana.svg" type="image/x-icon">
+</head>
+
+<body>
+    <div class="back">
+        <header>
+            <nav class="navbar">
+                <div class="navbarLogo">
+                    <img src="../img/logo.svg">
+                    Fitteya Tech
+                </div>
+                <div class="navbarButtons">
+                    <ul>
+                        <a href="home.html">Início</a>
+                        <a href="sobrenos.html">Sobre Nós</a>
+                        <a href="contato.html">Contato</a>
+                        <a href="nossahistoria.html">Nossa História</a>
+                        <a href="calc.html">Simulador Financeira</a>
+                    </ul>
+                    <img src="../img/linkedIn.png" alt="LinkedIn">
+                    <img src="../img/instagram.png" alt="Instagram">
+                    <img src="../img/facebook.png" alt="Facebook">
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <div class="div1">
+            <h1>Vamos conversar.<BR>
+                Fale conosco sobre<br>
+                o seu projeto</h1></div>
+                <div class="div2">
+                    <h2>Nos mande uma mensagem</h2><br>
+                    <input type="text" placeholder="Nome da empresa"><br><br>
+                    <input type="text" placeholder="Seu email"><br><br>
+                    <input type="text" placeholder="Assunto"><br><br>
+                    <input type="text" placeholder="Nos conte mais sobre o seu projeto" class="inputgg"><br><br>
+                    <button onclick="enviar()">Enviar mensagem</button>
+                </div>
+        </div>
+        <br>
+    </div>
+</body>
+</html>
+
+<script>
+    function enviar(){
+        alert(`Mensagem enviada com sucesso! Em breve retornaremos!`)
+    }
+</script>

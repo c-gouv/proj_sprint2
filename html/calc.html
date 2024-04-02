@@ -6,62 +6,52 @@
   <title>Fitteya Tech | Simulador</title>
   <link rel="stylesheet" href="../css/default.css">
   <link rel="stylesheet" href="../css/calc-style.css">
-  <link rel="shortcut icon" href="../img/logo.svg" type="image/x-icon">
+  <link rel="shortcut icon" href="../img/logo.svg">
 </head>
 <body>
-  <div class="back">
+    <div class="back">
     <header>
-      <nav class="navbar">
-        <div class="navbarLogo">
-          <img src="../img/logo.svg">
-          Fitteya Tech
-        </div>
-        <div class="navbarButtons">
-          <ul>
-            <a href="home.html">Início</a>
-            <a  href="sobrenos.html">Sobre Nós</a>
-            <a href="contato.html">Contato</a>
-            <a href="nossahistoria.html">Nossa História</a>
-            <a href="calc.html">Simulador Financeira</a>
-          </ul>
-          <img src="../img/linkedIn.png" alt="LinkedIn">
-          <img src="../img/instagram.png" alt="Instagram">
-          <img src="../img/facebook.png" alt="Facebook">
-        </div>
-
-      </nav>
+        <nav class="navbar">
+            <div class="navbarLogo">
+                <img src="../img/logo.svg">
+                Fitteya Tech
+            </div>
+            <div class="navbarButtons">
+                <ul>
+                    <a href="home.html">Início</a>
+                    <a href="sobre.html">Sobre Nós</a>
+                    <a href="contato.html">Contato</a>
+                    <a href="hist.html">Nossa História</a>
+                    <a href="calc.html">Simulador Financeira</a>
+                </ul>
+                <img src="../img/linkedIn.png">
+                <img src="../img/instagram.png">
+                <img src="../img/facebook.png">
+            </div>
+        </nav>
     </header>
 
     <main>
-      <div id="result" class="container_dados">
-        <div id="voltar" class="container-inputs">
-          <div class="input-select">
-            <span class="span-input">Total de trigo colhido no último ano:</span> <br>
-            <input type="number" id="input_totalTrigo">
-            <select id="select_totalTrigo">
-              <option value="t">Toneladas</option>
-              <option value="kg">Quilogramas</option>
-              <option value="sacas">Sacas</option>
-            </select> <br> <br>
-          </div>
-          <div>
-            <span class="span-input">Quantos hectares você planeja plantar na próxima safra?</span> <br>
-            <input type="number" id="input_proximaSafra"> <br> <br>
-          </div>
-          <div>
-            <span class="span-input">Porcentagem de perdas no transporte e armazenamento:</span> <br>
-            <input type="number" id="input_perdas"> <br>
-            <span class="legenda-input">Caso este campo esteja vazio utilizaremos uma média, definida pelo CONAB</span> <br> <br>
-          </div>
-
-          <div class="div_button">
-            <button onclick="calcularInvestimento()">Calcular Investimento</button>
-          </div>
+        <div id="voltar" class="formCalc">
+            <img src="../img/logo.svg" class="formCalcLogo">
+            <h3>Total de trigo colhido no último ano:</h3>
+            <div class="formCalcSelect">
+                <input type="number" id="input_totalTrigo" placeholder="*">
+                <select id="select_totalTrigo">
+                    <option value="t">Toneladas</option>
+                    <option value="kg">Quilogramas</option>
+                    <option value="sacas">Sacas</option>
+                </select>
+            </div>
+            <h3>Quantos hectares você planeja plantar na próxima safra?</h3>
+            <input type="number" id="input_proximaSafra" placeholder="*">
+            <h3>Porcentagem de perdas no transporte e armazenamento:</h3>
+            <input type="number" id="input_perdas" placeholder="Opcional">
+            <button class="formCalcButton" onclick="calcularInvestimento()">Calcular Investimento</button>
         </div>
-      </div>
       <div id="botao"></div>
     </main>
-  </div>
+    </div>
 </body>
 
 </html>

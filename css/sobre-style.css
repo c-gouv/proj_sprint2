@@ -1,0 +1,29 @@
+h1 {
+    margin: 0;
+    margin-bottom: 1.9vh;
+}
+.left {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.6vw;
+    padding-right: 1.5vw
+}
+
+.content p {
+    margin: 0;
+    font-weight: 400;
+    white-space: normal;
+}
+.main {
+    padding-inline: 7.7vw;
+    padding-top: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.main img {
+    border-radius: 1.3vw;
+    height: 60vh;
+    align-items: center;
+}

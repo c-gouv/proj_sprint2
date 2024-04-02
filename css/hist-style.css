@@ -1,0 +1,32 @@
+.back{
+    background-color: rgba(32, 102, 61, 0.7);
+    height: 100%;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 20vw;
+}
+
+.container p {
+    font-weight: 400;
+    margin-top: 0;
+    white-space: normal;
+}
+.container a {
+    font-weight: 400;
+    margin-bottom: 1.5vw;
+    text-align: center;
+}
+
+h1 {
+    align-self: center;
+    font-size: 3vw;
+    margin: 0;
+    margin-bottom: 0.5vw;
+}
+
+h3 {
+    margin: 0;
+    color: #ffda82;
+}

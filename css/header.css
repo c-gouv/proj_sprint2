@@ -42,6 +42,18 @@ body{
     align-items: center;
     width: max-content;
 }
+.navbarButtons span {
+    padding-block: 0.3vw;
+    border: 0.2vw solid #936639;
+    border-radius: 20px;
+    transition: background-color 0.5s ease;
+    color: #266041;
+}
+.navbarButtons span:hover {
+    background-color: rgb(147, 102, 57,0.5);
+    transition: background-color 0.4s ease, color 1s ease;
+    cursor: pointer;
+}
 .navbarButtons img{
     width: 1.5vw;
     margin-inline: 0.7vw;

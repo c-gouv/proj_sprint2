@@ -1,0 +1,36 @@
+main {
+    color: #888888;
+}
+h3 {
+    margin: 0;
+}
+.container {
+    padding: 10px;
+    border: 1.5px solid #24282b;
+    border-radius: 5px;
+    background-color: #181b1f;
+    width: max-content;
+    margin: 10px;
+}
+.containerData {
+    display: flex;
+    flex-direction: row;
+}
+.containerSection {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    /* margin-inline:10px; */
+}
+.containerSection img{
+    width: 300px;
+}
+.containerSection span {
+    text-align: left;
+    color: #888888;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+#umidade {
+    margin-right: 40px;
+}

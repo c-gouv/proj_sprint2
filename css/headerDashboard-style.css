@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "DM Sans", sans-serif;
+    background-color: #101214;
+    font-size: 1.3vw;
+    color: #fff;
+    font-weight: 600;
+    overflow-x: hidden;
+}
+header {
+    border-bottom: 1px solid white;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    margin-inline: 5vw;
+    align-items: center;
+    height: 11vh;
+}
+.navbarLogo img{
+    width: 3.3vw;
+    margin-right: 0.8vw;
+}
+.navbarButtons{
+    display: flex;
+    align-items: center;
+    width: max-content;
+}
+.navbarButtons span {
+    padding-block: 0.3vw;
+    border: 0.2vw solid #936639;
+    border-radius: 2vw;
+    transition: background-color 0.5s ease;
+    color: #266041;
+}
+.navbarButtons span:hover {
+    background-color: rgb(147, 102, 57,0.5);
+    transition: background-color 0.4s ease, color 1s ease;
+    cursor: pointer;
+}
+.navbarButtons a{
+    margin-inline: 1.5vw;
+    font-size: 1.3vw;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}

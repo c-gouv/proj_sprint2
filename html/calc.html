@@ -49,7 +49,12 @@
             <input type="number" id="input_perdas" placeholder="Opcional">
             <button class="formCalcButton" onclick="calcularInvestimento()">Calcular Investimento</button>
         </div>
-      <div id="botao"></div>
+        <div class="formResult">
+          <img src="../img/logo.svg" class="formCalcLogo">
+          <span id="formResultText">
+
+          </span>
+        </div>
     </main>
     </div>
 </body>
@@ -57,18 +62,11 @@
 </html>
 
 <script>
-
-  function voltarText() {
-    window.location.reload()
-  }
-
   function calcularInvestimento() {
-    var totalTrigo = Number(input_totalTrigo.value)
-    var perdas = Number(input_perdas.value)
-    var valorTrigo = 1238.12
-    var mediaColheita = 3.144
-    var tonelada = 'tonelada'
-    var toneladaPerda = 'tonelada'
+    const totalTrigo = Number(input_totalTrigo.value)
+    let perdas = Number(input_perdas.value)
+    const valorTrigo = 1238.12
+    const mediaColheita = 3.144
     
 
     if (select_totalTrigo.value == 'kg') {
@@ -98,16 +96,7 @@
       var lucro = ganhosAnual - ganhosProximaSafra
     }
 
-    
     var lucroPorcentagem = ((ganhosProximaSafra - ganhosAnual) / ganhosAnual) * 100
-
-    if (totalPerda > 1.99) {
-      toneladaPerda = 'toneladas'
-    }
-
-    if (totalTrigo > 1.99) {
-      tonelada = 'toneladas'
-    }
 
     if (totalTrigo == 0) {
       alert("Preencha o primeiro campo corretamente!!")
@@ -124,43 +113,15 @@
     prejuizoFormatado = prejuizo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
     ganhosProximaSafraFormatado = ganhosProximaSafra.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
     lucroFormatado = lucro.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
-      result.innerHTML =
-        `<div class="container-result">
-        <h2>Informações sobre o trigo</h2>
-        <p>
-          Total de Trigo no Ano: <b>${totalTrigo} ${tonelada}</b> <br>
-          Total de perdas: <b>${totalPerda} ${toneladaPerda}</b> <br>
-          Potencial da próxima safra: <b>${proximaSafra.toFixed(3)} toneladas</b> <br>
-        </p>
-        <p>Para evitar uma <b class="perda">perda de ${perdaProximaSafra} toneladas</b>, junte-se a nós! </p>
-        </div>
-
-        <div class="container-result">
-        <h1>CUIDADO</h1>
-        <p>
-        Você pode <b class="perda">perder ${prejuizoProximaSafraFormatado}</b> se não cuidar da <b>temperatura e umidade</b> do seu trigo.
-        </p>
-        <p>Mas não se preocupe, <b>a Fitteya Tech cuidará disso para você!</b>
-        </p>
-        </div>
-
-        <div class="container-result">
-        <h2>Informações sobre o dinheiro</h2>
-        <p>
-        Ganho anual: <b>${ganhosAnualFormatado}</b> <br>
-        Prejuízo: <b>${prejuizoFormatado}</b> <br>
-        Possíveis ganhos da próxima safra: <b class="lucro"> <br>${ganhosProximaSafraFormatado}</b> <br>
-        </p>
-        <p>Utilizando nossa tecnologia você pode <b class="lucro">ganhar ${lucroFormatado}</b> a mais na próxima safra,
-        isso é um <b class="lucro">aumento de ${lucroPorcentagem.toFixed(2)}%</b> em um ano! <p>
-        </div>
-      `
-
-      botao.innerHTML = `<div class="div_button btn_voltar">
-          <button onclick="voltarText()">Voltar</button>
-        </div>`
+      formResultText.innerHTML =
+      `Sua potencial para a próxima safra: ${proximaSafra.toFixed(2)} Toneladas<br>
+      o que dão ${ganhosProximaSafraFormatado}, porém você pode perder até 
+      ${prejuizoProximaSafraFormatado} se não cuidar da temperatura e umidade do seu 
+      trigo. Mas não se preocupe, a Fitteya Tech pode te ajudar a resolver isso!
+      <br><br>
+      Utilizando nossa tecnologia você pode aumentar seu lucro em até
+      ${lucroFormatado} a mais na próxima safra, isso é um aumento de 
+      ${lucroPorcentagem.toFixed(2)}% no ano!`
     }
   }
-
-
 </script>

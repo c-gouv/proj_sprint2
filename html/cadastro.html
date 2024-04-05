@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitteya Tech | Nossa História</title>
+    <title>Fitteya Tech | Cadastro</title>
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/cadastro.css">
     <link rel="shortcut icon" href="../img/logo.svg">
@@ -32,21 +32,15 @@
         </header>
         <div class="container">
             <div class="elementos">
-                <h1>Insira seus dados para se cadastrar:</h1><br><br>
+                <h1>Insira seus dados para se cadastrar:</h1><br>
                 <div class="div1">
                 <input type="text" id="input_nome" placeholder="Nome completo">
-                <input type="text" id="input_email" placeholder="Email"><br><br></div>
+                <input type="text" id="input_email" placeholder="Email">
+                <input type="password" id="input_senha" placeholder="Senha">
+                <input type="password" id="input_confirmar" placeholder="Confirmar senha"></div>
 
-                <div class="div2">
-                <input id="input_telefone" placeholder="Telefone">
-                <input id="input_cep" placeholder="CEP"><br><br></div>
-
-                <div class="div3">
-                <input type="text" id="input_senha" placeholder="Senha">
-                <input type="text" id="input_confirmar" placeholder="Confirmar senha"><br><br><br></div>
-
-                <div class="buttons"><button>Cadastrar-se</button><br>
-                    <a href="login.html" id="login">Voltar ao login  
+                <div class="buttons"><button class="botao1" onclick="cadastrar()">Cadastrar-se</button>
+                    <a href="login.html" id="login">Já tem um cadastro? Voltar ao login  
                     </a>
                 </div>
 
@@ -58,5 +52,9 @@
 </html>
 
 <script>
-
+function cadastrar(){
+    const nome = input_nome.value 
+    alert(`Usuário cadastrado com sucesso! Bem-vindo ${nome}`)
+    window.location.href="login.html"
+}
 </script>

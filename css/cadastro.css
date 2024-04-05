@@ -1,0 +1,70 @@
+input {
+    
+    border: 0px solid;
+    border-radius: 10px;
+    width: 270px;
+    height: 30px;
+    font-weight: bold;
+    margin-left: 15px;
+    padding: 5px ;
+}
+
+button{
+    border: 0px solid;
+    border-radius: 10px;
+    background-color: rgb(31, 194, 31);
+    color: white;
+    height: 35px;
+    width: 100px;
+    font-weight: bold;
+}
+
+button:hover{
+    background-color: rgb(4, 53, 4);
+    transition: 0.5s;
+    cursor:pointer;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #936639;
+    border-radius: 15px;
+    width: 600px;
+    margin: auto;
+    padding: 15px;
+
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.buttons a {
+    color: white;
+    text-decoration: none; 
+    cursor: pointer; 
+
+}
+
+.elementos {
+    margin-bottom: 15px;
+    
+}
+
+.div1{
+    display:flex;
+}
+
+.div2{
+    display: flex;
+}
+
+.div3{
+    display: flex;
+}

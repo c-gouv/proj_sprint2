@@ -1,5 +1,7 @@
 main {
     color: #888888;
+    display: flex;
+    flex-direction: row;
 }
 h3 {
     margin: 0;
@@ -33,4 +35,11 @@ h3 {
 }
 #umidade {
     margin-right: 40px;
+}
+.sensorList {
+    height: 87vh;
+    width: 20.9vw;
+}
+.sensorListItem {
+    border-bottom: 1px solid #24282b;
 }

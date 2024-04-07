@@ -51,10 +51,13 @@
     function logar(){
         const email = input_email.value
         const senha = input_senha.value
+        const arroba = email.indexOf("@")
 
         if (email == '' || senha == ''){
             alert(`Insira valores válidos`)
-        } else{
+        } else if(arroba <0){
+          alert(`Seu email precisar conter um "@"`)
+        }else{
      window.location.href="dashboard.html"
         }
         }

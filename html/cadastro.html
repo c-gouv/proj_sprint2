@@ -40,8 +40,8 @@
                 <input type="password" id="input_confirmar" placeholder="Confirmar senha"></div>
 
                 <div class="buttons"><button class="botao1" onclick="cadastrar()">Cadastrar-se</button>
-                    <a href="login.html" id="login">Já tem um cadastro? Voltar ao login  
-                    </a>
+                    <p >Já tem um cadastro? <a class="spanvoltar" href="login.html" id="login">Voltar ao login </a> 
+                    </p>
                 </div>
 
             </div>
@@ -54,7 +54,19 @@
 <script>
 function cadastrar(){
     const nome = input_nome.value 
+    const email = input_email.value
+    const senha = input_senha.value
+    const confirmar = input_confirmar.value
+
+    if(nome == '' || email == '' || senha ==''|| confirmar ==''){
+        alert(`Insira dados válidos`)
+    } else if(senha.lenght >=10 && senha == confirmar){
     alert(`Usuário cadastrado com sucesso! Bem-vindo ${nome}`)
     window.location.href="login.html"
+    } else {
+        alert(`
+        Sua senha deve conter no mínimo 10 caracteres
+        Sua senha deve conter um caracter especial`)
+    }
 }
 </script>

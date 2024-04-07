@@ -49,14 +49,9 @@ button:hover{
 .buttons a {
     color: white;
     text-decoration: none; 
-    cursor: pointer; 
 
 }
 
-.buttons a:hover{
-    text-decoration: underline;
-    color: #eeeded;
-}
 
 .elementos {
     display: flex;
@@ -74,3 +69,7 @@ button:hover{
     gap: 15px; /*espaço entre todos os elementos*/
 }
 
+.spanvoltar:hover {
+color: rgb(255, 166, 0);
+text-decoration: underline;
+}

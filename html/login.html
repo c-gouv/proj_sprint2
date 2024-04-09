@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitteya Tech | Nossa História</title>
+    <title>Fitteya Tech | Login</title>
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/login.css">
     <link rel="shortcut icon" href="../img/logo.svg">
@@ -34,7 +34,11 @@
             <div class="elementos">
                 <h2>Login:</h2><br><br>
                 <input type="text" id="input_email" placeholder="Email"><br><br>
-                <input type="password" id="input_senha" placeholder="Senha"><br><br><br>
+                <div class="password-container">
+                    <input type="password" id="input_senha" placeholder="Senha">
+                    <span toggle="#input_senha" class="eye-toggle"></span>
+                </div>
+                <br><br>
                 <div class="buttons">
                     <button id="btn_entrar" onclick="logar()">Entrar</button><br>
                     <p>Não tem um login? <a href="cadastro.html" id="cadastro" class="acad">Cadastre-se </a> 
@@ -48,17 +52,35 @@
 </html>
 
 <script>
-    function logar(){
+    document.querySelectorAll('.eye-toggle').forEach((toggle) => {
+        toggle.addEventListener('click', function () {
+            const input = document.querySelector(this.getAttribute('toggle'));
+            if (input.getAttribute('type') === 'password') {
+                input.setAttribute('type', 'text');
+                this.classList.add('active');
+            } else {
+                input.setAttribute('type', 'password');
+                this.classList.remove('active');
+            }
+        });
+    });
+
+    function logar() {
         const email = input_email.value
         const senha = input_senha.value
         const arroba = email.indexOf("@")
+        const ponto = email.indexOf(".com")
 
-        if (email == '' || senha == ''){
+        if (email == '' || senha == '') {
             alert(`Insira valores válidos`)
-        } else if(arroba <0){
-          alert(`Seu email precisar conter um "@"`)
-        }else{
-     window.location.href="dashboard.html"
+        } else if (arroba < 0 && ponto < 0) {
+            alert(`Seu email precisar conter um "@" e um ".com"`)
+        } else if (arroba < 0) {
+            alert(`Seu email precisar conter um "@"`)
+        } else if (ponto < 0) {
+            alert(`Seu email precisar conter um ".com"`)
+        } else {
+            window.location.href = "dashboard.html"
         }
-        }
+    }
 </script>

@@ -61,14 +61,23 @@
         const arroba = senha.indexOf("@")
         const cifrao = senha.indexOf("$")
         const velha = senha.indexOf("#")
+        const exclamacao = senha.indexOf("!")
+        const int = senha.indexOf("?")
         const arrob = email.indexOf("@")
+        const ponto = email.indexOf(".com")
+
 
         if (nome == '' || email == '' || senha == '' || confirmar == '') {
             alert(`Insira dados válidos`)
 
-        } else if (arrob < 0) {
+        }else if (arrob < 0 && ponto <0) {
+            alert(`
+            Seu email deve conter um "@" e um ".com"`)
+        }  else if (arrob < 0) {
             alert(`Seu email deve conter um "@"`)
-        } else if (senha.length < 10 && arroba < 0 && cifrao < 0 && velha < 0) {
+        } else if (ponto < 0) {
+            alert(`Seu email deve conter um ".com"`)
+        } else if (senha.length < 10 && arroba < 0 && cifrao < 0 && velha < 0 && exclamacao <0 && int <0) {
             alert(` 
         Sua senha deve conter no mínimo 10 caracteres!
         Sua senha deve conter pelo menos 1 caracter especial!
@@ -76,12 +85,12 @@
         } else if (senha.length < 10) {
             alert(`
         Sua senha deve conter no mínimo 10 caracteres!`)
-        } else if (arroba < 0 && cifrao < 0 && velha < 0) {
+        } else if (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao <0 && int <0) {
             alert(`Sua senha deve conter pelo menos 1 caracter especial!`)
         } else if (senha != confirmar || confirmar != senha) {
             alert(`Suas senhas precisam estar iguais!`)
         }
-        else if ((senha.length >= 10 && senha === confirmar) && (arroba >= 0 || cifrao >= 0 || velha >= 0) && (arrob >= 0)) {
+        else if ((senha.length >= 10 && senha === confirmar) && (arroba >= 0 || cifrao >= 0 || velha >= 0 || exclamacao >=0 || int >=0) && (arrob >= 0 && ponto >=0)) {
             alert(`Usuário cadastrado com sucesso! Bem-vindo ${nome}`)
             window.location.href = "login.html"
         }

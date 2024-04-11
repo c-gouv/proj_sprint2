@@ -1,13 +1,21 @@
 CREATE DATABASE fitteya;
 USE fitteya;
 
--- CRIAR UMA TABELA DE CADASTRO DE USUÁRIO/RESPONSÁVEL DA EMPRESA, ONDE 1 USUÁRIO PODE TER MAIS DE UMA EMPRESA
+
 CREATE TABLE usuario(
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45),
     email VARCHAR(45),
-    telefone CHAR(11)
+    telefone CHAR(11),
+    senha VARCHAR(244)
 );
+
+INSERT INTO usuario VALUES 
+	(default, 'Carlinhos', 'carlinhos@gmail.com', '11999999999', 'fa2d4e0f016d8fcaf758d307c857b3e3'),
+	(default, 'João Victor', 'joao@gmail.com', '11999999998', '3dfcab79ed21fd89c9eb25e9864a6155'),
+	(default, 'Erick Gomes', 'erick@gmail.com', '11999999997', '4da77e6afb73aaaabd18cdfe8d3e0262'),
+	(default, 'Cauã Gouvea', 'gouvea@gmail.com', '11999999996', '0e3a650faff671a35b335526bae4aa05');
+
 
 -- COMPLEXO - CONJUNTO DE SILOS
 CREATE TABLE complexo(
@@ -18,45 +26,32 @@ CREATE TABLE complexo(
     logradouro VARCHAR(50) NOT NULL,
     numero INT NOT NULL,
     fkUsuario INT,
-    CONSTRAINT fkEmpresaUsuario FOREIGN KEY (fkUsuario) REFERENCES idUsuario(idUsuario)
+    CONSTRAINT fkEmpresaUsuario FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario)
 );
 
-INSERT INTO empresa
-VALUES  (default, 'TrigoBrasil', 'contato@trigobrasil.com', '5512345678', 'email', 'João Silva', 'SP', 'São Paulo', 'Rua das Trigoiras', 123, null),
-        (default, 'TrigoForte', 'info@trigoforte.com', '5543219876', 'telefone', 'Ana Oliveira', 'RS', 'Porto Alegre', 'Avenida do Trigo', 456, null),
-        (default, 'GrãosPampas', 'sac@graospampas.com', '5588996655', 'email', 'Pedro Santos', 'RS', 'Caxias do Sul', 'Rua dos Grãos', 789, null),
-        (default, 'MoinhoReal', 'atendimento@moinhoreal.com', '5577889900', 'telefone', 'Maria Fernandes', 'PR', 'Curitiba', 'Avenida do Moinho', 321, null);
-
-CREATE TABLE contatoSite(
-    idContatoSite INT PRIMARY KEY AUTO_INCREMENT,
-    empresa VARCHAR(100),
-    email VARCHAR(200) NOT NULL,
-    assunto VARCHAR(100) NOT NULL,
-    mensagem VARCHAR(500) NOT NULL
-);
+INSERT INTO complexo
+VALUES  (default, 'TrigoBrasil',  'SP', 'São Paulo', 'Rua das Trigoiras', 123, 1),
+        (default, 'TrigoForte', 'RS', 'Porto Alegre', 'Avenida do Trigo', 456, 2),
+        (default, 'GrãosPampas', 'RS', 'Caxias do Sul', 'Rua dos Grãos', 789, 3),
+        (default, 'MoinhoReal', 'PR', 'Curitiba', 'Avenida do Moinho', 321, 4);
 
 CREATE TABLE silo ( 
     idSilo INT PRIMARY KEY AUTO_INCREMENT,
-    estado CHAR(2) NOT NULL,
-    cidade VARCHAR(50) NOT NULL,
+    nome VARCHAR(45),
+    temperaturaMax DECIMAL(4, 2),
+    temperaturaMin DECIMAL(4, 2),
+    umidadeMax DECIMAL (4, 2),
+    umidadeMin DECIMAL (4, 2),
     fkComplexo INT,
-    fkTipoTrigo INT,
-    CONSTRAINT fkComplexoSilo FOREIGN KEY (fkComplexo) REFERENCES complexo(idComplexo),
-    CONSTRAINT fkTrigoSilo FOREIGN KEY (fkTipoTrigo) REFERENCES tipoTrigo(idTipoTrigo)
+    CONSTRAINT fkComplexoSilo FOREIGN KEY (fkComplexo) REFERENCES complexo(idComplexo)
 );
 
-INSERT INTO silo 
-VALUES  (default, 'RS', 'Porto Alegre', 2),
-        (default, 'RS', 'Caxias do Sul', 3),
-        (default, 'SP', 'São Paulo', 1),    
-        (default, 'PR', 'Curitiba', 4);    
-        
-CREATE TABLE tiposTrigo(
-	idTipoTrigo INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(50) NOT NULL,
-    temperaturaIdeal DECIMAL(4,2),
-    humidadeIdeal DECIMAL(4,2)
-);
+INSERT INTO silo VALUES  
+	(default, 'SILO 1', 20.00, 00.00, 18.00, 00.00, 1),
+	(default, 'SILO 2', 15.00, 00.00, 13.00, 00.00, 2),
+	(default, 'SILO 3', 30.00, 00.00, 16.00, 00.00, 3),
+	(default, 'SILO 4', 20.00, 00.00, 10.00, 00.00, 4);
+
 
 CREATE TABLE sensor (
     idSensor INT PRIMARY KEY AUTO_INCREMENT,
@@ -68,9 +63,7 @@ INSERT INTO sensor
 VALUES  (default, 1),
         (default, 2),
         (default, 3),
-        (default, 4),
-        (default, 3),
-        (default, 2);
+        (default, 4);
 
 CREATE TABLE monitoramento ( 
     idMonitoramento INT PRIMARY KEY AUTO_INCREMENT,
@@ -85,16 +78,32 @@ INSERT INTO monitoramento
 VALUES  (default, 14.23, 10.00,'2024-03-21 13:30:00', 1),
         (default, 20.24, 12.00,'2024-03-20 10:45:00', 2),
         (default, 25.25, 25.00,'2024-03-19 14:00:30', 3),
-        (default, 18.20, 13.00,'2024-03-18 12:00:00', 4),
-        (default, 13.12, 10.00,'2024-03-17 11:45:30', 5),
-        (default, 16.02, 9.0,'2024-03-16 10:20;50', 6);
+        (default, 18.20, 13.00,'2024-03-18 12:00:00', 4);
         
+SELECT * FROM usuario;
+SELECT * FROM complexo;
+SELECT * FROM silo;
+SELECT * FROM sensor;
+SELECT * FROM monitoramento;
 
-SELECT nome FROM complexo;
+SELECT usuario.nome as usuarioName, complexo.nome as complexoNome, silo.*, sensor.idSensor, monitoramento.* 
+FROM usuario JOIN complexo ON complexo.fkUsuario = usuario.idUsuario
+JOIN silo ON silo.fkComplexo = complexo.idComplexo
+JOIN sensor ON sensor.fkSilo = silo.idSilo
+JOIN monitoramento ON monitoramento.fkSensor = sensor.idSensor; 
+        
+  
+        
+CREATE TABLE contatoSite(
+    idContatoSite INT PRIMARY KEY AUTO_INCREMENT,
+    empresa VARCHAR(100),
+    email VARCHAR(200) NOT NULL,
+    assunto VARCHAR(100) NOT NULL,
+    mensagem VARCHAR(500) NOT NULL
+);
 
-SELECT estado, cidade FROM silo;
+INSERT INTO contatoSite VALUES 
+	(default, 'TrigoBrasil', 'contato@trigobrasil.com', 'Contrato', 'Gostaria de mais informações'),
+	(default, 'TrigoCeara', 'contato@trigoceara.com', 'Contrato', 'Gostaria de mais informações'),
+	(default, 'TrigoSãoPaulo', 'contato@trigosaopaulo.com', 'Contrato', 'Gostaria de mais informações');
 
-SELECT silo.idSilo, complexo.nome, temperatura, humidade FROM monitoramento
-JOIN sensor ON sensor.idSensor = monitoramento.fkSensor
-JOIN silo ON sensor.fkSilo = silo.idSilo
-JOIN complexo ON complexo.fkSilo = complexo.idComplexo;

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/cadastro.css">
     <link rel="shortcut icon" href="../img/logo.svg">
+    <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -26,35 +27,50 @@
                         <a href="hist.html">Nossa História</a>
                         <a href="calc.html">Simulador Financeira</a>
                     </ul>
-                    <span><a href="login.html">Login</a></span>
+                    <button onclick="loginScreen()">Login</button>
                 </div>
             </nav>
         </header>
-        <div class="container">
-            <div class="elementos">
-                <h1>Insira seus dados para se cadastrar:</h1><br>
-                <div class="div1">
-                    <input type="text" id="input_nome" placeholder="Nome completo">
-                    <input type="text" id="input_email" placeholder="Email">
-                    <input type="password" id="input_senha" placeholder="Senha">
-                    <input type="password" id="input_confirmar" placeholder="Confirmar senha">
+        <main>
+            <div class="container">
+                <div class="elementos">
+                    <h1>Cadastre-se</h1>
+                    <div class="fieldList">
+                        <div style="position: relative;">
+                            <input type="text" id="input_user" placeholder="Usuário">
+                            <i class="fa-solid fa-user icon-position"></i>
+                        </div>
+                        <div style="position: relative;">
+                            <input type="text" id="input_email" placeholder="Email">
+                            <i class="fa-solid fa-envelope icon-position"></i>
+                        </div>
+                        <div style="position: relative;">
+                            <input type="password" id="input_senha" placeholder="Senha">
+                            <i class="fa-solid fa-lock icon-position"></i>
+                        </div>
+                        <div style="position: relative;">
+                            <input type="password" id="input_confirmar" placeholder="Confirmar senha">
+                            <i class="fa-solid fa-lock icon-position"></i>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button class="botao1" onclick="cadastrar()">Cadastrar-se</button>
+                        <span>Já tem um cadastro? <a class="spanvoltar" href="login.html" id="login">Voltar ao login</a></span>
+                    </div>
                 </div>
-
-                <div class="buttons"><button class="botao1" onclick="cadastrar()">Cadastrar-se</button>
-                    <p>Já tem um cadastro? <a class="spanvoltar" href="login.html" id="login">Voltar ao login </a>
-                    </p>
-                </div>
-
             </div>
-        </div>
+        </main>
     </div>
 </body>
 
 </html>
 
 <script>
+    function loginScreen() {
+        window.location.href = "login.html"
+    }
     function cadastrar() {
-        const nome = input_nome.value
+        const user = input_user.value
         const email = input_email.value
         const senha = input_senha.value
         const confirmar = input_confirmar.value
@@ -66,8 +82,7 @@
         const arrob = email.indexOf("@")
         const ponto = email.indexOf(".com")
 
-
-        if (nome == '' || email == '' || senha == '' || confirmar == '') {
+        if (user == '' || email == '' || senha == '' || confirmar == '') {
             alert(`Insira dados válidos`)
 
         }else if (arrob < 0 && ponto <0) {
@@ -91,7 +106,7 @@
             alert(`Suas senhas precisam estar iguais!`)
         }
         else if ((senha.length >= 10 && senha === confirmar) && (arroba >= 0 || cifrao >= 0 || velha >= 0 || exclamacao >=0 || int >=0) && (arrob >= 0 && ponto >=0)) {
-            alert(`Usuário cadastrado com sucesso! Bem-vindo ${nome}`)
+            alert(`Usuário cadastrado com sucesso! Bem-vindo!`)
             window.location.href = "login.html"
         }
     }

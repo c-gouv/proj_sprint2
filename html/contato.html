@@ -26,7 +26,7 @@
                         <a href="hist.html">Nossa História</a>
                         <a href="calc.html">Simulador Financeira</a>
                     </ul>
-                    <span><a href="./login.html">Login</a></span>
+                    <button onclick="loginScreen()">Login</button>
                 </div>
             </nav>
         </header>
@@ -40,7 +40,7 @@
                     <input type="text" placeholder="Seu email" class="form-field">
                     <input type="text" placeholder="Assunto" class="form-field">
                     <textarea type="text" placeholder="Nos conte mais sobre o seu projeto" class="form-field form-field-msg"></textarea>
-                    <button onclick="enviar()">Enviar mensagem</button>
+                    <button onclick="enviar()" id="enviar">Enviar mensagem</button>
                 </div>
         </div>
     </div>
@@ -48,7 +48,10 @@
 </html>
 
 <script>
-    function enviar(){
-        alert(`Mensagem enviada com sucesso! Em breve retornaremos!`)
-    }
+function loginScreen() {
+    window.location.href = "login.html"
+}
+function enviar(){
+    alert(`Mensagem enviada com sucesso! Em breve retornaremos!`)
+}
 </script>

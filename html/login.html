@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/login.css">
     <link rel="shortcut icon" href="../img/logo.svg">
+    <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -26,45 +27,40 @@
                         <a href="hist.html">Nossa História</a>
                         <a href="calc.html">Simulador Financeira</a>
                     </ul>
-                    <span><a href="./login.html">Login</a></span>
+                    <button onclick="loginScreen()">Login</button>
                 </div>
             </nav>
         </header>
-        <div class="container">
-            <div class="elementos">
-                <h2>Login:</h2><br><br>
-                <input type="text" id="input_email" placeholder="Email"><br><br>
-                <div class="password-container">
-                    <input type="password" id="input_senha" placeholder="Senha">
-                    <span toggle="#input_senha" class="eye-toggle"></span>
-                </div>
-                <br><br>
-                <div class="buttons">
-                    <button id="btn_entrar" onclick="logar()">Entrar</button><br>
-                    <p>Não tem um login? <a href="cadastro.html" id="cadastro" class="acad">Cadastre-se </a> 
-                    </p>
+        <main>
+            <div class="container">
+                <div class="elementos">
+                    <h1>Login</h1>
+                    <div>
+                        <div style="position: relative">
+                            <input type="text" id="input_email" placeholder="Email">
+                            <i class="fa-solid fa-envelope icon-position"></i>
+                        </div>
+                        <div style="position: relative"">
+                            <input type="password" id="input_senha" placeholder="Senha">
+                            <i class="fa-solid fa-lock icon-position"></i>
+                        </div>
+                        <span><a>Esqueceu a senha?</a></span>
+                    </div>
+                    <div class="buttons">
+                        <button id="btn_entrar" onclick="logar()">Entrar</button>
+                        <span>Não tem um login? <b><a href="cadastro.html" id="cadastro"> Cadastre-se</a></b></span>
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
-
 </body>
 </html>
 
 <script>
-    document.querySelectorAll('.eye-toggle').forEach((toggle) => {
-        toggle.addEventListener('click', function () {
-            const input = document.querySelector(this.getAttribute('toggle'));
-            if (input.getAttribute('type') === 'password') {
-                input.setAttribute('type', 'text');
-                this.classList.add('active');
-            } else {
-                input.setAttribute('type', 'password');
-                this.classList.remove('active');
-            }
-        });
-    });
-
+    function loginScreen() {
+        window.location.href = "login.html"
+    }
     function logar() {
         const email = input_email.value
         const senha = input_senha.value

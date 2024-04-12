@@ -1,75 +1,99 @@
-input {
-    
-    border: 0px solid;
-    border-radius: 10px;
-    width: 270px;
-    height: 30px;
-    font-weight: bold;
-    margin-left: 15px;
-    padding: 5px ;
-}
-
-button{
-    border: 0px solid;
-    border-radius: 10px;
-    background-color: rgb(31, 194, 31);
-    color: white;
-    font-weight: bold;
-    padding: 10px 20px;
-}
-
-button:hover{
-    background-color: rgb(4, 53, 4);
-    transition: 0.5s;
-    cursor:pointer;
-}
-
-.container {
+main {
+    height: 86vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    background-color: #936639;
-    border-radius: 15px;
-    width: 500px;
-    margin: auto;
-    padding: 10px;
-    text-align: center;
-
+    justify-content: center;
 }
-
-.buttons {
+input {
+    width: 300px;
+    height: 30px;   
+    margin-top: 20px;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 30px;
+    padding: 10px 10px 10px 10px;
+    box-sizing: border-box;
+    height: 45px;
+    color: white;
+}
+input::placeholder{
+    color: white;
+}
+h1{
+    margin:0
+}
+.container {
+    width: max-content;
+    height: max-content;
+    margin: auto;
+    box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 23px 35px 20px 35px;
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.buttons{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-top: 20px ;
-    gap: 15px;
+    margin-top: 20px;
 }
-
-.buttons a {
+.buttons button {
+    height: 43px;
+    width: 300px;
+    border: 0px;
+    border-radius: 20px;
+    font-weight: bold;
+    padding: 10px 20px;
+    color: #1fc21f;
+    background-color: white;
+    transition: background-color 0.3s ease, color 0.5s ease;
+}
+.buttons button:hover {
+    transition: background-color 0.3s ease, color 0.5s ease;
     color: white;
-    text-decoration: none; 
-
+    background-color: #1fc21f;
+    cursor:pointer;
 }
-
-
+.buttons span {
+    margin-top: 10px;
+}
 .elementos {
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin-bottom: 5px;
     align-items: center;
-    
 }
-
-.div1{
+.elementos span {
+    font-weight: 200;
+    font-size: 14px;
+}
+#login {
+    font-weight: bold;
+}
+.fieldList{
     display: flex;
     flex-direction: column;
     text-align: center;
-    gap: 15px; /*espaço entre todos os elementos*/
 }
-
+.spanvoltar {
+    color: white;
+    text-decoration: none;
+    transition:color 0.2s ease;
+}
 .spanvoltar:hover {
-color: rgb(255, 166, 0);
+color: #1fc21f;
 text-decoration: underline;
+transition:color 0.2s ease;
+}
+.icon-position {
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 18px;
 }

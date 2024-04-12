@@ -8,15 +8,18 @@
     <link rel="stylesheet" href="../css/dashboard-style.css">
     <link rel="shortcut icon" href="../img/logo.svg">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="navbarLogo">
                 <img src="../img/logo.svg">
+                DASHBOARD
             </div>
             <div class="navbarButtons">
-                <span><a href="./home.html">Sair</a></span>
+                <i class="fa-solid tema fa-moon" id="icon" onclick="mudarTema()"></i>
+                <button class="exitButton" onclick="voltarHome()">Sair</button>
             </div>
         </nav>
     </header>
@@ -39,7 +42,7 @@
             <h3>Sensores</h3>
             <div class="sensorListItem" target="A">
                 Sensor Silo 1
-                <button id="btnSensor">Banana A</button>
+                <button id="btnSensor">Selecionar</button>
             </div>
         </div>
         <div class="container sensorList">
@@ -50,6 +53,18 @@
 </html>
 
 <script>
+    function voltarHome() {
+        window.location.href="home.html"
+    }
+    function mudarTema() {
+      let icon = document.getElementById("icon");
+      let iconAtual = icon.classList.contains("fa-moon") ? "fa-moon" : "fa-sun";
+      let novoIcon = iconAtual === "fa-moon" ? "fa-sun" : "fa-moon";
+      document.body.classList.toggle("light-theme");
+      icon.classList.remove(iconAtual);
+      icon.classList.add(novoIcon);
+    }
+
     // Dados de exemplo
     const hours = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
     const humidityData = [65, 63, 62, 61, 60, 59, 58, 57, 58, 60, 62, 64, 66, 68, 70, 72, 70, 68, 66, 64, 62, 60, 58, 57];

@@ -1,17 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
+:root {
+    --cor-primaria: #101214;
+    --cor-secundaria: #181b1f;
+    --cor-borda: #24282b;
+    --cor-texto: #888888;
+    --cor-destaque: #ffda82;
+    --cor-destaque-hover: rgba(255, 218, 130, 0.562);
+    --cor-ne: white
+}
+.light-theme{
+    --cor-primaria: #999999;
+    --cor-secundaria: #cccccc;
+    --cor-borda: rgb(29, 29, 29,0.5);
+    --cor-texto: #3a3a3a;
+    --cor-destaque: #936639;
+    --cor-destaque-hover: rgb(147, 102, 57,0.5);
+    --cor-ne: black;
+}
 body{
     margin: 0;
     padding: 0;
     font-family: "DM Sans", sans-serif;
-    background-color: #101214;
+    background-color: var(--cor-primaria);
     font-size: 1.3vw;
-    color: #fff;
+    color: var(--cor-ne);
     font-weight: 600;
     overflow-x: hidden;
 }
 header {
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid var(--cor-borda);
 }
 .navbar{
     display: flex;
@@ -20,31 +38,45 @@ header {
     align-items: center;
     height: 11vh;
 }
+.navbarLogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
 .navbarLogo img{
     width: 3.3vw;
     margin-right: 0.8vw;
 }
 .navbarButtons{
     display: flex;
+    justify-content: center;
+    height: 100%;
     align-items: center;
     width: max-content;
 }
-.navbarButtons span {
-    padding-block: 0.3vw;
-    border: 0.2vw solid #936639;
-    border-radius: 2vw;
-    transition: background-color 0.5s ease;
-    color: #266041;
-}
-.navbarButtons span:hover {
-    background-color: rgb(147, 102, 57,0.5);
-    transition: background-color 0.4s ease, color 1s ease;
-    cursor: pointer;
-}
-.navbarButtons a{
+.exitButton {
+    background-color: transparent;
+    border: 0.2vw solid var(--cor-destaque);
     margin-inline: 1.5vw;
+    color: var(--cor-ne);
     font-size: 1.3vw;
-    color: #fff;
     text-decoration: none;
     font-weight: 500;
+    padding-block: 0.4vw;
+    padding-inline: 1.3vw;
+    border-radius: 2vw;
+    transition: background-color 0.5s ease;
+}
+.exitButton:hover {
+    background-color: var(--cor-destaque-hover);
+    cursor: pointer;
+    transition: background-color 0.4s ease;
+}
+.tema{
+    margin-right: 20px;
+    font-size: 25px;
+}
+.tema:hover {
+    cursor: pointer;
 }

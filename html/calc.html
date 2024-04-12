@@ -30,29 +30,28 @@
     </header>
 
     <main>
-        <div id="voltar" class="formCalc">
-            <img src="../img/logo.svg" class="formCalcLogo">
-            <h3>Total de trigo colhido no último ano:</h3>
-            <div class="formCalcSelect">
-                <input type="number" id="input_totalTrigo" placeholder="*">
-                <select id="select_totalTrigo">
-                    <option value="t">Toneladas</option>
-                    <option value="kg">Quilogramas</option>
-                    <option value="sacas">Sacas</option>
-                </select>
-            </div>
-            <h3>Quantos hectares você planeja plantar na próxima safra?</h3>
-            <input type="number" id="input_proximaSafra" placeholder="*">
-            <h3>Porcentagem de perdas no transporte e armazenamento:</h3>
-            <input type="number" id="input_perdas" placeholder="Opcional">
-            <button class="formCalcButton" onclick="calcularInvestimento()">Calcular Investimento</button>
+      <div id="voltar" class="formCalc">
+        <img src="../img/logo.svg" class="formCalcLogo">
+        <h3>Capacidade de armazenamento por silo:</h3>
+        <div class="formCalcSelect">
+          <input type="number" id="capArmazenamento" placeholder="Insira o valor">
+          <select id="Capacidade">
+            <option value="ton">Toneladas</option>
+            <option value="kg">Quilogramas</option>
+          </select>
         </div>
-        <div class="formResult">
-          <img src="../img/logo.svg" class="formCalcLogo">
-          <span id="formResultText">
+        <h3>Quantidade de silos total:</h3>
+        <input type="number" id="siloTotal" placeholder="Insira a quantidade">
+        <h3>Por quanto é vendido a saca:</h3>
+        <input type="number" id="valorSaca" placeholder="R$ 00,00">
+        <button class="formCalcButton" onclick="calcularInvestimento()">Iniciar Simulação</button>
+      </div>
+      <div class="formResult">
+        <img src="../img/logo.svg" class="formCalcLogo">
+        <span style="color: black;" id='exibir'>
 
-          </span>
-        </div>
+        </span>
+      </div>
     </main>
     </div>
 </body>
@@ -64,65 +63,25 @@
     window.location.href = "login.html"
   }
   function calcularInvestimento() {
-    const totalTrigo = Number(input_totalTrigo.value)
-    let perdas = Number(input_perdas.value)
-    const valorTrigo = 1238.12
-    const mediaColheita = 3.144
-    
+    let capacidadePorSilo = Number(capArmazenamento.value)
+    const qtdSilo = Number(siloTotal.value)
+    const valor = Number(valorSaca.value)
 
-    if (select_totalTrigo.value == 'kg') {
-      totalTrigo = totalTrigo / 1000
-    }
-    else if (select_totalTrigo.value == 'sacas') {
-      totalTrigo = (totalTrigo * 60) / 1000
+    if (Capacidade.value == 'ton') {
+      capacidadePorSilo = capacidadePorSilo * 1000
     }
 
-    if (input_perdas.value == '') {
-      perdas = 24
-    }
+    let qtdTrigo = qtdSilo * capacidadePorSilo
+    let qtdSacas = qtdTrigo / 60
+    let perdaTrigo = qtdTrigo * 0.2
+    let producaoReais = qtdTrigo * valor
+    let perdaProducao = producaoReais * 0.2
 
-    var perdaPorcentagem = perdas / 100
-    var totalPerda = totalTrigo * perdaPorcentagem
-    var proximaSafra = input_proximaSafra.value * mediaColheita
-    var prejuizoProximaSafra = (proximaSafra * perdaPorcentagem) * valorTrigo
-    var perdaProximaSafra = proximaSafra * perdaPorcentagem
-    var ganhosAnual = (totalTrigo - totalPerda) * valorTrigo
-    var prejuizo =  totalPerda * valorTrigo
-    var ganhosProximaSafra = proximaSafra * valorTrigo
-
-    if(ganhosProximaSafra >= ganhosAnual){
-      var lucro = ganhosProximaSafra - ganhosAnual
-    }
-    else{
-      var lucro = ganhosAnual - ganhosProximaSafra
-    }
-
-    var lucroPorcentagem = ((ganhosProximaSafra - ganhosAnual) / ganhosAnual) * 100
-
-    if (totalTrigo == 0) {
-      alert("Preencha o primeiro campo corretamente!!")
-    }
-    else if (proximaSafra == 0) {
-      alert("Preencha o segundo campo corretamente!!")
-    }
-    else if (perdas > 100) {
-      alert("O valor das perdas não pode ultrapassar 100%")
-    }
-    else {
-    prejuizoProximaSafraFormatado = prejuizoProximaSafra.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
-    ganhosAnualFormatado = ganhosAnual.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
-    prejuizoFormatado = prejuizo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
-    ganhosProximaSafraFormatado = ganhosProximaSafra.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
-    lucroFormatado = lucro.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
-      formResultText.innerHTML =
-      `Sua potencial para a próxima safra: ${proximaSafra.toFixed(2)} Toneladas<br>
-      o que dão ${ganhosProximaSafraFormatado}, porém você pode perder até 
-      ${prejuizoProximaSafraFormatado} se não cuidar da temperatura e umidade do seu 
-      trigo. Mas não se preocupe, a Fitteya Tech pode te ajudar a resolver isso!
-      <br><br>
-      Utilizando nossa tecnologia você pode aumentar seu lucro em até
-      ${lucroFormatado} a mais na próxima safra, isso é um aumento de 
-      ${lucroPorcentagem.toFixed(2)}% no ano!`
-    }
+    exibir.innerHTML += `CONSIDERE UMA PERDA MÉDIA DE <span style="color:#FF0000">20%</span> DURANTE O ARMAZENAMENTO SEGUNDO A EMBRAPA<br>
+	<br>SITUAÇÃO:<br> 
+	- Quantidade de Trigo perdido: <span style="color:#FF0000">${perdaTrigo}</span><br>
+	- Quantidade em dinheiro perdido: <span style="color:#FF0000"> ${perdaProducao}</span><br>
+  <br>Não ter dados precisos de umidade e temperatura abre as portas para o surgimento de fungos e pragas em sua produção.
+  Com a Fitteya, tenha essas informações ao seu alcance com um dashboard em tempo real e gráficos que mostram o histórico de coletas anteriores.`
   }
 </script>

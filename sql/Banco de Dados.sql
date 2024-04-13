@@ -1,7 +1,7 @@
 CREATE DATABASE fitteya;
 USE fitteya;
 
-
+-- CRIAR UMA TABELA DE CADASTRO DE USUÁRIO/RESPONSÁVEL DA EMPRESA, ONDE 1 USUÁRIO PODE TER MAIS DE UM COMPLEXO
 CREATE TABLE usuario(
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45),
@@ -69,9 +69,28 @@ CREATE TABLE monitoramento (
     idMonitoramento INT PRIMARY KEY AUTO_INCREMENT,
     temperatura DECIMAL(4,2),
     humidade DECIMAL(4,2),
+    dataHora DATETIME,
+    fkSensor INT,
+    CONSTRAINT fkSensorMonitoramento FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor) 
+);
+
+CREATE TABLE historico(
+	idHistorico INT PRIMARY KEY AUTO_INCREMENT,
+    temperatura DECIMAL(4,2),
+    humidade DECIMAL(4,2),
     data DATETIME,
     fkSensor INT,
     CONSTRAINT fkSensorMonitoramento FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor) 
+);
+
+CREATE TABLE alerta(
+	idAlerta INT PRIMARY KEY AUTO_INCREMENT,
+    motivo VARCHAR(100),
+    dataHora DATETIME,
+    temperaturaMomento DECIMAL(4,2),
+    humidadeMomento DECIMAL(4,2),
+    fkSensor INT,
+    CONSTRAINT fkSensorAlerta FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor)
 );
 
 INSERT INTO monitoramento

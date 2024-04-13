@@ -13,14 +13,14 @@ button{
     font-weight: bold;
     height: 43px;
     width: 100px;
-    color:  #dba933;
+    color:  #eeb122;
     background-color: white;
-    transition: background-color 0.5s ease, color 0.5s ease;
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 button:hover{
-    transition: background-color 0.5s ease, color 0.5s ease;
+    transition: background-color 0.4s ease, color 0.4s ease;
     color: white;
-    background-color: #d3ab4d;
+    background-color: #eeb122;
     cursor: pointer;
 }
 .container {

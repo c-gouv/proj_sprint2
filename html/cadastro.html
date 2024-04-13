@@ -25,7 +25,7 @@
                         <a href="sobre.html">Sobre Nós</a>
                         <a href="contato.html">Contato</a>
                         <a href="hist.html">Nossa História</a>
-                        <a href="calc.html">Simulador Financeira</a>
+                        <a href="calc.html">Simulador Financeiro</a>
                     </ul>
                     <button onclick="loginScreen()">Login</button>
                 </div>
@@ -52,7 +52,8 @@
                             <input type="password" id="input_confirmar" placeholder="Confirmar senha">
                             <i class="fa-solid fa-lock icon-position"></i>
                         </div>
-                    </div>
+                    </div><br>
+                    <div id="exibir" style="color: red;"></div>
                     <div class="buttons">
                         <button class="botao1" onclick="cadastrar()">Cadastrar-se</button>
                         <span>Já tem um cadastro? <a class="spanvoltar" href="login.html" id="login">Voltar ao login</a></span>
@@ -82,32 +83,29 @@
         const arrob = email.indexOf("@")
         const ponto = email.indexOf(".com")
 
-        if (user == '' || email == '' || senha == '' || confirmar == '') {
-            alert(`Insira dados válidos`)
+        const exibir = document.getElementById('exibir');
 
-        }else if (arrob < 0 && ponto <0) {
-            alert(`
-            Seu email deve conter um "@" e um ".com"`)
-        }  else if (arrob < 0) {
-            alert(`Seu email deve conter um "@"`)
+        if (user == '' || email == '' || senha == '' || confirmar == '') {
+            exibir.innerHTML = 'Insira dados válidos';
+
+        } else if (arrob < 0 && ponto < 0) {
+            exibir.innerHTML = 'Seu email deve conter um "@" e um ".com"';
+        } else if (arrob < 0) {
+            exibir.innerHTML = 'Seu email deve conter um "@"';
         } else if (ponto < 0) {
-            alert(`Seu email deve conter um ".com"`)
-        } else if (senha.length < 10 && arroba < 0 && cifrao < 0 && velha < 0 && exclamacao <0 && int <0) {
-            alert(` 
-        Sua senha deve conter no mínimo 10 caracteres!
-        Sua senha deve conter pelo menos 1 caracter especial!
-        `)
+            exibir.innerHTML = 'Seu email deve conter um ".com"';
+        } else if (senha.length < 10 && arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) {
+            exibir.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres!<br>';
+            exibir.innerHTML += 'Sua senha 1 caracter especial!';
         } else if (senha.length < 10) {
-            alert(`
-        Sua senha deve conter no mínimo 10 caracteres!`)
-        } else if (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao <0 && int <0) {
-            alert(`Sua senha deve conter pelo menos 1 caracter especial!`)
+            exibir.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres!';
+        } else if (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) {
+            exibir.innerHTML = 'Sua senha deve conter pelo menos 1 caracter especial!';
         } else if (senha != confirmar || confirmar != senha) {
-            alert(`Suas senhas precisam estar iguais!`)
-        }
-        else if ((senha.length >= 10 && senha === confirmar) && (arroba >= 0 || cifrao >= 0 || velha >= 0 || exclamacao >=0 || int >=0) && (arrob >= 0 && ponto >=0)) {
-            alert(`Usuário cadastrado com sucesso! Bem-vindo!`)
-            window.location.href = "login.html"
+            exibir.innerHTML = 'Suas senhas precisam estar iguais!';
+        } else if ((senha.length >= 10 && senha === confirmar) && (arroba >= 0 || cifrao >= 0 || velha >= 0 || exclamacao >= 0 || int >= 0) && (arrob >= 0 && ponto >= 0)) {
+            exibir.innerHTML = 'Usuário cadastrado com sucesso! Bem-vindo!';
+            window.location.href = "login.html";
         }
     }
 </script>

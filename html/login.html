@@ -25,7 +25,7 @@
                         <a href="sobre.html">Sobre Nós</a>
                         <a href="contato.html">Contato</a>
                         <a href="hist.html">Nossa História</a>
-                        <a href="calc.html">Simulador Financeira</a>
+                        <a href="calc.html">Simulador Financeiro</a>
                     </ul>
                     <button onclick="loginScreen()">Login</button>
                 </div>
@@ -45,7 +45,8 @@
                             <i class="fa-solid fa-lock icon-position"></i>
                         </div>
                         <span><a>Esqueceu a senha?</a></span>
-                    </div>
+                    </div><br>
+                    <div id="exibir" style="color: red;"></div>
                     <div class="buttons">
                         <button id="btn_entrar" onclick="logar()">Entrar</button>
                         <span>Não tem um login? <b><a href="cadastro.html" id="cadastro"> Cadastre-se</a></b></span>
@@ -67,16 +68,18 @@
         const arroba = email.indexOf("@")
         const ponto = email.indexOf(".com")
 
+        const exibir = document.getElementById('exibir');
+
         if (email == '' || senha == '') {
-            alert(`Insira valores válidos`)
+            exibir.innerHTML = 'Insira valores válidos';
         } else if (arroba < 0 && ponto < 0) {
-            alert(`Seu email precisar conter um "@" e um ".com"`)
+            exibir.innerHTML = 'Seu email precisar conter um "@" e um ".com"';
         } else if (arroba < 0) {
-            alert(`Seu email precisar conter um "@"`)
+            exibir.innerHTML = 'Seu email precisar conter um "@"';
         } else if (ponto < 0) {
-            alert(`Seu email precisar conter um ".com"`)
+            exibir.innerHTML = 'Seu email precisar conter um ".com"';
         } else {
-            window.location.href = "dashboard.html"
+            window.location.href = "dashboard.html";
         }
     }
 </script>

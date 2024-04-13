@@ -86,7 +86,7 @@
         const exibir = document.getElementById('exibir');
 
         if (user == '' || email == '' || senha == '' || confirmar == '') {
-            exibir.innerHTML = 'Insira dados válidos';
+            exibir.innerHTML = 'Preencha todos os campos!';
 
         } else if (arrob < 0 && ponto < 0) {
             exibir.innerHTML = 'Seu email deve conter um "@" e um ".com"';
@@ -96,7 +96,7 @@
             exibir.innerHTML = 'Seu email deve conter um ".com"';
         } else if (senha.length < 10 && arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) {
             exibir.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres!<br>';
-            exibir.innerHTML += 'Sua senha 1 caracter especial!';
+            exibir.innerHTML += 'Sua senha deve conter no minimo 1 caracter especial!';
         } else if (senha.length < 10) {
             exibir.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres!';
         } else if (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) {
@@ -104,7 +104,7 @@
         } else if (senha != confirmar || confirmar != senha) {
             exibir.innerHTML = 'Suas senhas precisam estar iguais!';
         } else if ((senha.length >= 10 && senha === confirmar) && (arroba >= 0 || cifrao >= 0 || velha >= 0 || exclamacao >= 0 || int >= 0) && (arrob >= 0 && ponto >= 0)) {
-            exibir.innerHTML = 'Usuário cadastrado com sucesso! Bem-vindo!';
+            alert('Usuário cadastrado com sucesso! Bem-vindo!')
             window.location.href = "login.html";
         }
     }

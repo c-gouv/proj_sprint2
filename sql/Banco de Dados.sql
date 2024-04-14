@@ -1,23 +1,25 @@
 CREATE DATABASE fitteya;
 USE fitteya;
 
--- CRIAR UMA TABELA DE CADASTRO DE USUÁRIO/RESPONSÁVEL DA EMPRESA, ONDE 1 USUÁRIO PODE TER MAIS DE UM COMPLEXO
+
 CREATE TABLE usuario(
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45),
     email VARCHAR(45),
     telefone CHAR(11),
-    senha VARCHAR(244)
+    senha VARCHAR(244),
+    fkAdm INT,
+    CONSTRAINT fkUsurioAdm FOREIGN KEY (fkAdm) REFERENCES usuario(idUsuario)
 );
 
 INSERT INTO usuario VALUES 
-	(default, 'Carlinhos', 'carlinhos@gmail.com', '11999999999', 'fa2d4e0f016d8fcaf758d307c857b3e3'),
-	(default, 'João Victor', 'joao@gmail.com', '11999999998', '3dfcab79ed21fd89c9eb25e9864a6155'),
-	(default, 'Erick Gomes', 'erick@gmail.com', '11999999997', '4da77e6afb73aaaabd18cdfe8d3e0262'),
-	(default, 'Cauã Gouvea', 'gouvea@gmail.com', '11999999996', '0e3a650faff671a35b335526bae4aa05');
+	(default, 'Carlinhos', 'carlinhos@gmail.com', '11999999999', 'fa2d4e0f016d8fcaf758d307c857b3e3', null),
+	(default, 'João Victor', 'joao@gmail.com', '11999999998', '3dfcab79ed21fd89c9eb25e9864a6155', 1),
+	(default, 'Erick Gomes', 'erick@gmail.com', '11999999997', '4da77e6afb73aaaabd18cdfe8d3e0262', 1),
+	(default, 'Cauã Gouvea', 'gouvea@gmail.com', '11999999996', '0e3a650faff671a35b335526bae4aa05', 1);
 
 
--- COMPLEXO - CONJUNTO DE SILOS
+
 CREATE TABLE complexo(
     idComplexo INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100),
@@ -78,9 +80,9 @@ CREATE TABLE historico(
 	idHistorico INT PRIMARY KEY AUTO_INCREMENT,
     temperatura DECIMAL(4,2),
     humidade DECIMAL(4,2),
-    data DATETIME,
+    dataHora DATETIME,
     fkSensor INT,
-    CONSTRAINT fkSensorMonitoramento FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor) 
+    CONSTRAINT fkSensorHistorico FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor) 
 );
 
 CREATE TABLE alerta(
@@ -98,6 +100,10 @@ VALUES  (default, 14.23, 10.00,'2024-03-21 13:30:00', 1),
         (default, 20.24, 12.00,'2024-03-20 10:45:00', 2),
         (default, 25.25, 25.00,'2024-03-19 14:00:30', 3),
         (default, 18.20, 13.00,'2024-03-18 12:00:00', 4);
+        
+INSERT INTO alerta
+VALUES  (default, 'Temperatura Elevada','2024-03-21 13:30:00', '30.00', '15.00', 1),
+		(default, 'Umidade Elevada','2024-06-19 10:00:00', '10.00', '25.00', 2);
         
 SELECT * FROM usuario;
 SELECT * FROM complexo;

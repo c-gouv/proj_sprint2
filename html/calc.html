@@ -43,7 +43,8 @@
         <h3>Quantidade de silos total:</h3>
         <input type="number" id="siloTotal" placeholder="Insira a quantidade">
         <h3>Por quanto é vendido a saca de trigo:</h3>
-        <input type="number" id="valorSaca" placeholder="R$ 00,00">
+        <input type="number" id="valorSaca" placeholder="R$ 00,00"><br><br><br>
+        <div id="exibir1" style="color: red; font-size: 25px; text-align: center;"></div>
         <button class="formCalcButton" onclick="calcularInvestimento()">Iniciar Simulação</button>
       </div>
       <div class="formResult">
@@ -67,6 +68,12 @@
     const qtdSilo = Number(siloTotal.value)
     const valor = Number(valorSaca.value)
 
+    exibir1.innerHTML = ''
+
+    if (capacidadePorSilo == '' || qtdSilo == '' || valor == ''){
+      exibir1.innerHTML = `Preencha todos os campos!`
+    } else {
+
     if (Capacidade.value == 'ton') {
       capacidadePorSilo = capacidadePorSilo * 1000
     }
@@ -84,4 +91,6 @@
   <br>Não ter dados precisos de umidade e temperatura abre as portas para o surgimento de fungos e pragas em sua produção.
   Com a Fitteya, tenha essas informações ao seu alcance com um dashboard em tempo real e gráficos que mostram o histórico de coletas anteriores.`
   }
+  }
+  
 </script>

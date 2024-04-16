@@ -23,7 +23,7 @@ h1{
     margin:0
 }
 .container {
-    width: max-content;
+    width: 450px;
     height: max-content;
     margin: auto;
     box-sizing: border-box;
@@ -66,10 +66,12 @@ h1{
     flex-direction: column;
     margin-bottom: 5px;
     align-items: center;
+    box-sizing: border-box;
 }
 .elementos span {
     font-weight: 200;
     font-size: 14px;
+    
 }
 #login {
     font-weight: bold;

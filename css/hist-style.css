@@ -5,8 +5,8 @@
 .container {
     display: flex;
     flex-direction: column;
-    padding-inline: 20vw;
-   flex-wrap: wrap; 
+    padding: 70px;
+    
 
     
 }
@@ -30,13 +30,13 @@ h1 {
     margin-bottom: 0.5vw;
 }
 
-h3 {
+h1 {
     margin: 0;
     color: #ffda82;
 }
 
 .div1 {
-    background-color: rgba(32, 102, 61, 0.7);
+    background-color: rgba(28, 75, 47, 0.7);
     border-radius: 10px;
     width: 400px;
     height: 250px;
@@ -49,13 +49,40 @@ h3 {
 .container2{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-around;  
     padding: 50px;
 }
 .container3{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 50px;
 }
+
+footer {
+    background-color:rgba(7, 7, 7, 0.7);
+    backdrop-filter: blur 15px;
+    color: #fff; 
+    height: 80px;
+}
+
+.container4 {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+/* caso eu volte com o link */
+
+/* .filho2 a{
+    color: white;
+}
+
+.filho2 a:hover{
+    color:  #e7b540;
+    cursor: pointer;
+    text-decoration: none;
+} */
 

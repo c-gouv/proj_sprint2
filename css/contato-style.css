@@ -60,3 +60,22 @@
     vertical-align: top;
     padding-block: 0.8vw;
 }
+
+footer {
+    background-color:rgba(7, 7, 7, 0.7);
+    backdrop-filter: blur 15px;
+    color: #fff; 
+    height: 80px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+
+
+

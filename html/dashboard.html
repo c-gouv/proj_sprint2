@@ -15,7 +15,7 @@
         <nav class="navbar">
             <div class="navbarLogo">
                 <img src="../img/logo.svg">
-                DASHBOARD
+                Ola, Isaque
             </div>
             <div class="navbarButtons">
                 <i class="fa-solid tema fa-moon" id="icon" onclick="mudarTema()"></i>
@@ -24,30 +24,84 @@
         </nav>
     </header>
     <main>
-        <div>
-            <div class="container">
-                Histórico Umidade
-                <div id="umidade" class="containerSection">
-                    <canvas id="umidadeHist" width="740" height="256"></canvas>
+            <span class="title_dashboard" ><span>Complexo Boa Vista</span> > Silo 1</span>
+            <div class="main_grafico">
+              <section class="section_grafico">
+                <div class="container-grafico">
+                  <div class="container">
+                    <span class="titulo_grafico umidade">Umidade (Tempo Real)</span>
+                    <div id="umidade" class="containerSection">
+                          <canvas id="te" ></canvas>
+                      </div>
+                  </div>
+                  <div class="container">
+                      <sspan class="titulo_grafico temperatura">Temperatura (Tempo Real)</sspan>
+                      <div id="temperatura" class="containerSection">
+                          <canvas id="te"  ></canvas>
+                      </div>
+                  </div>
                 </div>
-            </div>
-            <div class="container">
-                Histórico Temperatura
-                <div id="temperatura" class="containerSection">
-                    <canvas id="temperaturaHist" width="740" height="256"></canvas>
+  
+                <div class="container-grafico">
+                  <div class="container">
+                    <span class="titulo_grafico umidade">Histórico Umidade</span>
+                    <div id="umidade" class="containerSection">
+                          <canvas id="umidadeHist"></canvas>
+                      </div>
+                  </div>
+                  <div class="container">
+                      <span class="titulo_grafico temperatura"> Histórico Temperatura</span>
+                      <div id="temperatura" class="containerSection">
+                          <canvas id="temperaturaHist" ></canvas>
+                      </div>
+                  </div>
                 </div>
+              </section>
+          
+          <!-- <div class="container sensorList">
+              <h3>Sensores</h3>
+              <div class="sensorListItem" target="A">
+                  Sensor Silo 1
+                  <button id="btnSensor">Selecionar</button>
+              </div>
+              <div class="sensorListItem" target="A">
+                  Sensor Silo 1
+                  <button id="btnSensor" onclick="historico()">Selecionar</button>
+              </div>
+          </div> -->
+          <div class="container sensorList">
+              Registro de Alertas
+              <section class="alert-list">
+                <div class="alert_container">
+                  <div class="title_alert">
+                    <span class="titulo_grafico umidade">Umidade</span>
+                    <span>15/04/2024 08:04h</span>
+                  </div>
+                  <div class="alert ruim">
+                    <h3>80%</h3>
+                    <div class="info-alert">
+                      <p> CUIDADO!</p>
+                      <p>Umidade elevada!</p>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="alert_container">
+                  <div class="title_alert">
+                    <span class="titulo_grafico temperatura">Temperatura</span>
+                    <span>15/04/2024 08:00h</span>
+                  </div>
+                  <div class="alert medio">
+                    <h3>40ºC</h3>
+                    <div class="info-alert">
+                      <p> Atenção!</p>
+                      <p>Temperatura alterada!</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+          </div>
             </div>
-        </div>
-        <div class="container sensorList">
-            <h3>Sensores</h3>
-            <div class="sensorListItem" target="A">
-                Sensor Silo 1
-                <button id="btnSensor">Selecionar</button>
-            </div>
-        </div>
-        <div class="container sensorList">
-            Registro de Estado Crítico
-        </div>
     </main>
 </body>
 </html>
@@ -66,19 +120,15 @@
     }
 
     // Dados de exemplo
-    const hours = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
-    const humidityData = [65, 63, 62, 61, 60, 59, 58, 57, 58, 60, 62, 64, 66, 68, 70, 72, 70, 68, 66, 64, 62, 60, 58, 57];
-    const temperatureData = [20, 21, 21, 20, 19, 18, 18, 18, 19, 20, 21, 22, 24, 26, 27, 28, 28, 27, 25, 23, 22, 21, 20, 20];
+    // const hours = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
 
     // Configuração do gráfico de umidade
     const umidade = document.getElementById('umidadeHist').getContext('2d');
     const humidityChart = new Chart(umidade, {
       type: 'line',
       data: {
-        labels: hours,
         datasets: [{
           label: 'Umidade (%)',
-          data: humidityData,
           backgroundColor: 'rgba(75, 192, 192, 0.2)',
           borderColor: 'rgba(75, 192, 192, 1)',
           borderWidth: 1
@@ -104,10 +154,8 @@
     const tempGrafico = new Chart(temp, {
       type: 'line',
       data: {
-        labels: hours,
         datasets: [{
           label: 'Temperatura (°C)',
-          data: temperatureData,
           backgroundColor: '#ffda82',
           borderColor: '#ffda82',
           borderWidth: 1
@@ -127,6 +175,76 @@
         }
       }
     });
+
+    var paginacao = {};
+        var tempo = {};
+        let dataAtual = new Date()
+        let hora = '';
+        function obterDados(grafico, endpoint) {
+            var http = new XMLHttpRequest();
+            http.open('GET', 'http://localhost:3300/sensores/' + endpoint, false);
+            http.send(null);
+            var valores = JSON.parse(http.responseText);
+            if (paginacao[endpoint] == null) {
+                paginacao[endpoint] = 0;
+            }
+            if (tempo[endpoint] == null) {
+                tempo[endpoint] = 0;
+            }
+            // Exibir à partir do último elemento exibido anteriormente
+            var ultimaPaginacao = paginacao[endpoint];
+            paginacao[endpoint] = valores.length;
+            var valores = valores.slice(ultimaPaginacao);
+            valores.forEach((valor) => {
+                //Máximo de 60 itens exibidos no gráfico
+                if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
+                    grafico.data.labels.shift();
+                    grafico.data.datasets[0].data.shift();
+                }
+
+                grafico.data.labels.push('');
+                grafico.data.datasets[0].data.push(parseFloat(valor));
+                grafico.update();
+            })
+        }
+
+        // SPRINT 3
+        // function lerHistorico(grafico) {
+        //     var http = new XMLHttpRequest();
+        //     http.open('GET', 'http://localhost:3300/monitoramento', false);
+        //     http.send(null);
+        //     var valores = JSON.parse(http.responseText);
+        //     console.log(valores)
+           
+        //     valores.forEach((valor) => {
+        //         //Máximo de 60 itens exibidos no gráfico
+        //         if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
+        //             grafico.data.labels.shift();
+        //             grafico.data.datasets[0].data.shift();
+        //         }
+
+        //         grafico.data.labels.push(valor.dataHora.split('T')[1]);
+        //         if(grafico == humidityChart){
+        //           grafico.data.datasets[0].data.push(parseFloat(valor.umidade));
+        //         }else if(grafico == tempGrafico){
+        //           grafico.data.datasets[0].data.push(parseFloat(valor.temperatura));
+
+        //         }
+        //         grafico.update();
+        //     })
+        // }
+
+        // function historico(){
+        //   lerHistorico(humidityChart);
+        //   lerHistorico(tempGrafico);
+        // }
+
+
+
+        // setInterval(() => {
+        //     obterDados(humidityChart, 'dht11/umidade');
+        //     obterDados(tempGrafico, 'dht11/temperatura');
+        // }, 1000);
 
     // let sensors = document.getElementsByClassName("sensorListItem");
     // let umidade = document.getElementById("umidade");

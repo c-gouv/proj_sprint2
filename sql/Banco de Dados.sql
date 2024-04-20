@@ -1,6 +1,6 @@
 CREATE DATABASE fitteya;
-USE fitteya;
 
+USE fitteya;
 
 CREATE TABLE usuario(
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
@@ -9,7 +9,7 @@ CREATE TABLE usuario(
     telefone CHAR(11),
     senha VARCHAR(244),
     fkAdm INT,
-    CONSTRAINT fkUsurioAdm FOREIGN KEY (fkAdm) REFERENCES usuario(idUsuario)
+    CONSTRAINT fkUsuarioAdm FOREIGN KEY (fkAdm) REFERENCES usuario(idUsuario)
 );
 
 INSERT INTO usuario VALUES 
@@ -70,7 +70,7 @@ VALUES  (default, 1),
 CREATE TABLE monitoramento ( 
     idMonitoramento INT PRIMARY KEY AUTO_INCREMENT,
     temperatura DECIMAL(4,2),
-    humidade DECIMAL(4,2),
+    umidade DECIMAL(4,2),
     dataHora DATETIME,
     fkSensor INT,
     CONSTRAINT fkSensorMonitoramento FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor) 
@@ -79,7 +79,7 @@ CREATE TABLE monitoramento (
 CREATE TABLE historico(
 	idHistorico INT PRIMARY KEY AUTO_INCREMENT,
     temperatura DECIMAL(4,2),
-    humidade DECIMAL(4,2),
+    umidade DECIMAL(4,2),
     dataHora DATETIME,
     fkSensor INT,
     CONSTRAINT fkSensorHistorico FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor) 
@@ -90,7 +90,7 @@ CREATE TABLE alerta(
     motivo VARCHAR(100),
     dataHora DATETIME,
     temperaturaMomento DECIMAL(4,2),
-    humidadeMomento DECIMAL(4,2),
+    umidadeMomento DECIMAL(4,2),
     fkSensor INT,
     CONSTRAINT fkSensorAlerta FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor)
 );

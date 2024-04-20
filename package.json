@@ -2,15 +2,21 @@
     "name": "chartjs-example",
     "version": "1.0.0",
     "license": "MIT",
+    "main": "main.js",
     "scripts": {
       "dev": "parcel src/dashboard.html",
-      "build": "parcel build src/dashboard.html"
+      "build": "parcel build src/dashboard.html",
+      "start": "node main.js"
+      
     },
     "devDependencies": {
       "parcel": "^2.6.2"
     },
     "dependencies": {
       "@cubejs-client/core": "^0.31.0",
-      "chart.js": "^4.0.0"
+      "chart.js": "^4.0.0",
+      "express": "^4.17.3",
+      "mysql2": "^2.3.3",
+      "serialport": "^10.4.0" 
     }
   }

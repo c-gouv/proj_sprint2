@@ -72,7 +72,7 @@
 
         if (email == '' || senha == '') {
             exibir.innerHTML = 'Insira valores válidos';
-        } else if (arroba < 0 && ponto < 0) {
+        } else if (arroba < 1 || ponto < 0) {
             exibir.innerHTML = 'Seu email precisar conter um "@" e um ".com"';
         } else if (arroba < 0) {
             exibir.innerHTML = 'Seu email precisar conter um "@"';

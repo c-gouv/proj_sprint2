@@ -88,7 +88,7 @@
         if (user == '' || email == '' || senha == '' || confirmar == '') {
             exibir.innerHTML = 'Preencha todos os campos!';
 
-        } else if (arrob < 0 || !ponto) {
+        } else if (arrob < 1 || !ponto) {
             exibir.innerHTML = 'Seu email deve conter um "@" e um ".com"';
         } else if (arrob < 0) {
             exibir.innerHTML = 'Seu email deve conter um "@"';

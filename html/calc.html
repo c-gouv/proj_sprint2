@@ -43,7 +43,7 @@
         <h3>Quantidade de silos total:</h3>
         <input type="number" id="siloTotal" placeholder="Insira a quantidade">
         <h3>Por quanto é vendido a saca de trigo:</h3>
-        <input type="number" id="valorSaca" placeholder="R$ 00,00"><br><br><br>
+        <input type="number" id="valorSaca" placeholder="R$ 00,00"><br><br>
         <div id="exibir1" style="color: red; font-size: 25px; text-align: center;"></div>
         <button class="formCalcButton" onclick="calcularInvestimento()">Iniciar Simulação</button>
       </div>
@@ -86,8 +86,8 @@
 
     exibir.innerHTML = `CONSIDERE UMA PERDA MÉDIA DE <span style="color:#FF0000">20%</span> DURANTE O ARMAZENAMENTO SEGUNDO A EMBRAPA<br>
 	<br>SITUAÇÃO:<br> 
-	- Quantidade de Trigo perdido: <span style="color:#FF0000">${perdaTrigo}</span><br>
-	- Quantidade em dinheiro perdido: <span style="color:#FF0000"> ${perdaProducao}</span><br>
+	- Quantidade de Trigo perdido: <span style="color:#FF0000">${perdaTrigo} Quilogramas</span><br>
+	- Quantidade em dinheiro perdido: <span style="color:#FF0000"> ${perdaProducao.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span><br>
   <br>Não ter dados precisos de umidade e temperatura abre as portas para o surgimento de fungos e pragas em sua produção.
   Com a Fitteya, tenha essas informações ao seu alcance com um dashboard em tempo real e gráficos que mostram o histórico de coletas anteriores.`
   }

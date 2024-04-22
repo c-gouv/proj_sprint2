@@ -66,7 +66,7 @@
         const email = input_email.value
         const senha = input_senha.value
         const arroba = email.indexOf("@")
-        const ponto = email.indexOf(".com")
+        const ponto = email.endsWith(".com")
 
         const exibir = document.getElementById('exibir');
 
@@ -76,7 +76,7 @@
             exibir.innerHTML = 'Seu email precisar conter um "@" e um ".com"';
         } else if (arroba < 0) {
             exibir.innerHTML = 'Seu email precisar conter um "@"';
-        } else if (ponto < 0) {
+        } else if (!ponto) {
             exibir.innerHTML = 'Seu email precisar conter um ".com"';
         } else {
             alert(`Login efetuado com sucesso!`)

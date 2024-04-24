@@ -1,5 +1,5 @@
 body {
-    overflow: hidden;
+
     margin: 0;
     color: white;
     font-family: "DM Sans", sans-serif;
@@ -63,15 +63,19 @@ h3 {
     margin-top: 12vh;
     height: 40px;
     border-radius: 10px;
-    background-color: #fff;
-    color: #000;
+    background-color: #20663db3;;
+    color: white;
     font-size: 15px;
     font-weight: bold;
     border: none;
     cursor: pointer;
 }
 .formCalcButton:hover{
-    background-color: #dddddd;
+    transition: background-color 0.5s, color 0.5s ease, box-shadow 0.5s ease;
+    cursor: pointer;
+    background-color: #266041;
+    color: white;
+    box-shadow: 0 2px 1vw 0 rgb(18, 51, 34, 0.5), 0 -2px 1vw 0 rgb(18, 51, 34, 0.5)
 }
 #formResultText {
     color: black;
@@ -89,4 +93,29 @@ h3 {
     padding-inline: 1.8vw;
     padding-block: 3vh;
     box-sizing: border-box;
+}
+
+
+.back{
+    background-color: rgba(32, 102, 61, 0.7);
+    min-width: 100vw;
+    height: 120vh;
+}
+
+input {
+    font-weight: bold;
+}
+footer {
+    background-color:rgba(7, 7, 7, 0.7);
+    backdrop-filter: blur 15px;
+    color: #fff; 
+    height: 80px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-evenly;
+    text-align: center;
 }

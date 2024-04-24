@@ -54,6 +54,14 @@
         </span>
       </div>
     </main>
+    <br><br><br>
+    <footer>
+      <div class="container">
+          <div class="filho">
+                  <p>Privacy Policy | Terms & Conditions | Cookies</p>
+          </div>
+      </div>
+    </footer>
     </div>
 </body>
 
@@ -84,7 +92,7 @@
     let producaoReais = qtdTrigo * valor
     let perdaProducao = producaoReais * 0.2
 
-    exibir.innerHTML = `CONSIDERE UMA PERDA MÉDIA DE <span style="color:#FF0000">20%</span> DURANTE O ARMAZENAMENTO SEGUNDO A EMBRAPA<br>
+    exibir.innerHTML = `CONSIDERE UMA PERDA MÉDIA DE <span style="color:#FF0000">20%</span> DURANTE O ARMAZENAMENTO SEGUNDO A EMBRAPA (Empresa Brasileira de Pesquisa Agropecuária)<br>
 	<br>SITUAÇÃO:<br> 
 	- Quantidade de Trigo perdido: <span style="color:#FF0000">${perdaTrigo} Quilogramas</span><br>
 	- Quantidade em dinheiro perdido: <span style="color:#FF0000"> ${perdaProducao.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span><br>

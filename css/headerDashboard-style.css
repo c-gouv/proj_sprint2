@@ -10,8 +10,8 @@
     --cor-ne: white
 }
 .light-theme{
-    --cor-primaria: #999999;
-    --cor-secundaria: #cccccc;
+    --cor-primaria: #e2e2e2;
+    --cor-secundaria: #ffffff;
     --cor-borda: rgb(29, 29, 29,0.5);
     --cor-texto: #3a3a3a;
     --cor-destaque: #936639;
@@ -26,7 +26,6 @@ body{
     font-size: 1.3vw;
     color: var(--cor-ne);
     font-weight: 600;
-    overflow-x: hidden;
 }
 header {
     border-bottom: 1px solid var(--cor-borda);

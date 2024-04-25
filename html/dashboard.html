@@ -24,39 +24,119 @@
         </nav>
     </header>
     <main>
-            <span class="title_dashboard" ><span>Complexo Boa Vista</span> > Silo 1</span>
             <div class="main_grafico">
-              <section class="section_grafico">
-                <div class="container-grafico">
-                  <div class="container">
-                    <span class="titulo_grafico umidade">Umidade (Tempo Real)</span>
-                    <div id="umidade" class="containerSection">
-                          <canvas id="te" ></canvas>
-                      </div>
+
+              <span class="title_dashboard">Últimos alertas do silo 
+                <span class="kip danger_border"> PERIGO</span>
+                <span class="kip warning_border"> CUIDADO</span>
+
+              </span>
+
+              <section class="alert-list">
+                <div class="alert-container danger_border">
+                  <div class="alert-title">
+                    <span class="alert-info">Temperatura elevada</span>
+                    <span class="alert-date">22/05/2024 - 14:00</span>
                   </div>
-                  <div class="container">
-                      <sspan class="titulo_grafico temperatura">Temperatura (Tempo Real)</sspan>
-                      <div id="temperatura" class="containerSection">
-                          <canvas id="te"  ></canvas>
-                      </div>
+                  <div class="alert-value">
+                    <span>55ºC</span>
                   </div>
                 </div>
-  
+                <div class="alert-container warning_border">
+                  <div class="alert-title">
+                    <span class="alert-info">Temperatura elevada</span>
+                    <span class="alert-date">22/05/2024 - 14:00</span>
+                  </div>
+                  <div class="alert-value">
+                    <span>55ºC</span>
+                  </div>
+                </div>
+                <div class="alert-container danger_border">
+                  <div class="alert-title">
+                    <span class="alert-info">Temperatura elevada</span>
+                    <span class="alert-date">22/05/2024 - 14:00</span>
+                  </div>
+                  <div class="alert-value">
+                    <span>55ºC</span>
+                  </div>
+                </div>
+                <div class="alert-container warning_border">
+                  <div class="alert-title">
+                    <span class="alert-info">Temperatura elevada</span>
+                    <span class="alert-date">22/05/2024 - 14:00</span>
+                  </div>
+                  <div class="alert-value">
+                    <span>55ºC</span>
+                  </div>
+                </div>
+                <div class="alert-container danger_border">
+                  <div class="alert-title">
+                    <span class="alert-info">Temperatura elevada</span>
+                    <span class="alert-date">22/05/2024 - 14:00</span>
+                  </div>
+                  <div class="alert-value">
+                    <span>55ºC</span>
+                  </div>
+                </div>
+                <div class="alert-container warning_border">
+                  <div class="alert-title">
+                    <span class="alert-info">Temperatura elevada</span>
+                    <span class="alert-date">22/05/2024 - 14:00</span>
+                  </div>
+                  <div class="alert-value">
+                    <span>55ºC</span>
+                  </div>
+                </div>
+              </section>
+
+
+              <span class="title_dashboard">Dashboard
+                <span class="kip danger_border"> PERIGO</span>
+                <span class="kip warning_border"> CUIDADO</span>
+                <span class="kip normal_border"> NORMAL</span>
+              </span>
+
+
+              <section class="section_grafico">
                 <div class="container-grafico">
-                  <div class="container">
-                    <span class="titulo_grafico umidade">Histórico Umidade</span>
-                    <div id="umidade" class="containerSection">
+                  <div class="content_grafico ">
+                    <div class="titulo_grafico umidade ">Umidade do silo (%)</div>
+                    <div class="content_value real_umidade">50%</div>
+                  </div>
+
+                  <div class="content_grafico">
+                      <span class="titulo_grafico temperatura">Temperatura do silo (ºC)</span>
+                      <div class="content_value real_temperatura">35ºC</div>
+                  </div>
+                </div>
+                
+                
+                <div class="container-grafico">
+                  <div class="content_grafico">
+                    <div class="title-flex">
+                      <span class="titulo_grafico umidade">Histórico de Umidade</span>
+                      <select id="select_date" onchange="changeHis()">
+                        <option value="10">dia 10</option>
+                        <option value="5">dia 5</option>
+                      </select>
+                    </div>
+                   
+                    <div id="umidade" class="containerCanvas">
                           <canvas id="umidadeHist"></canvas>
                       </div>
                   </div>
-                  <div class="container">
-                      <span class="titulo_grafico temperatura"> Histórico Temperatura</span>
-                      <div id="temperatura" class="containerSection">
+                  <div class="content_grafico">
+                      <span class="titulo_grafico temperatura"> Histórico de Temperatura</span>
+                      <div id="temperatura" class="containerCanvas">
                           <canvas id="temperaturaHist" ></canvas>
                       </div>
                   </div>
                 </div>
               </section>
+
+              <footer style="padding: 20px;">
+                FIM!
+              </footer>
           
           <!-- <div class="container sensorList">
               <h3>Sensores</h3>
@@ -69,39 +149,9 @@
                   <button id="btnSensor" onclick="historico()">Selecionar</button>
               </div>
           </div> -->
-          <div class="container sensorList">
-              Registro de Alertas
-              <section class="alert-list">
-                <div class="alert_container">
-                  <div class="title_alert">
-                    <span class="titulo_grafico umidade">Umidade</span>
-                    <span>15/04/2024 08:04h</span>
-                  </div>
-                  <div class="alert ruim">
-                    <h3>80%</h3>
-                    <div class="info-alert">
-                      <p> CUIDADO!</p>
-                      <p>Umidade elevada!</p>
-                    </div>
-                  </div>
-                </div>
-  
-                <div class="alert_container">
-                  <div class="title_alert">
-                    <span class="titulo_grafico temperatura">Temperatura</span>
-                    <span>15/04/2024 08:00h</span>
-                  </div>
-                  <div class="alert medio">
-                    <h3>40ºC</h3>
-                    <div class="info-alert">
-                      <p> Atenção!</p>
-                      <p>Temperatura alterada!</p>
-                    </div>
-                  </div>
-                </div>
+         
               </section>
-          </div>
-            </div>
+        
     </main>
 </body>
 </html>
@@ -120,17 +170,20 @@
     }
 
     // Dados de exemplo
-    // const hours = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
-
+    const hours = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
+    let day = []
+    let day2 = []
     // Configuração do gráfico de umidade
     const umidade = document.getElementById('umidadeHist').getContext('2d');
     const humidityChart = new Chart(umidade, {
       type: 'line',
       data: {
+        labels: hours,
         datasets: [{
+          data: day,
           label: 'Umidade (%)',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: '#329BFC',
+          borderColor: '#329BFC',
           borderWidth: 1
         }]
       },
@@ -154,10 +207,11 @@
     const tempGrafico = new Chart(temp, {
       type: 'line',
       data: {
+        labels: hours,
         datasets: [{
           label: 'Temperatura (°C)',
-          backgroundColor: '#ffda82',
-          borderColor: '#ffda82',
+          backgroundColor: '#fcab32',
+          borderColor: '#fcab32',
           borderWidth: 1
         }]
       },
@@ -176,7 +230,63 @@
       }
     });
 
-    var paginacao = {};
+    function changeHis(){
+      const selectDate = select_date.value
+      if(selectDate == "10"){
+        console.log(selectDate)
+        humidityChart.data.datasets[0].data = day;
+        humidityChart.update()
+      }else if (selectDate == '5'){
+        humidityChart.data.datasets[0].data = day2;
+        humidityChart.update()
+      }
+    }
+    function inserirDados(dataHis){
+            var valores = []
+            valores.push(Math.floor(Math.random() * 100))
+            valores.forEach((valor, index) => {
+                //Máximo de 60 itens exibidos no gráfico
+                dataHis.push(valor)
+                console.log(dataHis.length);
+            
+    })}
+
+    // // VALORES RANDOMICOS
+     setInterval(() => {
+        if (day.length < 24) {
+          inserirDados(day)
+          humidityChart.update()
+          }
+          if (day2.length < 10) {
+          inserirDados(day2)
+          }
+
+        }, 500);
+
+
+
+    // function dadosRandom(grafico){
+    //         var valores = []
+    //         valores.push(Math.floor(Math.random() * 100))
+    //         if (grafico.data.datasets[0].data.length == 24) {
+    //               grafico.data.datasets[0].data=[];
+    //             }
+
+    //         valores.forEach((valor, index) => {
+    //             //Máximo de 60 itens exibidos no gráfico
+                
+    //             grafico.data.datasets[0].data.push(valor);
+    //             grafico.update();
+    //             console.log(grafico.data.datasets[0].data.length);
+            
+    // })}
+
+    // // VALORES RANDOMICOS
+    //  setInterval(() => {
+    //        dadosRandom(humidityChart)
+    //     }, 1000);
+
+        var paginacao = {};
         var tempo = {};
         let dataAtual = new Date()
         let hora = '';

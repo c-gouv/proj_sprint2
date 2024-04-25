@@ -11,19 +11,37 @@
     <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="navbarLogo">
-                <img src="../img/logo.svg">
-                Ola, Isaque
+    <header id="header">
+      <div class="leftHeaderLogo">
+        <img src="../img/logo-extended.svg">
+      </div>
+      <div class="leftHeaderButtons">
+        <a href="./dashboard teste.html">
+            <div class="menuSection selected">
+                <i class="fa-solid fa-gauge-high"></i>
             </div>
+            <span class="selected">Dashboard</span>
+        </a>
+        <a>
+            <div class="menuSection">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+            Silo
+        </a>
+      </div>
+      <button onclick="fecharMenu()"> <i class="fa-solid fa-angle-left"></i> </button>
+    </header>
+
+    <main>
+      <div class="topHeader">
+        <nav class="navbar">
+            <i class="fa-solid fa-bars" style="font-size: 25px;" onclick="exibirMenu()"></i>
             <div class="navbarButtons">
                 <i class="fa-solid tema fa-moon" id="icon" onclick="mudarTema()"></i>
                 <button class="exitButton" onclick="voltarHome()">Sair</button>
             </div>
         </nav>
-    </header>
-    <main>
+      </div>
             <div class="main_grafico">
 
               <span class="title_dashboard">Últimos alertas do silo 
@@ -157,6 +175,17 @@
 </html>
 
 <script>
+        let style = getComputedStyle(document.body);
+    let primCol = style.getPropertyValue("--cor-borda");
+
+    function fecharMenu() {
+        let cabecalho = document.getElementById("header");
+        header.classList.remove("exibirMenu")
+    }
+    function exibirMenu() {
+        let cabecalho = document.getElementById("header");
+        header.classList.add("exibirMenu")
+    }
     function voltarHome() {
         window.location.href="home.html"
     }

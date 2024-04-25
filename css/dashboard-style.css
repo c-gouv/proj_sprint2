@@ -189,4 +189,84 @@ h3 {
     border-radius: 5pxs;
 }
 
+/* LEFT HEADER */
 
+header {
+    display: flex;
+    flex-direction: column;
+    background-color: #181b1f;
+    width: 19.53vw;
+    min-height: 100%;
+    padding-inline: 3.55vh;
+    box-sizing: border-box;
+    position: absolute;
+    font-size: 22px;
+    gap: 20px;
+    border-right: white solid 1px;
+    transform:translateX(-100%);
+    transition: transform 1s ease;
+}
+header button {
+    align-self: center;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    font-weight: bold;
+    border: 0px;
+    background-color: var(--cor-texto);
+    transition: background-color 0.5s ease;
+}
+header button:hover{
+    background-color: var(--cor-ne);
+    transition: background-color 0.5s ease;
+}
+
+.exibirMenu {
+    transform: translateX(0%);
+    transition: transform 1s ease;
+}
+
+header div {
+    border-bottom: 0.28vh solid var(--cor-borda);
+}
+
+.leftHeaderButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-bottom: 20px;
+}
+
+.leftHeaderButtons a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--cor-texto);
+}
+.selected {
+    color: white;
+}
+
+.leftHeaderButtons a i {
+    display: flex;
+    justify-content: center;
+}
+
+.leftHeaderButtons .menuSection {
+    width: 40px;
+    justify-content: center;
+    border: 0px
+}
+
+.leftHeaderLogo {
+    display: flex;
+    justify-content: center;
+    border-bottom: 0.28vh solid var(--cor-borda);
+    padding-block: 1.42vh;
+    max-height: 12.94vh;
+}
+
+.leftHeaderLogo img {
+    margin: 1.42vh;
+    width: 10.41vw;
+}

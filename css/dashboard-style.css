@@ -1,3 +1,5 @@
+
+
 main{
     color: var(--cor-ne);
     box-sizing: border-box;
@@ -114,19 +116,15 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 60px;
+    font-size: 80px;
     height: 80%;
     border: 5px solid black;
+    color: #181b1f;
+    
 }
 
-.real_umidade{
-    background-color: #FC3232;
-}
 
-.real_temperatura{
-    color: black;
-    background-color: #FCE832;
-}
+
 
 .titulo_grafico{
     padding-left: 5px;

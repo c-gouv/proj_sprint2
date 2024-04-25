@@ -119,12 +119,12 @@
                 <div class="container-grafico">
                   <div class="content_grafico ">
                     <div class="titulo_grafico umidade ">Umidade do silo (%)</div>
-                    <div class="content_value real_umidade">50%</div>
+                    <div class="content_value background-umidade"><span id="monitoramento_umidade" >50</span>%</div>
                   </div>
 
                   <div class="content_grafico">
                       <span class="titulo_grafico temperatura">Temperatura do silo (ºC)</span>
-                      <div class="content_value real_temperatura">35ºC</div>
+                      <div class="content_value background-temperatura"><span id="monitoramento_temperatura" >35</span>ºC</div>
                   </div>
                 </div>
                 
@@ -175,7 +175,7 @@
 </html>
 
 <script>
-        let style = getComputedStyle(document.body);
+    let style = getComputedStyle(document.body);
     let primCol = style.getPropertyValue("--cor-borda");
 
     function fecharMenu() {
@@ -336,16 +336,45 @@
             var valores = valores.slice(ultimaPaginacao);
             valores.forEach((valor) => {
                 //Máximo de 60 itens exibidos no gráfico
-                if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
-                    grafico.data.labels.shift();
-                    grafico.data.datasets[0].data.shift();
-                }
+                // if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
+                //     grafico.data.labels.shift();
+                //     grafico.data.datasets[0].data.shift();
+                // }
 
-                grafico.data.labels.push('');
-                grafico.data.datasets[0].data.push(parseFloat(valor));
-                grafico.update();
+                // grafico.data.labels.push('');
+                // grafico.data.datasets[0].data.push(parseFloat(valor));
+                // grafico.update();
+                
+                grafico.innerHTML = parseFloat(valor);
+                if(grafico == monitoramento_umidade){
+                  let item = document.querySelector(".background-umidade")
+                  item.style.color = 'white'
+                  if(valor > 16){
+                    item.style.backgroundColor = '#FC3232'
+                  }else if(valor > 13){
+                    item.style.backgroundColor = '#ffc916'
+                  }else {
+                    item.style.backgroundColor = '#329BFC' 
+                  }
+                }else if(grafico == monitoramento_temperatura){
+                  let item = document.querySelector(".background-temperatura")
+                  item.style.color = 'white'
+                  if(valor >= 20){
+                    item.style.backgroundColor = '#FC3232'
+                  }else if(valor > 18 || valor < 15){
+                    item.style.backgroundColor = '#ffc916'
+                  }else{
+                    item.style.backgroundColor = '#329BFC'
+                  }
+                }
+                
             })
         }
+
+        setInterval(() => {
+            obterDados(monitoramento_umidade, 'dht11/umidade');
+            obterDados(monitoramento_temperatura, 'dht11/temperatura');
+        }, 1000);
 
         // SPRINT 3
         // function lerHistorico(grafico) {
@@ -380,10 +409,7 @@
 
 
 
-        // setInterval(() => {
-        //     obterDados(humidityChart, 'dht11/umidade');
-        //     obterDados(tempGrafico, 'dht11/temperatura');
-        // }, 1000);
+        
 
     // let sensors = document.getElementsByClassName("sensorListItem");
     // let umidade = document.getElementById("umidade");

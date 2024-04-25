@@ -5,8 +5,7 @@
     --cor-secundaria: #181b1f;
     --cor-borda: #24282b;
     --cor-texto: #888888;
-    --cor-destaque: #ffda82;
-    --cor-destaque-hover: rgba(255, 218, 130, 0.562);
+    --cor-destaque: #434343;
     --cor-ne: white
 }
 .light-theme{
@@ -14,8 +13,7 @@
     --cor-secundaria: #cccccc;
     --cor-borda: rgb(29, 29, 29,0.5);
     --cor-texto: #3a3a3a;
-    --cor-destaque: #936639;
-    --cor-destaque-hover: rgb(147, 102, 57,0.5);
+    --cor-destaque: #bcbcbc;
     --cor-ne: black;
 }
 body{
@@ -32,6 +30,9 @@ body{
 .topHeader {
     border-bottom: 1px solid var(--cor-borda);
     height: 12.94vh;
+    position: sticky;
+    top: 0;
+    background-color: var(--cor-primaria);
 }
 .navbar{
     display: flex;

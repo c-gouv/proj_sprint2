@@ -36,26 +36,30 @@
                 <div class="elementos">
                     <h1>Cadastre-se</h1>
                     <div class="fieldList">
-                        <div style="position: relative;">
-                            <input type="text" id="input_user" placeholder="Usuário">
+                        <div class="singupField">
+                            <span>Usuário</span>
+                            <input type="text" id="input_user" placeholder="usuario123">
                             <i class="fa-solid fa-user icon-position"></i>
                         </div>
-                        <div style="position: relative;">
-                            <input type="text" id="input_email" placeholder="Email">
+                        <div class="singupField">
+                            <span>Email</span>
+                            <input type="text" id="input_email" placeholder="usuario@email.com">
                             <i class="fa-solid fa-envelope icon-position"></i>
                         </div>
-                        <div style="position: relative;">
-                            <input type="password" id="input_senha" placeholder="Senha">
+                        <div class="singupField">
+                            <span>Senha</span>
+                            <input type="password" id="input_senha" placeholder="**********">
                             <i class="fa-solid fa-lock icon-position"></i>
                         </div>
-                        <div style="position: relative;">
-                            <input type="password" id="input_confirmar" placeholder="Confirmar senha">
+                        <div class="singupField">
+                            <span>Confirme a Senha</span>
+                            <input type="password" id="input_confirmar" placeholder="**********">
                             <i class="fa-solid fa-lock icon-position"></i>
                         </div>
-                    </div><br>
-                    <div id="exibir" style="color: red; font-size: 18px; text-align: center;"></div>
+                    </div>
                     <div class="buttons">
                         <button class="botao1" onclick="cadastrar()">Cadastrar-se</button>
+                        <div id="errorArea" class="errorMsg"></div>
                         <span>Já tem um cadastro? <a class="spanvoltar" href="login.html" id="login">Voltar ao login</a></span>
                     </div>
                 </div>
@@ -71,6 +75,8 @@
         window.location.href = "login.html"
     }
     function cadastrar() {
+        errorArea.innerHTML = ""
+
         const user = input_user.value
         const email = input_email.value
         const senha = input_senha.value
@@ -83,27 +89,21 @@
         const arrob = email.indexOf("@")
         const ponto = email.endsWith(".com")
 
-        const exibir = document.getElementById('exibir');
-
         if (user == '' || email == '' || senha == '' || confirmar == '') {
-            exibir.innerHTML = 'Preencha todos os campos!';
-
+            errorArea.innerHTML = 'Preencha todos os campos!';
         } else if (arrob < 1 || !ponto) {
-            exibir.innerHTML = 'Seu email deve conter um "@" e um ".com"';
+            errorArea.innerHTML = 'Seu email deve conter um "@" e um ".com"';
         } else if (arrob < 0) {
-            exibir.innerHTML = 'Seu email deve conter um "@"';
+            errorArea.innerHTML = 'Seu email deve conter um "@"';
         } else if (ponto < 0) {
-            exibir.innerHTML = 'Seu email deve conter um ".com"';
-        } else if (senha.length < 10 && arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) {
-            exibir.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres!<br>';
-            exibir.innerHTML += 'Sua senha deve conter no minimo 1 caracter especial!';
+            errorArea.innerHTML = 'Seu email deve conter um ".com"';
         } else if (senha.length < 10) {
-            exibir.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres!';
+            errorArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres!';
         } else if (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) {
-            exibir.innerHTML = 'Sua senha deve conter pelo menos 1 caracter especial!';
+            errorArea.innerHTML += 'Sua senha deve conter pelo menos 1 caracter especial!';
         } else if (senha != confirmar || confirmar != senha) {
-            exibir.innerHTML = 'Suas senhas precisam estar iguais!';
-        } else if ((senha.length >= 10 && senha === confirmar) && (arroba >= 0 || cifrao >= 0 || velha >= 0 || exclamacao >= 0 || int >= 0) && (arrob >= 0 && ponto >= 0)) {
+            errorArea.innerHTML = 'Suas senhas precisam estar iguais!';
+        } else {
             alert('Usuário cadastrado com sucesso! Bem-vindo!')
             window.location.href = "login.html";
         }

@@ -6,8 +6,7 @@ main {
 }
 input {
     width: 300px;
-    height: 30px;   
-    margin-top: 20px;
+    height: 30px;
     background: none;
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 30px;
@@ -17,16 +16,15 @@ input {
     color: white;
 }
 input::placeholder{
-    color: white;
+    color: #c6c6c6;
 }
 h1{
     margin:0
 }
 .container {
-    width: 450px;
+    width: 400px;
     height: max-content;
     margin: auto;
-    box-sizing: border-box;
     box-sizing: border-box;
     padding: 23px 35px 20px 35px;
     backdrop-filter: blur(10px);
@@ -68,6 +66,9 @@ h1{
     align-items: center;
     box-sizing: border-box;
 }
+.elementos h1 {
+    margin-bottom: 10px;
+}
 .elementos span {
     font-weight: 200;
     font-size: 14px;
@@ -98,4 +99,23 @@ transition:color 0.2s ease;
     width: 20px;
     height: 20px;
     font-size: 18px;
+}
+.singupField {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.singupField span {
+    position: relative;
+    font-size: 15px;
+    font-weight: 400;
+}
+.errorMsg {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    color: red;
 }

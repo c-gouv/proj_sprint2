@@ -24,11 +24,11 @@ button:hover{
     cursor: pointer;
 }
 .container {
-    width: max-content;
+    width: 400px;
     height: max-content;
     margin: auto;
     box-sizing: border-box;
-    padding: 50px 35px 50px 35px;
+    padding: 23px 35px 20px 35px;
     backdrop-filter: blur(10px);
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.5);
@@ -63,19 +63,19 @@ button:hover{
     font-weight: 200;
     font-size: 14px;
 }
-.elementos input {
+input {
     width: 300px;
     height: 30px;   
-    margin-top: 20px;
     background: none;
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 30px;
     padding: 10px 10px 10px 10px;
     box-sizing: border-box;
     height: 45px;
-}
-.elementos input::placeholder {
     color: white;
+}
+input::placeholder {
+    color: #c6c6c6;
 }
 #cadastro{
     margin-left: 5px;
@@ -90,7 +90,7 @@ button:hover{
 .icon-position {
     position: absolute;
     right: 13px;
-    top: 50%;
+    top: 57%;
     width: 20px;
     height: 20px;
     font-size: 18px;
@@ -98,4 +98,23 @@ button:hover{
 #btn_entrar{
     margin-block: 10px;
     width: 100%;
+}
+.loginField {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.loginField span {
+    font-size: 15px;
+    font-weight: 400;
+    align-self: center;
+}
+
+.errorMsg {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    color: red;
 }

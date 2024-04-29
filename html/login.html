@@ -36,17 +36,19 @@
                 <div class="elementos">
                     <h1>Login</h1>
                     <div>
-                        <div style="position: relative">
+                        <div class="loginField">
+                            <span>Email</span>
                             <input type="text" id="input_email" placeholder="Email">
                             <i class="fa-solid fa-envelope icon-position"></i>
                         </div>
-                        <div style="position: relative"">
+                        <div class="loginField">
+                            <span>Senha</span>
                             <input type="password" id="input_senha" placeholder="Senha">
                             <i class="fa-solid fa-lock icon-position"></i>
                         </div>
                         <span><a>Esqueceu a senha?</a></span>
-                    </div><br>
-                    <div id="exibir" style="color: red;"></div>
+                    </div>
+                    <div id="exibir" class="errorMsg""></div>
                     <div class="buttons">
                         <button id="btn_entrar" onclick="logar()">Entrar</button>
                         <span>Não tem um login? <b><a href="cadastro.html" id="cadastro"> Cadastre-se</a></b></span>
@@ -56,6 +58,7 @@
         </main>
     </div>
 </body>
+
 </html>
 
 <script>
@@ -71,15 +74,12 @@
         const exibir = document.getElementById('exibir');
 
         if (email == '' || senha == '') {
-            exibir.innerHTML = 'Insira valores válidos';
+            exibir.innerHTML = 'Preencha os campos antes de tentar o login';
         } else if (arroba < 1 || ponto < 0) {
-            exibir.innerHTML = 'Seu email precisar conter um "@" e um ".com"';
-        } else if (arroba < 0) {
-            exibir.innerHTML = 'Seu email precisar conter um "@"';
-        } else if (!ponto) {
-            exibir.innerHTML = 'Seu email precisar conter um ".com"';
+            exibir.innerHTML = 'Insira um email válido';
+        } else if (senha.length < 10) {
+            exibir.innerHTML = "Insira a senha corretamente"
         } else {
-            alert(`Login efetuado com sucesso!`)
             window.location.href = "dashboard.html";
         }
     }

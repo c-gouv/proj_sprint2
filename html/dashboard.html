@@ -64,70 +64,7 @@
               </span>
 
               <div class="wrapper">
-                <section class="alert-list">
-                  <div class="alert-container danger_border">
-                    <div class="alert-title">
-                      <span class="alert-info">Temperatura elevada</span>
-                      <span class="alert-date">22/05/2024 - 14:00</span>
-                    </div>
-                    <div class="alert-value">
-                      <span>55ºC</span>
-                    </div>
-                  </div>
-                  <div class="alert-container warning_border">
-                    <div class="alert-title">
-                      <span class="alert-info">Temperatura elevada</span>
-                      <span class="alert-date">22/05/2024 - 14:00</span>
-                    </div>
-                    <div class="alert-value">
-                      <span>55ºC</span>
-                    </div>
-                  </div>
-                  <div class="alert-container danger_border">
-                    <div class="alert-title">
-                      <span class="alert-info">Temperatura elevada</span>
-                      <span class="alert-date">22/05/2024 - 14:00</span>
-                    </div>
-                    <div class="alert-value">
-                      <span>55ºC</span>
-                    </div>
-                  </div>
-                  <div class="alert-container warning_border">
-                    <div class="alert-title">
-                      <span class="alert-info">Temperatura elevada</span>
-                      <span class="alert-date">22/05/2024 - 14:00</span>
-                    </div>
-                    <div class="alert-value">
-                      <span>55ºC</span>
-                    </div>
-                  </div>
-                  <div class="alert-container danger_border">
-                    <div class="alert-title">
-                      <span class="alert-info">Temperatura elevada</span>
-                      <span class="alert-date">22/05/2024 - 14:00</span>
-                    </div>
-                    <div class="alert-value">
-                      <span>55ºC</span>
-                    </div>
-                  </div>
-                  <div class="alert-container warning_border">
-                    <div class="alert-title">
-                      <span class="alert-info">Temperatura elevada</span>
-                      <span class="alert-date">22/05/2024 - 14:00</span>
-                    </div>
-                    <div class="alert-value">
-                      <span>55ºC</span>
-                    </div>
-                  </div>
-                  <div class="alert-container warning_border">
-                    <div class="alert-title">
-                      <span class="alert-info">Temperatura elevada</span>
-                      <span class="alert-date">22/05/2024 - 14:00</span>
-                    </div>
-                    <div class="alert-value">
-                      <span>55ºC</span>
-                    </div>
-                  </div>
+                <section class="alert-list" id="alert-list">
                 </section>
               </div>
 
@@ -223,6 +160,7 @@
     const hours = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
     let day = []
     let day2 = []
+    let dia = []
     // Configuração do gráfico de umidade
     const umidade = document.getElementById('umidadeHist').getContext('2d');
     const humidityChart = new Chart(umidade, {
@@ -259,6 +197,7 @@
       data: {
         labels: hours,
         datasets: [{
+          data: dia,
           label: 'Temperatura (°C)',
           backgroundColor: '#fcab32',
           borderColor: '#fcab32',
@@ -291,27 +230,96 @@
         humidityChart.update()
       }
     }
-    function inserirDados(dataHis){
+        function inserirDadosUmidade(dataHis){
             var valores = []
-            valores.push(Math.floor(Math.random() * 100))
+            valores.push(Math.floor(Math.random() * (20-5+1) + 5))
             valores.forEach((valor, index) => {
                 //Máximo de 60 itens exibidos no gráfico
                 dataHis.push(valor)
                 console.log(dataHis.length);
-            
+
+            let list = document.getElementById("alert-list")    
+
+            // for(i = 0;i<=valores.length;i++){
+              if(valor>16){
+                list.innerHTML += `
+                    <div class="alert-container danger_border">
+                      <div class="alert-title">
+                       <span class="alert-info">Umidade <br> elevada</span>
+                       <span class="alert-date">22/05/2024 - ${hours[index]}</span>
+                      </div>
+                      <div class="alert-value">
+                       <span>${valor}%</span>
+                      </div>
+                   </div>
+                `
+              }else if(valor>13){
+                list.innerHTML += `
+                    <div class="alert-container warning_border">
+                      <div class="alert-title">
+                       <span class="alert-info">Umidade <br> elevada</span>
+                       <span class="alert-date">22/05/2024 - ${hours[index]}</span>
+                      </div>
+                      <div class="alert-value">
+                       <span>${valor}%</span>
+                      </div>
+                   </div>
+                   `
+              }
+    })}
+
+    function inserirDadosTemperatura(dataHis){
+            var valores = []
+            valores.push(Math.floor(Math.random() * (21-14+1) + 14))
+            valores.forEach((valor, index) => {
+                //Máximo de 60 itens exibidos no gráfico
+                dataHis.push(valor);
+                console.log(dataHis.length);
+
+            let list = document.getElementById("alert-list")    
+
+              if(valor>20){
+                list.innerHTML += `
+                    <div class="alert-container danger_border">
+                      <div class="alert-title">
+                       <span class="alert-info">Temperatura elevada</span>
+                       <span class="alert-date">22/05/2024 - ${hours[index]}</span>
+                      </div>
+                      <div class="alert-value">
+                       <span>${valor}°C</span>
+                      </div>
+                   </div>
+                `
+              }else if(valor>18 || valor<15){
+                list.innerHTML += `
+                    <div class="alert-container warning_border">
+                      <div class="alert-title">
+                       <span class="alert-info">Temperatura elevada</span>
+                       <span class="alert-date">22/05/2024 - ${hours[index]}</span>
+                      </div>
+                      <div class="alert-value">
+                       <span>${valor}°C</span>
+                      </div>
+                   </div>
+                   `
+              }
     })}
 
     // // VALORES RANDOMICOS
      setInterval(() => {
         if (day.length < 24) {
-          inserirDados(day)
+          inserirDadosUmidade(day);
+          humidityChart.update();
+        }else
+          if (day2.length < 10) {
+          inserirDadosUmidade(day2)
           humidityChart.update()
           }
-          if (day2.length < 10) {
-          inserirDados(day2)
-          }
+        
+          inserirDadosTemperatura(dia);
+          tempGrafico.update();
+        }, 1000);
 
-        }, 500);
 
 
 
@@ -392,10 +400,10 @@
             })
         }
 
-        // setInterval(() => {
-        //     obterDados(monitoramento_umidade, 'dht11/umidade');
-        //     obterDados(monitoramento_temperatura, 'dht11/temperatura');
-        // }, 1000);
+        setInterval(() => {
+            obterDados(monitoramento_umidade, 'dht11/umidade');
+            obterDados(monitoramento_temperatura, 'dht11/temperatura');
+        }, 1000);
 
         // SPRINT 3
         // function lerHistorico(grafico) {

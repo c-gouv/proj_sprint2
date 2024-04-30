@@ -2,21 +2,19 @@
     background-color: rgba(32, 102, 61, 0.7);
     height: 100%;
 }
+
 .container {
     display: flex;
     flex-direction: column;
     padding: 70px;
-    
-
-    
 }
 
 .container p {
     font-weight: 400;
     margin-top: 0;
     white-space: normal;
-
 }
+
 .container a {
     font-weight: 400;
     margin-bottom: 1.5vw;
@@ -28,6 +26,9 @@ h1 {
     font-size: 3vw;
     margin: 0;
     margin-bottom: 0.5vw;
+}
+h4 {
+    margin-block: 10px;
 }
 
 h1 {
@@ -41,29 +42,29 @@ h1 {
     width: 400px;
     height: 250px;
     padding: 10px;
+    box-sizing: border-box;
     margin: 20px;
     box-sizing: border-box;
     backdrop-filter: blur 15px;
+}
+.div1 h4, p{
+    text-align: center;
+}
+.div1 p {
+    align-self: center;
 }
 
 .container2{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;  
-    padding: 50px;
+    justify-content: center;
+    gap: 20px;
 }
 .container3{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    padding: 50px;
-}
-
-footer {
-    background-color:rgba(7, 7, 7, 0.7);
-    backdrop-filter: blur 15px;
-    color: #fff; 
-    height: 80px;
+    justify-content: center;
+    gap: 20px;
 }
 
 .container4 {
@@ -78,3 +79,26 @@ h4 {
     color: #ffda82;
 }
 
+.back{
+    background-color: rgba(32, 102, 61, 0.7);
+    min-width: 100vw;
+    height: 145vh;
+}
+
+.footerContainer {
+    background-color:rgba(7, 7, 7, 0.7);
+    width: 100vw;
+    height: 8vh;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+}
+
+.footerItem {
+       align-items: center;
+       width: 100%;
+       justify-content: space-around;
+}

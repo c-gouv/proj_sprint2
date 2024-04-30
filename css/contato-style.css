@@ -55,17 +55,11 @@
     padding-block: 2vh;
     box-sizing: border-box;
 }
+
 .form-field-msg {
     height: 30vh;
     vertical-align: top;
     padding-block: 0.8vw;
-}
-
-footer {
-    background-color:rgba(7, 7, 7, 0.7);
-    backdrop-filter: blur 15px;
-    color: #fff; 
-    height: 80px;
 }
 
 .container {
@@ -76,6 +70,26 @@ footer {
     text-align: center;
 }
 
+.back{
+    background-color: rgba(32, 102, 61, 0.7);
+    min-width: 100vw;
+    height: 113vh;
+}
 
+.footerContainer {
+    background-color:rgba(7, 7, 7, 0.7);
+    width: 100vw;
+    height: 8vh;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+}
 
-
+.footerItem {
+       align-items: center;
+       width: 100%;
+       justify-content: space-around;
+}

@@ -6,7 +6,7 @@ body{
     font-family: "DM Sans", sans-serif;
     background-image: url(../img/trigo.jpg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100vw;
     font-size: 1.3vw;
     color: #fff;
     font-weight: 600;
@@ -16,6 +16,8 @@ body{
     background-color: rgba(32, 102, 61, 0.7);
     min-width: 100vw;
     height: 110vh;
+    /* overflow-y: hidden; */
+    position: absolute;
 }
 .navbar{
     display: flex;

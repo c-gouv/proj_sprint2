@@ -28,24 +28,34 @@ h1 {
     align-items: center;
 }
 
-footer {
-    background-color:rgba(7, 7, 7, 0.7);
-    backdrop-filter: blur 15px;
-    color: #fff; 
-    height: 80px;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    bottom: 0;
-    transform: translateY(9%);
-    
-}
-
 .container {
     display: flex;
     flex-direction: row;
     padding: 10px;
     justify-content: space-evenly;
     text-align: center;
+}
+
+.back{
+    background-color: rgba(32, 102, 61, 0.7);
+    min-width: 100vw;
+    height: 110vh;
+}
+
+.footerContainer {
+    background-color:rgba(7, 7, 7, 0.7);
+    width: 100vw;
+    height: 8vh;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+}
+
+.footerItem {
+       align-items: center;
+       width: 100%;
+       justify-content: space-around;
 }

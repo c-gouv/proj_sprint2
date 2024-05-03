@@ -3,59 +3,76 @@ CREATE DATABASE fitteya;
 USE fitteya;
 
 -- CRIAR UMA TABELA DE CADASTRO DE USUÁRIO/RESPONSÁVEL DA EMPRESA, ONDE 1 USUÁRIO PODE TER MAIS DE UM COMPLEXO
+CREATE TABLE empresa(
+	idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45),
+    telefoneFixo VARCHAR(8),
+    telefoneCel VARCHAR(11),
+    email VARCHAR(45)
+);
+
+INSERT INTO empresa
+VALUES  (default, 'TrigoBrasil', '22223333', '11912345678', 'contato@trigobrasil.com.br'),
+        (default, 'TrigoCeara', '33334444', '85987654321', 'contato@trigoceara.com.br'),
+        (default, 'TrigoSãoPaulo', '55556666', '11876543210', 'contato@trigosp.com.br');
+
 CREATE TABLE usuario(
-	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(45) UNIQUE,
+	idUsuario INT AUTO_INCREMENT,
+    nome VARCHAR(45),
     email VARCHAR(45) UNIQUE,
-    telefone CHAR(11),
+    telefone CHAR(11) UNIQUE,
     senha VARCHAR(244),
     fkAdm INT,
-    CONSTRAINT fkUsuarioAdm FOREIGN KEY (fkAdm) REFERENCES usuario(idUsuario)
+    fkEmpresa INT,
+    CONSTRAINT fkUsuarioAdm FOREIGN KEY (fkAdm) REFERENCES usuario(idUsuario),
+    CONSTRAINT fkUsuarioEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
+    CONSTRAINT pkUsuarioEmpresa PRIMARY KEY (idUsuario, fkEmpresa)
 );
 
 INSERT INTO usuario VALUES 
-	(default, 'Carlinhos', 'carlinhos@gmail.com', '11999999999', 'fa2d4e0f016d8fcaf758d307c857b3e3', null),
-	(default, 'João Victor', 'joao@gmail.com', '11999999998', '3dfcab79ed21fd89c9eb25e9864a6155', 1),
-	(default, 'Erick Gomes', 'erick@gmail.com', '11999999997', '4da77e6afb73aaaabd18cdfe8d3e0262', 1),
-	(default, 'Cauã Gouvea', 'gouvea@gmail.com', '11999999996', '0e3a650faff671a35b335526bae4aa05', 1);
+	(default, 'Carlinhos', 'carlinhos@gmail.com', '11999999999', 'fa2d4e0f016d8fcaf758d307c857b3e3', null, 1),
+	(default, 'João Victor', 'joao@gmail.com', '11999999998', '3dfcab79ed21fd89c9eb25e9864a6155', 1, 1),
+	(default, 'Erick Gomes', 'erick@gmail.com', '11999999997', '4da77e6afb73aaaabd18cdfe8d3e0262', null, 2),
+	(default, 'Cauã Gouvea', 'gouvea@gmail.com', '11999999996', '0e3a650faff671a35b335526bae4aa05', 3, 2);
 
 -- COMPLEXO - CONJUNTO DE SILOS
 CREATE TABLE complexo(
-    idComplexo INT PRIMARY KEY AUTO_INCREMENT,
+    idComplexo INT AUTO_INCREMENT,
     nome VARCHAR(100),
     estado CHAR(2) NOT NULL,
     cidade VARCHAR(50) NOT NULL,
     logradouro VARCHAR(50) NOT NULL,
     numero INT NOT NULL,
-    fkUsuario INT,
-    CONSTRAINT fkEmpresaUsuario FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario)
+    fkEmpresa INT,
+    CONSTRAINT fkEmpresaComplexo FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
+    CONSTRAINT pkComplexoEmpres PRIMARY KEY (idComplexo, fkEmpresa)
 );
 
 INSERT INTO complexo
 VALUES  (default, 'TrigoBrasil',  'SP', 'São Paulo', 'Rua das Trigoiras', 123, 1),
         (default, 'TrigoForte', 'RS', 'Porto Alegre', 'Avenida do Trigo', 456, 2),
         (default, 'GrãosPampas', 'RS', 'Caxias do Sul', 'Rua dos Grãos', 789, 3),
-        (default, 'MoinhoReal', 'PR', 'Curitiba', 'Avenida do Moinho', 321, 4);
+        (default, 'MoinhoReal', 'PR', 'Curitiba', 'Avenida do Moinho', 321, 3);
 
-CREATE TABLE medida(
-	idMedida INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE parametro(
+	idParametro INT PRIMARY KEY AUTO_INCREMENT,
     temperaturaMin DECIMAL(4, 2),
     temperaturaMax DECIMAL(4, 2),
     umidadeMin DECIMAL (4, 2),
     umidadeMax DECIMAL (4, 2)
 );
 
-INSERT INTO medida
+INSERT INTO parametro
 VALUES 	(DEFAULT, 15, 18, 13, 16);
 
 CREATE TABLE silo ( 
     idSilo INT AUTO_INCREMENT,
     nome VARCHAR(45),
     fkComplexo INT,
-    fkMedida INT,
+    fkParametro INT,
     CONSTRAINT fkComplexoSilo FOREIGN KEY (fkComplexo) REFERENCES complexo(idComplexo),
-    CONSTRAINT fkSiloMedida FOREIGN KEY (fkMedida) REFERENCES medida(idMedida),
-    CONSTRAINT pkSiloMedida PRIMARY KEY (idSilo, fkMedida)
+    CONSTRAINT fkSiloParametro FOREIGN KEY (fkParametro) REFERENCES parametro(idParametro),
+    CONSTRAINT pkSiloParametro PRIMARY KEY (idSilo, fkParametro)
 );
 
 INSERT INTO silo VALUES  
@@ -115,8 +132,9 @@ SELECT * FROM silo;
 SELECT * FROM sensor;
 SELECT * FROM monitoramento;
 
-SELECT usuario.nome as usuarioName, complexo.nome as complexoNome, silo.*, sensor.idSensor, monitoramento.* 
-FROM usuario JOIN complexo ON complexo.fkUsuario = usuario.idUsuario
+SELECT usuario.nome as usuarioName, empresa.nome, complexo.nome as complexoNome, silo.*, sensor.idSensor, monitoramento.* 
+FROM usuario JOIN empresa ON usuario.fkEmpresa = empresa.idEmpresa
+JOIN complexo ON complexo.fkEmpresa = empresa.idEmpresa
 JOIN silo ON silo.fkComplexo = complexo.idComplexo
 JOIN sensor ON sensor.fkSilo = silo.idSilo
 JOIN monitoramento ON monitoramento.fkSensor = sensor.idSensor; 
@@ -133,3 +151,7 @@ INSERT INTO contatoSite VALUES
 	(default, 'TrigoBrasil', 'contato@trigobrasil.com', 'Contrato', 'Gostaria de mais informações'),
 	(default, 'TrigoCeara', 'contato@trigoceara.com', 'Contrato', 'Gostaria de mais informações'),
 	(default, 'TrigoSãoPaulo', 'contato@trigosaopaulo.com', 'Contrato', 'Gostaria de mais informações');
+    
+select * from monitoramento
+join sensor
+where dataHora like '2024-03-18%' and minute(dataHora) = 0 and second(dataHora) = 0;

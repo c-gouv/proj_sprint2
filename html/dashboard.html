@@ -133,41 +133,89 @@
 
 
               <span class="title_dashboard">Dashboard
-                <span class="kip danger_border"> PERIGO</span>
+                <!-- <span class="kip danger_border"> PERIGO</span>
                 <span class="kip warning_border"> CUIDADO</span>
-                <span class="kip normal_border"> NORMAL</span>
+                <span class="kip normal_border"> NORMAL</span> -->
               </span>
 
 
               <section class="section_grafico">
-                <div class="container-grafico">
-                  <div class="content_grafico ">
-                    <div class="titulo_grafico umidade ">Umidade do silo (%)</div>
+                <div class="container-grafico ">
+                  <div class="content_grafico">
+                    <div class="title-flex">
+                    <div class="titulo_grafico umidade">Umidade do silo (%)</div>
+                    <div style="display: flex; gap: 10px;">
+                      <span class="kip danger_border">PERIGO (> 16%)</span>
+                      <span class="kip warning_border">CUIDADO(13% - 16%)</span>
+                      <span class="kip normal_border"> NORMAL (< 13%)</span>
+                    </div>
+                    </div>
                     <div class="content_value background-umidade"><span id="monitoramento_umidade" >50</span>%</div>
                   </div>
 
                   <div class="content_grafico">
+                    <div class="title-flex">
+
                       <span class="titulo_grafico temperatura">Temperatura do silo (ºC)</span>
+                      <div style="display: flex; gap: 10px;">
+                        <span class="kip danger_border">PERIGO (> 20ºC)</span>
+                        <span class="kip warning_border">CUIDADO (> 18ºC e < 15 ºC) </span>
+                        <span class="kip normal_border"> NORMAL(15ºC - 18ºC)</span>
+                      </div>
+                    </div>
                       <div class="content_value background-temperatura"><span id="monitoramento_temperatura" >35</span>ºC</div>
                   </div>
                 </div>
                 
                 
                 <div class="container-grafico">
-                  <div class="content_grafico">
+                  <div class="content_grafico  historico_container">
                     <div class="title-flex">
                       <span class="titulo_grafico umidade">Histórico de Umidade</span>
-                     
+                      
+                    </div>
+                    <div class="kpi_container">
+                        <div class="kpi_info">
+                          <span>Máximo</span>
+                          <span>14%</span>
+                        </div>
+                        <div class="kpi_info">
+                          <span>Minímo</span>
+                          <span>10%</span>
+                        </div>
+                        <div class="kpi_info">
+                          <span>Média</span>
+                          <span>13%</span>
+                        </div>
                     </div>
                    
                     <div id="umidade" class="containerCanvas">
-                          <canvas id="umidadeHist"></canvas>
+                          <canvas id="umidadeHist" style="position: relative; width: 500px;"></canvas>
                       </div>
+                    
+                  
                   </div>
-                  <div class="content_grafico">
+
+                  <div class="content_grafico historico_container">
+                    <div class="title-flex">
                       <span class="titulo_grafico temperatura"> Histórico de Temperatura</span>
+                    </div>
+                      <div class="kpi_container">
+                        <div class="kpi_info">
+                          <span>Máximo</span>
+                          <span>14%</span>
+                        </div>
+                        <div class="kpi_info">
+                          <span>Minímo</span>
+                          <span>10%</span>
+                        </div>
+                        <div class="kpi_info">
+                          <span>Média</span>
+                          <span>13%</span>
+                        </div>
+                    </div>
                       <div id="temperatura" class="containerCanvas">
-                          <canvas id="temperaturaHist" ></canvas>
+                          <canvas id="temperaturaHist" style="position: relative; width: 500px;"></canvas>
                       </div>
                   </div>
                 </div>

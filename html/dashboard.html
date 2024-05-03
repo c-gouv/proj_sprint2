@@ -226,8 +226,7 @@
 </html>
 
 <script>
-    let style = getComputedStyle(document.body);
-    let primCol = style.getPropertyValue("--cor-borda");
+    var corTexto = getComputedStyle(document.body).getPropertyValue('--cor-texto');
 
     function userOptions() {
         let menu = document.getElementById("menuPerfil");
@@ -256,7 +255,7 @@
         window.location.href="home.html"
     }
     function mudarTema() {
-      let icon = document.getElementById("icon");
+      let icon = document.getElementById("themeIcon");
       let iconAtual = icon.classList.contains("fa-moon") ? "fa-moon" : "fa-sun";
       let novoIcon = iconAtual === "fa-moon" ? "fa-sun" : "fa-moon";
       document.body.classList.toggle("light-theme");

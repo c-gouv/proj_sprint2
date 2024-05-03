@@ -1,0 +1,22 @@
+.footerContainer {
+    background-color:rgba(7, 7, 7, 0.7);
+    width: 100vw;
+    height: 8vh;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+}
+
+.footerItem {
+       align-items: center;
+       width: 100%;
+       justify-content: space-around;
+}
+
+.footerItem span {
+    font-weight: 300;
+    cursor: pointer;
+}

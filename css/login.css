@@ -24,6 +24,7 @@ button:hover{
     cursor: pointer;
 }
 .container {
+    display: flex;
     width: 400px;
     height: max-content;
     margin: auto;
@@ -113,8 +114,10 @@ input::placeholder {
 }
 
 .errorMsg {
-    text-align: center;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 300;
+    font-weight: bold;
     color: red;
+    margin-left: 10vw;
+    margin-top: 15vh;
 }

@@ -93,3 +93,22 @@
        width: 100%;
        justify-content: space-around;
 }
+
+.btnModal {
+    width: 8vw;
+    height: 4vh;
+    border: 0px solid;
+    background-color: rgba(32, 102, 61, 0.7);
+    color: white;
+    border-radius: 20px;
+    margin-left: 6.5vw;
+    font-weight: bold;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.btnModal:hover{
+    transition: background-color 0.4s ease, color 0.4s ease;
+    color: white;
+    background-color: #eeb122;
+    cursor: pointer;
+}

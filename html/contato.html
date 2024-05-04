@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/contato-style.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/modal.css">
     <link rel="shortcut icon" href="../img/logo.svg">
 </head>
 
@@ -43,6 +44,14 @@
                     <div id="exibir"></div>
                     <button onclick="enviar()" id="enviar">Enviar mensagem</button>
                 </div>
+                <dialog id="logado">
+                    <div class="modal">
+                        <p id="p">Mensagem enviada com sucesso!<br> 
+                                  Em breve retornaremos!</p>
+                        <img style="width: 5vw; margin-bottom: 5vh;" src="../img/verificado.png" alt="verificado">
+                            
+                    </div><button class="btnModal" onclick="login()">OK</button>
+                </dialog>
         </div><br><br><br>
         <footer>
             <div class="footerContainer">
@@ -68,10 +77,13 @@ function enviar(){
     if (nomeEmpresa == '' || email == '' || assunto == '' || contar ==''){
        exibir.innerHTML='<p style="color:red;">Preencha todos os campos!</p>'
     } else {
-        alert(`Mensagem enviada com sucesso! Em breve retornaremos!`)
-    window.location.href="contato.html"
+       logado.showModal()
     }
 
     
+}
+
+function login(){
+    window.location.href="contato.html"
 }
 </script>

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/modal.css">
     <link rel="shortcut icon" href="../img/logo.svg">
     <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
 </head>
@@ -49,13 +50,21 @@
                         </div>
                         <span><a>Esqueceu a senha?</a></span>
                     </div>
-                    <div id="exibir" class="errorMsg""></div>
                     <div class="buttons">
                         <button id="btn_entrar" onclick="logar()">Entrar</button>
                         <span>Não tem um login? <b><a href="cadastro.html" id="cadastro"> Cadastre-se</a></b></span>
                     </div>
-                </div>
-            </div>
+                </div>  <div id="exibir" class="errorMsg"></div>
+                <dialog id="logado">
+                    <div class="modal">
+                        <p id="p">LOGIN EFETUADO COM SUCESSO!</p>
+                            <p>BEM VINDO!</p>
+                        <img style="width: 5vw; margin-bottom: 5vh;" src="../img/verificado.png" alt="verificado">
+                            
+                    </div><button class="btn" onclick="dash()">OK</button>
+                </dialog>
+            </div> 
+          
         </main>
         <footer>
             <div class="footerContainer">
@@ -82,13 +91,18 @@
         const exibir = document.getElementById('exibir');
 
         if (email == '' || senha == '') {
-            exibir.innerHTML = 'Preencha os campos antes de tentar o login';
+            exibir.innerHTML = 'Preencha todos os campos!';
         } else if (arroba < 1 || ponto < 0) {
-            exibir.innerHTML = 'Insira um email válido';
+            exibir.innerHTML = 'Insira um email válido!';
         } else if (senha.length < 10) {
-            exibir.innerHTML = "Insira a senha corretamente"
+            exibir.innerHTML = "Senha incorreta!"
         } else {
-            window.location.href = "dashboard.html";
+            logado.showModal()
+            
         }
+    }
+
+    function dash(){
+        window.location.href="dashboard.html"
     }
 </script>

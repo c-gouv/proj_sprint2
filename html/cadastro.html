@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/cadastro.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/modal.css">
     <link rel="shortcut icon" href="../img/logo.svg">
     <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
 </head>
@@ -60,10 +61,17 @@
                     </div>
                     <div class="buttons">
                         <button class="botao1" onclick="cadastrar()">Cadastrar-se</button>
-                        <div id="errorArea" class="errorMsg"></div>
+                        
                         <span>Já tem um cadastro? <a class="spanvoltar" href="login.html" id="login">Voltar ao login</a></span>
                     </div>
-                </div>
+                </div> <div id="errorArea" class="errorMsg"></div>
+                <dialog id="logado">
+                    <div class="modal">
+                        <p id="p">CADASTRO EFETUADO COM SUCESSO!</p>
+                        <img style="width: 5vw; margin-bottom: 5vh;" src="../img/verificado.png" alt="verificado">
+                            
+                    </div><button class="btnModal" onclick="login()">OK</button>
+                </dialog>
             </div>
         </main>
         <footer>
@@ -112,8 +120,11 @@
         } else if (senha != confirmar || confirmar != senha) {
             errorArea.innerHTML = 'Suas senhas precisam estar iguais!';
         } else {
-            alert('Usuário cadastrado com sucesso! Bem-vindo!')
-            window.location.href = "login.html";
-        }
+         logado.showModal()
+         }
+    }
+
+    function login(){
+        window.location.href="login.html"
     }
 </script>

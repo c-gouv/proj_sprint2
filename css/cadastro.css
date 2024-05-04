@@ -23,7 +23,7 @@ h1{
 }
 .container {
     width: 400px;
-    height: max-content;
+    height: 70vh;
     margin: auto;
     box-sizing: border-box;
     padding: 23px 35px 20px 35px;
@@ -65,6 +65,7 @@ h1{
     margin-bottom: 5px;
     align-items: center;
     box-sizing: border-box;
+    
 }
 .elementos h1 {
     margin-bottom: 10px;
@@ -112,10 +113,31 @@ transition:color 0.2s ease;
     font-size: 15px;
     font-weight: 400;
 }
+
 .errorMsg {
-    margin-top: 10px;
-    text-align: center;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 300;
+    font-weight: bold;
     color: red;
+    margin-left: 35vw;
+    margin-top: -50vh;
+}
+
+.btnModal {
+    width: 8vw;
+    height: 4vh;
+    border: 0px solid;
+    background-color: rgba(32, 102, 61, 0.7);
+    color: white;
+    border-radius: 20px;
+    margin-left: 8vw;
+    font-weight: bold;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.btnModal:hover{
+    transition: background-color 0.4s ease, color 0.4s ease;
+    color: white;
+    background-color: #eeb122;
+    cursor: pointer;
 }

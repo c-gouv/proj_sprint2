@@ -1,0 +1,18 @@
+#logado {
+    border: 1px solid black; 
+    border-radius: 25px;
+}
+
+.modal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    margin-left: 7vw;
+     margin-top: -8vh;
+     background-color: rgba(32, 102, 61, 0.7);
+     color: white;
+}

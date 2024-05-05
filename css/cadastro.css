@@ -116,12 +116,18 @@ transition:color 0.2s ease;
 }
 
 .errorMsg {
+    width: 60%;
+    display: none;
     font-size: 16px;
     font-weight: 300;
     font-weight: bold;
     color: red;
-    margin-left: 35vw;
-    margin-top: -50vh;
+    right: -80%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    top: 0;
+    position: absolute;
 }
 
 .btnModal {

@@ -25,7 +25,6 @@ button:hover{
 }
 .container {
     display: flex;
-    width: 400px;
     height: max-content;
     margin: auto;
     box-sizing: border-box;
@@ -33,6 +32,7 @@ button:hover{
     backdrop-filter: blur(10px);
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.5);
+    position: relative;
 }
 .buttons {
     display: flex;
@@ -114,10 +114,16 @@ input::placeholder {
 }
 
 .errorMsg {
+    width: 60%;
+    display: none;
     font-size: 16px;
     font-weight: 300;
     font-weight: bold;
     color: red;
-    margin-left: 10vw;
-    margin-top: 15vh;
+    right: -80%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    top: 0;
+    position: absolute;
 }

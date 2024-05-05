@@ -66,7 +66,8 @@
                         
                         <span>Já tem um cadastro? <a class="spanvoltar" href="login.html" id="login">Voltar ao login</a></span>
                     </div>
-                </div> <div id="errorArea" class="errorMsg"></div>
+                </div> 
+                <div id="errorArea" class="errorMsg"></div>
                 <dialog id="logado">
                     <div class="modal">
                         <p id="p">CADASTRO EFETUADO COM SUCESSO!</p>
@@ -108,19 +109,28 @@
         const arrob = email.indexOf("@")
         const ponto = email.endsWith(".com")
 
+
+
         if (user == '' || email == '' || senha == '' || confirmar == '') {
+            errorArea.style.display = 'block'
             errorArea.innerHTML = 'Preencha todos os campos!';
         } else if (arrob < 1 || !ponto) {
+            errorArea.style.display = 'block'
             errorArea.innerHTML = 'Seu email deve conter um "@" e um ".com"';
         } else if (arrob < 0) {
+            errorArea.style.display = 'block'
             errorArea.innerHTML = 'Seu email deve conter um "@"';
         } else if (ponto < 0) {
+            errorArea.style.display = 'block'
             errorArea.innerHTML = 'Seu email deve conter um ".com"';
         } else if (senha.length < 10) {
+            errorArea.style.display = 'block'
             errorArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres!';
         } else if (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) {
+            errorArea.style.display = 'block'
             errorArea.innerHTML += 'Sua senha deve conter pelo menos 1 caracter especial!';
         } else if (senha != confirmar || confirmar != senha) {
+            errorArea.style.display = 'block'
             errorArea.innerHTML = 'Suas senhas precisam estar iguais!';
         } else {
          logado.showModal()

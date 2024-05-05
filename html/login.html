@@ -55,7 +55,8 @@
                         <button id="btn_entrar" onclick="logar()">Entrar</button>
                         <span>Não tem um login? <b><a href="cadastro.html" id="cadastro"> Cadastre-se</a></b></span>
                     </div>
-                </div>  <div id="exibir" class="errorMsg"></div>
+                </div>  
+                <div id="exibir" class="errorMsg"></div>
                 <dialog id="logado">
                     <div class="modal">
                         <p id="p">LOGIN EFETUADO COM SUCESSO!<br>
@@ -93,10 +94,13 @@
         const exibir = document.getElementById('exibir');
 
         if (email == '' || senha == '') {
+            exibir.style.display = 'block'
             exibir.innerHTML = 'Preencha todos os campos!';
         } else if (arroba < 1 || ponto < 0) {
+            exibir.style.display = 'block'
             exibir.innerHTML = 'Insira um email válido!';
         } else if (senha.length < 10) {
+            exibir.style.display = 'block'
             exibir.innerHTML = "Senha incorreta!"
         } else {
             logado.showModal()

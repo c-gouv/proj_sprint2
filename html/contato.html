@@ -35,55 +35,63 @@
         <div class="main">
             <h1>Fale conosco sobre<br>
                 o seu projeto.</h1>
-                <div class="form">
-                    <p>Nos mande uma mensagem</p>
-                    <input type="text" placeholder="Nome da empresa" id="nome_empresa" class="form-field">
-                    <input type="text" placeholder="Email" id="email_empresa" class="form-field">
-                    <input type="text" placeholder="Assunto" id="assunto_empresa" class="form-field">
-                    <textarea type="text" placeholder="Nos conte mais sobre o seu projeto" id="contar_mais" class="form-field form-field-msg"></textarea>
-                    <div id="exibir"></div>
-                    <button onclick="enviar()" id="enviar">Enviar mensagem</button>
-                </div>
-                <dialog id="logado">
-                    <div class="modal">
-                        <p id="p">Mensagem enviada com sucesso!<br> 
-                                  Em breve retornaremos!</p>
-                        <img style="width: 5vw; margin-bottom: 5vh;" src="../img/verificado.png" alt="verificado">
-                            
-                    </div><button class="btnModal" onclick="login()">OK</button>
-                </dialog>
+            <div class="form">
+                <p>Nos mande uma mensagem</p>
+                <input type="text" placeholder="Nome da empresa" id="nome_empresa" class="form-field">
+                <input type="text" placeholder="Email" id="email_empresa" class="form-field">
+                <input type="text" placeholder="Assunto" id="assunto_empresa" class="form-field">
+                <textarea type="text" placeholder="Nos conte mais sobre o seu projeto" id="contar_mais"
+                    class="form-field form-field-msg"></textarea>
+                <div id="exibir"></div>
+                <button onclick="enviar()" id="enviar">Enviar mensagem</button>
+            </div>
+            <dialog id="logado">
+                <div class="modal">
+                    <p id="p">Mensagem enviada com sucesso!<br>
+                        Em breve retornaremos!</p>
+                    <img style="width: 5vw; margin-bottom: 5vh;" src="../img/verificado.png" alt="verificado">
+
+                </div><button class="btnModal" onclick="login()">OK</button>
+            </dialog>
         </div><br><br><br>
         <footer>
             <div class="footerContainer">
                 <div class="footerItem">
-                        <span>Privacy Policy</span> | <span>Terms & Conditions</span> | <span>Cookies</span>
+                    <span>Privacy Policy</span> | <span>Terms & Conditions</span> | <span>Cookies</span>
                 </div>
             </div>
         </footer>
     </div>
 </body>
+
 </html>
 
 <script>
-function loginScreen() {
-    window.location.href = "login.html"
-}
-function enviar(){
-    const nomeEmpresa = nome_empresa.value
-    const email = email_empresa.value
-    const assunto = assunto_empresa.value
-    const contar = contar_mais.value 
+    function loginScreen() {
+        window.location.href = "login.html"
+    }
+    function enviar() {
+        const nomeEmpresa = nome_empresa.value
+        const email = email_empresa.value
+        const assunto = assunto_empresa.value
+        const contar = contar_mais.value
+        const arroba = email.indexOf('@')
+        const ponto = email.indexOf('.com')
 
-    if (nomeEmpresa == '' || email == '' || assunto == '' || contar ==''){
-       exibir.innerHTML='<p style="color:red;">Preencha todos os campos!</p>'
-    } else {
-       logado.showModal()
+        if (nomeEmpresa == '' || email == '' || assunto == '' || contar == '') {
+            exibir.innerHTML = '<p style="color:red;">Preencha todos os campos!</p>'
+        }
+        else if (arroba < 0 || ponto < 0) {
+            exibir.innerHTML = '<p style="color:red;">Insira um email válido!</p>'
+        }else {
+            logado.showModal()
+        }
+
+
+
     }
 
-    
-}
-
-function login(){
-    window.location.href="contato.html"
-}
+    function login() {
+        window.location.href = "contato.html"
+    }
 </script>

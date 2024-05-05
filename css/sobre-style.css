@@ -36,11 +36,7 @@ h1 {
     text-align: center;
 }
 
-.back{
-    background-color: rgba(32, 102, 61, 0.7);
-    min-width: 100vw;
-    height: 110vh;
-}
+
 
 .footerContainer {
     background-color:rgba(7, 7, 7, 0.7);

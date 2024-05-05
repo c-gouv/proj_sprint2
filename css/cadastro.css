@@ -1,8 +1,9 @@
 main {
-    height: 86vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-bottom: 50px;
 }
 input {
     width: 300px;
@@ -23,7 +24,7 @@ h1{
 }
 .container {
     width: 400px;
-    height: 70vh;
+    height: 500px;
     margin: auto;
     box-sizing: border-box;
     padding: 23px 35px 20px 35px;

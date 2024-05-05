@@ -1,12 +1,9 @@
-.back{
-    background-color: rgba(32, 102, 61, 0.7);
-    height: 100%;
-}
 
 .container {
     display: flex;
     flex-direction: column;
-    padding: 70px;
+    padding: 80px 70px;
+    
 }
 
 .container p {
@@ -39,7 +36,7 @@ h1 {
 .div1 {
     background-color: rgba(28, 75, 47, 0.7);
     border-radius: 10px;
-    width: 400px;
+    width: 50%;
     height: 250px;
     padding: 10px;
     box-sizing: border-box;
@@ -79,26 +76,5 @@ h4 {
     color: #ffda82;
 }
 
-.back{
-    background-color: rgba(32, 102, 61, 0.7);
-    min-width: 100vw;
-    height: 145vh;
-}
 
-.footerContainer {
-    background-color:rgba(7, 7, 7, 0.7);
-    width: 100vw;
-    height: 8vh;
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    padding: 10px;
-    align-items: center;
-    text-align: center;
-}
 
-.footerItem {
-       align-items: center;
-       width: 100%;
-       justify-content: space-around;
-}

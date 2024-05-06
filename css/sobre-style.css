@@ -2,6 +2,7 @@ h1 {
     margin: 0;
     margin-bottom: 1.9vh;
 }
+
 .left {
     display: flex;
     flex-direction: column;
@@ -14,6 +15,7 @@ h1 {
     font-weight: 400;
     white-space: normal;
 }
+
 .main {
     padding-inline: 7.7vw;
     padding-top: 10vh;
@@ -22,6 +24,7 @@ h1 {
     justify-content: space-between;
     align-items: center;
 }
+
 .main img {
     border-radius: 1.3vw;
     height: 60vh;
@@ -35,11 +38,12 @@ h1 {
     justify-content: space-evenly;
     text-align: center;
 }
-
-
-
+.back {
+    min-width: 100vw;
+    height: 100vh;
+}
 .footerContainer {
-    background-color:rgba(7, 7, 7, 0.7);
+    background-color: rgba(7, 7, 7, 0.7);
     width: 100vw;
     height: 8vh;
     position: absolute;
@@ -51,7 +55,7 @@ h1 {
 }
 
 .footerItem {
-       align-items: center;
-       width: 100%;
-       justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
 }

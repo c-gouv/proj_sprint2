@@ -1,8 +1,12 @@
+footer {
+    align-self: self-end;
+    display: block;
+}
 .footerContainer {
-    background-color:rgba(7, 7, 7, 0.7);
+    background-color: rgba(7, 7, 7, 0.7);
     width: 100vw;
     height: 8vh;
-    position: absolute;
+    /* position: absolute; */
     bottom: 0;
     display: flex;
     padding: 10px;
@@ -11,9 +15,9 @@
 }
 
 .footerItem {
-       align-items: center;
-       width: 100%;
-       justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
 }
 
 .footerItem span {

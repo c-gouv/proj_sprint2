@@ -16,75 +16,76 @@
 <body>
     <div class="bg_site">
 
-    <div class="back">
-        <header>
-            <nav class="navbar">
-                <div class="navbarLogo">
-                    <img src="../img/logo.svg">
-                    Fitteya Tech
-                </div>
-                <div class="navbarButtons">
-                    <ul>
-                        <a href="home.html">Início</a>
-                        <a href="sobre.html">Sobre Nós</a>
-                        <a href="contato.html">Contato</a>
-                        <a href="hist.html">Nossa História</a>
-                        <a href="calc.html">Simulador Financeiro</a>
-                    </ul>
-                    <button onclick="loginScreen()">Login</button>
-                </div>
-            </nav>
-        </header>
-        <main>
-            <div class="container">
-                <div class="elementos">
-                    <h1>Cadastre-se</h1>
-                    <div class="fieldList">
-                        <div class="singupField">
-                            <span>Usuário</span>
-                            <input type="text" id="input_user" placeholder="usuario123">
-                            <i class="fa-solid fa-user icon-position"></i>
+        <div class="back">
+            <header>
+                <nav class="navbar">
+                    <div class="navbarLogo">
+                        <img src="../img/logo.svg">
+                        Fitteya Tech
+                    </div>
+                    <div class="navbarButtons">
+                        <ul>
+                            <a href="home.html">Início</a>
+                            <a href="sobre.html">Sobre Nós</a>
+                            <a href="contato.html">Contato</a>
+                            <a href="hist.html">Nossa História</a>
+                            <a href="calc.html">Simulador Financeiro</a>
+                        </ul>
+                        <button onclick="loginScreen()">Login</button>
+                    </div>
+                </nav>
+            </header>
+            <main>
+                <div class="container">
+                    <div class="elementos">
+                        <h1>Cadastre-se</h1>
+                        <div class="fieldList">
+                            <div class="singupField">
+                                <span>Usuário</span>
+                                <input type="text" id="input_user" placeholder="usuario123">
+                                <i class="fa-solid fa-user icon-position"></i>
+                            </div>
+                            <div class="singupField">
+                                <span>Email</span>
+                                <input type="text" id="input_email" placeholder="usuario@email.com">
+                                <i class="fa-solid fa-envelope icon-position"></i>
+                            </div>
+                            <div class="singupField">
+                                <span>Senha</span>
+                                <input type="password" id="input_senha" placeholder="**********">
+                                <i class="fa-solid fa-lock icon-position"></i>
+                            </div>
+                            <div class="singupField">
+                                <span>Confirme a Senha</span>
+                                <input type="password" id="input_confirmar" placeholder="**********">
+                                <i class="fa-solid fa-lock icon-position"></i>
+                            </div>
                         </div>
-                        <div class="singupField">
-                            <span>Email</span>
-                            <input type="text" id="input_email" placeholder="usuario@email.com">
-                            <i class="fa-solid fa-envelope icon-position"></i>
-                        </div>
-                        <div class="singupField">
-                            <span>Senha</span>
-                            <input type="password" id="input_senha" placeholder="**********">
-                            <i class="fa-solid fa-lock icon-position"></i>
-                        </div>
-                        <div class="singupField">
-                            <span>Confirme a Senha</span>
-                            <input type="password" id="input_confirmar" placeholder="**********">
-                            <i class="fa-solid fa-lock icon-position"></i>
+                        <div class="buttons">
+                            <button class="botao1" onclick="cadastrar()">Cadastrar-se</button>
+
+                            <span>Já tem um cadastro? <a class="spanvoltar" href="login.html" id="login">Voltar ao
+                                    login</a></span>
                         </div>
                     </div>
-                    <div class="buttons">
-                        <button class="botao1" onclick="cadastrar()">Cadastrar-se</button>
-                        
-                        <span>Já tem um cadastro? <a class="spanvoltar" href="login.html" id="login">Voltar ao login</a></span>
-                    </div>
-                </div> 
-                <div id="errorArea" class="errorMsg"></div>
-                <dialog id="logado">
-                    <div class="modal">
-                        <p id="p">CADASTRO EFETUADO COM SUCESSO!</p>
-                        <img style="width: 5vw; margin-bottom: 5vh;" src="../img/verificado.png" alt="verificado">
-                            
-                    </div><button class="btnModal" onclick="login()">OK</button>
-                </dialog>
-            </div>
-        </main>
-        <footer>
-            <div class="footerContainer">
-                <div class="footerItem">
+                    <div id="errorArea" class="errorMsg"></div>
+                    <dialog id="logado">
+                        <div class="modal">
+                            <p id="p">CADASTRO EFETUADO COM SUCESSO!</p>
+                            <img style="width: 5vw; margin-bottom: 5vh;" src="../img/verificado.png" alt="verificado">
+
+                        </div><button class="btnModal" onclick="login()">OK</button>
+                    </dialog>
+                </div>
+            </main>
+            <footer>
+                <div class="footerContainer">
+                    <div class="footerItem">
                         <span>Privacy Policy</span> | <span>Terms & Conditions</span> | <span>Cookies</span>
+                    </div>
                 </div>
-            </div>
-        </footer>
-    </div>
+            </footer>
+        </div>
     </div>
 </body>
 
@@ -108,6 +109,13 @@
         const int = senha.indexOf("?")
         const arrob = email.indexOf("@")
         const ponto = email.endsWith(".com")
+        let temNum = false;
+        for (let count = 0; count <= 9; count++) {
+            let numConvetido = count.toString();
+            if (senha.indexOf(numConvetido) > 0) {
+                temNum = true
+            }
+        }
 
 
 
@@ -128,16 +136,20 @@
             errorArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres!';
         } else if (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) {
             errorArea.style.display = 'block'
-            errorArea.innerHTML += 'Sua senha deve conter pelo menos 1 caracter especial!';
+            errorArea.innerHTML = 'Sua senha deve conter pelo menos 1 caracter especial!';
+        } else if (temNum == false) {
+            errorArea.style.display = 'block'
+            errorArea.innerHTML = 'Sua senha deve conter pelo menos 1 número!';
         } else if (senha != confirmar || confirmar != senha) {
             errorArea.style.display = 'block'
             errorArea.innerHTML = 'Suas senhas precisam estar iguais!';
         } else {
-         logado.showModal()
-         }
+            errorArea.style.display = 'none'
+            logado.showModal()
+        }
     }
 
-    function login(){
-        window.location.href="login.html"
+    function login() {
+        window.location.href = "login.html"
     }
 </script>

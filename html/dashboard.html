@@ -58,8 +58,8 @@
             <div class="main_grafico">
 
               <span class="title_dashboard">Últimos alertas do silo 
-                <span class="kip danger_border"> PERIGO</span>
-                <span class="kip warning_border"> CUIDADO</span>
+                <span class="kpi danger_border"> PERIGO</span>
+                <span class="kpi warning_border"> CUIDADO</span>
 
               </span>
 
@@ -67,75 +67,67 @@
                 <section class="alert-list" id="alert-list">
                   <div class="alert-container danger_border">
                     <div class="alert-title">
-                     <span class="alert-info">Umidade <br> elevada</span>
-                     <span class="alert-date">05/05/2024 - 09:00</span>
+                     <span class="alert-info">Temperatura <br> elevada</span>
+                     <span class="alert-date">10/05/2024 - 08:00</span>
                     </div>
                     <div class="alert-value">
-                     <span>18%</span>
+                     <span>22ºC</span>
                     </div>
                   </div>
+                  
                   <div class="alert-container danger_border">
                     <div class="alert-title">
+                     <span class="alert-info">Umidade <br> elevada</span>
+                     <span class="alert-date">10/05/2024 - 08:00</span>
+                    </div>
+                    <div class="alert-value">
+                     <span>17%</span>
+                    </div>
+                  </div>
+                  <div class="alert-container warning_border">
+                    <div class="alert-title">
                      <span class="alert-info">Temperatura <br> elevada</span>
-                     <span class="alert-date">05/05/2024 - 09:00</span>
+                     <span class="alert-date">10/05/2024 - 07:00</span>
                     </div>
                     <div class="alert-value">
                      <span>20ºC</span>
+                    </div>    
+                  </div>
+                  <div class="alert-container warning_border">
+                    <div class="alert-title">
+                     <span class="alert-info">Umidade <br> elevada</span>
+                     <span class="alert-date">10/05/2024 - 07:00</span>
                     </div>
-                 </div>
-                 <div class="alert-container warning_border">
-                  <div class="alert-title">
-                   <span class="alert-info">Umidade <br> elevada</span>
-                   <span class="alert-date">05/05/2024 - 08:55</span>
+                    <div class="alert-value">
+                     <span>15%</span>
+                    </div>    
                   </div>
-                  <div class="alert-value">
-                   <span>14%</span>
+                  <div class="alert-container warning_border">
+                    <div class="alert-title">
+                     <span class="alert-info">Umidade <br> elevada</span>
+                     <span class="alert-date">10/05/2024 - 02:00</span>
+                    </div>
+                    <div class="alert-value">
+                     <span>14%</span>
+                    </div>    
                   </div>
-               </div>
-                 <div class="alert-container warning_border">
-                  <div class="alert-title">
-                   <span class="alert-info">Temperatura <br> elevada</span>
-                   <span class="alert-date">05/05/2024 - 08:50</span>
+                  <div class="alert-container warning_border">
+                    <div class="alert-title">
+                     <span class="alert-info">Temperatura <br> elevada</span>
+                     <span class="alert-date">10/05/2024 - 02:00</span>
+                    </div>
+                    <div class="alert-value">
+                     <span>19ºC</span>
+                    </div>    
                   </div>
-                  <div class="alert-value">
-                   <span>15ºC</span>
-                  </div>
-                 </div>
-                 <div class="alert-container warning_border">
-                  <div class="alert-title">
-                   <span class="alert-info">Temperatura <br> elevada</span>
-                   <span class="alert-date">04/05/2024 - 10:30</span>
-                  </div>
-                  <div class="alert-value">
-                   <span>14ºC</span>
-                  </div>
-                 </div>
-                 <div class="alert-container danger_border">
-                  <div class="alert-title">
-                   <span class="alert-info">Temperatura <br> elevada</span>
-                   <span class="alert-date">03/05/2024 - 20:30</span>
-                  </div>
-                  <div class="alert-value">
-                   <span>25ºC</span>
-                  </div>
-               </div>
-               <div class="alert-container warning_border">
-                <div class="alert-title">
-                 <span class="alert-info">Umidade <br> elevada</span>
-                 <span class="alert-date">05/05/2024 - 20:20</span>
-                </div>
-                <div class="alert-value">
-                 <span>15ºC</span>
-                </div>
-             </div>
                 </section>
               </div>
 
 
               <span class="title_dashboard">Dashboard
-                <!-- <span class="kip danger_border"> PERIGO</span>
-                <span class="kip warning_border"> CUIDADO</span>
-                <span class="kip normal_border"> NORMAL</span> -->
+                <!-- <span class="kpi danger_border"> PERIGO</span>
+                <span class="kpi warning_border"> CUIDADO</span>
+                <span class="kpi normal_border"> NORMAL</span> -->
               </span>
 
 
@@ -144,10 +136,10 @@
                   <div class="content_grafico">
                     <div class="title-flex">
                     <div class="titulo_grafico umidade">Umidade do silo (%)</div>
-                    <div style="display: flex; gap: 10px;">
-                      <span class="kip danger_border">PERIGO (> 16%)</span>
-                      <span class="kip warning_border">CUIDADO(13% - 16%)</span>
-                      <span class="kip normal_border"> NORMAL (< 13%)</span>
+                    <div style="display: flex; gap: 30px;">
+                      <span class="kpi_flex"><span class="kpi danger_border"> PERIGO</span> <span>(> 16%)</span></span>
+                      <span class="kpi_flex"><span class="kpi warning_border">CUIDADO</span> <span>(13% - 16%)</span></span>
+                      <span class="kpi_flex"><span class="kpi normal_border">NORMAL</span> <span>(< 13%)</span></span>
                     </div>
                     </div>
                     <div class="content_value background-umidade"><span id="monitoramento_umidade" >50</span>%</div>
@@ -157,10 +149,10 @@
                     <div class="title-flex">
 
                       <span class="titulo_grafico temperatura">Temperatura do silo (ºC)</span>
-                      <div style="display: flex; gap: 10px;">
-                        <span class="kip danger_border">PERIGO (> 20ºC)</span>
-                        <span class="kip warning_border">CUIDADO (> 18ºC e < 15 ºC) </span>
-                        <span class="kip normal_border"> NORMAL(15ºC - 18ºC)</span>
+                      <div style="display: flex; gap: 30px;">
+                        <span class="kpi_flex"><span class="kpi danger_border"> PERIGO</span> <span>(> 20ºC e < 10ºC)</span></span>
+                        <span class="kpi_flex"><span class="kpi warning_border">CUIDADO</span> <span>(> 18ºC e < 15 ºC)</span> </span>
+                        <span class="kpi_flex"><span class="kpi normal_border">NORMAL</span>  <span>(15ºC - 18ºC)</span></span>
                       </div>
                     </div>
                       <div class="content_value background-temperatura"><span id="monitoramento_temperatura" >35</span>ºC</div>
@@ -171,21 +163,21 @@
                 <div class="container-grafico">
                   <div class="content_grafico  historico_container">
                     <div class="title-flex">
-                      <span class="titulo_grafico umidade">Histórico de Umidade</span>
+                      <span class="titulo_grafico umidade">Histórico Diário - Umidade</span>
                       
                     </div>
                     <div class="kpi_container">
                         <div class="kpi_info">
                           <span>Máximo</span>
-                          <span>14%</span>
+                          <span>17%</span>
                         </div>
                         <div class="kpi_info">
-                          <span>Minímo</span>
+                          <span>Mínimo</span>
                           <span>10%</span>
                         </div>
                         <div class="kpi_info">
                           <span>Média</span>
-                          <span>13%</span>
+                          <span>11%</span>
                         </div>
                     </div>
                    
@@ -198,20 +190,20 @@
 
                   <div class="content_grafico historico_container">
                     <div class="title-flex">
-                      <span class="titulo_grafico temperatura"> Histórico de Temperatura</span>
+                      <span class="titulo_grafico temperatura"> Histórico Diário - Temperatura </span>
                     </div>
                       <div class="kpi_container">
                         <div class="kpi_info">
                           <span>Máximo</span>
-                          <span>14%</span>
+                          <span>22ºC</span>
                         </div>
                         <div class="kpi_info">
-                          <span>Minímo</span>
-                          <span>10%</span>
+                          <span>Mínimo</span>
+                          <span>25ºC</span>
                         </div>
                         <div class="kpi_info">
                           <span>Média</span>
-                          <span>13%</span>
+                          <span>17ºC</span>
                         </div>
                     </div>
                       <div id="temperatura" class="containerCanvas">
@@ -258,8 +250,8 @@
 
     // Dados de exemplo
     const hours = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
-    const dataUmidade = [10, 11, 11, 12, 12, 13, 13, 14, 14, 13, 12, 12, 11, 11, 10];
-    const dataTemp = [15, 16, 17, 18, 18, 17, 16, 17, 18, 19, 19, 18, 17, 16, 15];
+    const dataUmidade = [10, 11, 14, 12, 12, 11, 10, 15, 17, 13, 12, 10, 11, 11, 10];
+    const dataTemp = [15, 16, 19, 16, 16, 17, 18, 20, 22, 17, 17, 18, 17, 16, 15];
     let day = []
     let day2 = []
     let dia = []

@@ -19,7 +19,7 @@
         <header>
             <nav class="navbar">
                 <div class="navbarLogo">
-                    <img src="../img/logo.svg">
+                    <img onclick="home()" style="cursor: pointer;" src="../img/logo.svg">
                     Fitteya Tech
                 </div>
                 <div class="navbarButtons">
@@ -89,7 +89,7 @@
         const email = input_email.value
         const senha = input_senha.value
         const arroba = email.indexOf("@")
-        const ponto = email.endsWith(".com")
+        const ponto = email.indexOf(".com")
 
         const exibir = document.getElementById('exibir');
 
@@ -103,12 +103,16 @@
             exibir.style.display = 'block'
             exibir.innerHTML = "Senha incorreta!"
         } else {
-            exibir.style.display = 'block'
+            exibir.style.display = 'none'
             logado.showModal()
         }
     }
 
     function dash(){
         window.location.href="dashboard.html"
+    }
+
+    function home(){
+        window.location.href="home.html"
     }
 </script>

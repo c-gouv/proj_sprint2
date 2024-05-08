@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+:root {
+    --cor-primaria: #101214;
+    --cor-secundaria: #181b1f;
+    --cor-borda: #24282b;
+    --cor-texto: #888888;
+    --cor-destaque: #434343;
+    --cor-ne: white
+}
+.light-theme{
+    --cor-primaria: #999999;
+    --cor-secundaria: #cccccc;
+    --cor-borda: rgb(29, 29, 29,0.5);
+    --cor-texto: #3a3a3a;
+    --cor-destaque: #bcbcbc;
+    --cor-ne: black;
+}
+body{
+    margin: 0;
+    height: max-content;
+    padding: 0;
+    font-family: "DM Sans", sans-serif;
+    background-color: var(--cor-primaria);
+    font-size: 1.3vw;
+    color: var(--cor-ne);
+    font-weight: 600;
+    overflow-x: hidden;
+}
+.topHeader {
+    border-bottom: 1px solid var(--cor-borda);
+    height: 12.94vh;
+    position: sticky;
+    top: 0;
+    background-color: var(--cor-primaria);
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    margin-inline: 5vw;
+    align-items: center;
+    height: 100%;
+}
+.navbarLogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.navbarLogo img{
+    width: 3.3vw;
+}
+.navbarButtons{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+    width: max-content;
+}
+.exitButton {
+    background-color: transparent;
+    border: 0.2vw solid var(--cor-destaque);
+    margin-right: 1.5vw;
+    color: var(--cor-ne);
+    font-size: 1.3vw;
+    text-decoration: none;
+    font-weight: 500;
+    padding-block: 0.4vw;
+    padding-inline: 1.3vw;
+    border-radius: 2vw;
+    transition: background-color 0.5s ease;
+}
+.exitButton:hover {
+    background-color: var(--cor-destaque-hover);
+    cursor: pointer;
+    transition: background-color 0.4s ease;
+}
+.tema{
+    margin-right: 20px;
+    font-size: 25px;
+}
+.tema:hover {
+    cursor: pointer;
+}
+header {
+    display: flex;
+    flex-direction: column;
+    background-color: #181b1f;
+    width: 19.53vw;
+    min-height: 100%;
+    padding-inline: 3.55vh;
+    box-sizing: border-box;
+    position: fixed;
+    font-size: 22px;
+    gap: 20px;
+    border-right: white solid 1px;
+    transform: translateX(-100%);
+    transition: transform 1s ease;
+    z-index: 10;
+}
+header button {
+    align-self: center;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    font-weight: bold;
+    border: 0px;
+    background-color: var(--cor-texto);
+    transition: background-color 0.5s ease;
+}
+header button:hover {
+    background-color: var(--cor-ne);
+    transition: background-color 0.5s ease;
+}
+.exibirMenu {
+    transform: translateX(0%);
+    transition: transform 1s ease;
+}
+header div {
+    border-bottom: 0.28vh solid var(--cor-borda);
+}
+.leftHeaderButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-bottom: 20px;
+}
+.leftHeaderButtons a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--cor-texto);
+}
+.selected {
+    color: white;
+}
+.leftHeaderButtons a i {
+    display: flex;
+    justify-content: center;
+}
+.leftHeaderButtons .menuSection {
+    width: 40px;
+    justify-content: center;
+    border: 0px
+}
+.leftHeaderLogo {
+    display: flex;
+    justify-content: center;
+    border-bottom: 0.28vh solid var(--cor-borda);
+    padding-block: 1.42vh;
+    max-height: 12.94vh;
+}
+.leftHeaderLogo img {
+    margin: 1.42vh;
+    width: 10.41vw;
+}
+.themeArea {
+    width: 26.5px;
+    height: 26.5px;
+}
+/* USERINFO DROPDOWN */
+.userArea {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 13px;
+    cursor: pointer;
+}
+.pfpPicture {
+    border-radius: 50%;
+    width: 55px;
+}
+.dropdownContent {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cor-secundaria);
+    position: absolute;
+    width: 250px;
+    padding-block: 15px;
+    box-sizing: border-box;
+    height: max-content;
+    transform: translate(-85%, 35%);
+    border: 2px solid var(--cor-borda);
+}
+.hidden {
+    display: none;
+}
+.show {
+    display: flex;
+}
+.dropdownContent a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--cor-ne);
+    font-size: 17px;
+    font-weight: 400;
+    height: 50px;
+    padding-left: 15px;
+}
+.dropdownContent a:hover {
+    cursor: pointer;
+    background-color: var(--cor-destaque);
+}

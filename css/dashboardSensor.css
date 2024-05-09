@@ -19,6 +19,11 @@ main {
     padding: 10px;
 }
 
+.main_grafico>h3{
+    font-size: 40px;
+    padding: 5px 10px;
+}
+
 .alert-list {
     display: flex;
     gap: 10px;

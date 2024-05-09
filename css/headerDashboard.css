@@ -203,3 +203,7 @@ header div {
     cursor: pointer;
     background-color: var(--cor-destaque);
 }
+
+.fecharMenu {
+    cursor: pointer;
+}

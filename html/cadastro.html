@@ -35,29 +35,29 @@
                 </nav>
             </header>
             <main>
+
                 <div class="container">
+                    <h1>Cadastre-se</h1>
+                    <div class="flex_container">
                     <div class="elementos">
-                        <h1>Cadastre-se</h1>
                         <div class="fieldList">
                             <div class="singupField">
                                 <span>Nome Empresa</span>
-                                <input type="text" id="input_nomeEmpresa">
+                                <input type="text" id="input_nomeEmpresa" placeholder="Fitteya">
                                 <i class="fa-solid fa-user icon-position"></i>
                             </div>
                             <div class="singupField">
                                 <span>CNPJ</span>
-                                <input type="number" id="input_cnpj" >
+                                <input type="number" id="input_cnpj" placeholder="XX.XXX.XXX/0001-XX.">
                                 <i class="fa-solid fa-user icon-position"></i>
                             </div>
                             <div class="singupField">
                                 <span>Email</span>
-                                <input type="email" id="input_emailEmpresa" >
+                                <input type="email" id="input_emailEmpresa" placeholder="fitteya@gmail.com">
                                 <i class="fa-solid fa-user icon-position"></i>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="container">
                     <div class="elementos">
                         <div class="fieldList">
                             <div class="singupField">
@@ -81,21 +81,21 @@
                                 <i class="fa-solid fa-lock icon-position"></i>
                             </div>
                         </div>
-                        <div class="buttons">
-                            <button class="botao1" onclick="cadastrar()">Cadastrar-se</button>
-
-                            <span>Já tem um cadastro? <a class="spanvoltar" href="login.html" id="login">Voltar ao
-                                    login</a></span>
-                        </div>
                     </div>
                     <div id="msgArea" class="errorMsg"></div>
                     <dialog id="logado">
                         <div class="modal">
                             <p id="p">CADASTRO EFETUADO COM SUCESSO!</p>
                             <img style="width: 5vw; margin-bottom: 5vh;" src="../img/verificado.png" alt="verificado">
-
+                            
                         </div><button class="btnModal" onclick="login()">OK</button>
                     </dialog>
+                </div>
+                <div class="buttons">
+                    <button class="botao1" onclick="cadastrar()">Cadastrar-se</button>
+
+                    <span>Já tem um cadastro? <a class="spanvoltar" href="login.html" id="login">Voltar ao
+                            login</a></span>
                 </div>
             </main>
             <footer>
@@ -106,6 +106,7 @@
                 </div>
             </footer>
         </div>
+    </div>
     </div>
 </body>
 
@@ -129,6 +130,11 @@
         const int = senha.indexOf("?")
         const arrob = email.indexOf("@")
         const ponto = email.endsWith(".com")
+        const arrobaEmpresa = emailEmpresa.indexOf("@")
+        const pontoEmpresa = emailEmpresa.endsWith(".com")
+        const emailEmpresa = input_emailEmpresa.value
+        const nomeEmpresa = input_nomeEmpresa.value
+        const cnpj = input_cnpj.value
         let temNum = false;
         for (let count = 0; count <= 9; count++) {
             let numConvetido = count.toString();
@@ -139,34 +145,91 @@
 
 
 
-        if (user == '' || email == '' || senha == '' || confirmar == '') {
+        if (user == '' || email == '' || senha == '' || confirmar == '' || emailEmpresa == '' || nomeEmpresa == '' || cnpj == '') {
             msgArea.style.display = 'block'
             msgArea.innerHTML = 'Preencha todos os campos!';
-        } else if (arrob < 1 || !ponto) {
+            return false 
+        }  else if (arrob < 1 || !ponto) {
             msgArea.style.display = 'block'
             msgArea.innerHTML = 'Seu email deve conter um "@" e um ".com"';
+            return false
         } else if (arrob < 0) {
             msgArea.style.display = 'block'
             msgArea.innerHTML = 'Seu email deve conter um "@"';
+            return false
         } else if (ponto < 0) {
             msgArea.style.display = 'block'
             msgArea.innerHTML = 'Seu email deve conter um ".com"';
-        } else if (senha.length < 10) {
+            return false
+
+        }  else if (arrobaEmpresa < 1 || !pontoEmpresa) {
             msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres!';
-        } else if (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) {
+            msgArea.innerHTML = 'Seu email da empresa deve conter um "@" e um ".com"';
+            return false
+        } else if (arrobaEmpresa < 0) {
             msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter pelo menos 1 caracter especial!';
-        } else if (temNum == false) {
+            msgArea.innerHTML = 'Seu email da empresa deve conter um "@"';
+            return false
+        } else if (pontoEmpresa < 0) {
             msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter pelo menos 1 número!';
-        } else if (senha != confirmar || confirmar != senha) {
+            msgArea.innerHTML = 'Seu email da empresa deve conter um ".com"';
+            return false
+
+        } 
+        else if ((senha.length < 10) && (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0)
+                   && (temNum == false) ) {
+            msgArea.style.display = 'block'
+            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres<br>'; 
+            msgArea.innerHTML += '<br>Pelo menos 1 caracter especial<br>';
+            msgArea.innerHTML += '<br>E pelo menos 1 número!';
+            return false
+        }
+        
+        else if ((senha.length < 10) && (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0)) {
+            msgArea.style.display = 'block'
+            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres<br>'; 
+            msgArea.innerHTML += '<br>E pelo menos 1 caracter especial<br>';
+            return false
+
+        }  
+         else if ((senha.length < 10) && (temNum == false)) {
+            msgArea.style.display = 'block'
+            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres<br>'; 
+            msgArea.innerHTML += '<br>E pelo menos 1 número<br>';
+            return false
+        }
+        else if ((arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) && (temNum == false)) {
+            msgArea.style.display = 'block'
+            msgArea.innerHTML = 'Sua senha deve conter no minimo 1 caracter especial<br>'; 
+            msgArea.innerHTML += '<br>E pelo menos 1 número<br>';
+            return false
+        }
+        else if (temNum == false) {
+            msgArea.style.display = 'block'
+            msgArea.innerHTML = 'Sua senha deve conter pelo menos 1 número!<br>';
+            return false
+        }
+        else if (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) {
+            msgArea.style.display = 'block'
+            msgArea.innerHTML = 'Sua senha deve conter pelo menos 1 caracter especial!<br>';
+            return false
+        }
+        else if (senha.length < 10) {
+            msgArea.style.display = 'block'
+            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres!<br>';
+            return false
+        }
+
+            
+         else if (senha != confirmar || confirmar != senha) {
             msgArea.style.display = 'block'
             msgArea.innerHTML = 'Suas senhas precisam estar iguais!';
-        } else {
-            msgArea.style.display = 'none'
+            return false
+        } else{
+             msgArea.style.display = 'none'
             logado.showModal()
         }
+         
     }
 
     function login() {

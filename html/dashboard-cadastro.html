@@ -82,6 +82,15 @@
                         <input type="password" id="input_confirmar" placeholder="**********">
                         <i class="fa-solid fa-lock icon-position"></i>
                     </div>
+                    <div  class="inputField">
+                        <span>Selecione uma Permissão</span>
+                        <select id="select_escolha">
+                            <option value="#">Selecione uma opção</option>
+                            <option value="">Administração</option>
+                            <option value="">Leitura</option>
+                            <option value="">Edição</option>
+                        </select>
+                    </div>
                     <div class="buttons">
                         <button class="botao1" onclick="cadastrar()">Cadastrar</button>
                     </div>
@@ -134,6 +143,7 @@ function cadastrar() {
         const int = senha.indexOf("?")
         const arrob = email.indexOf("@")
         const ponto = email.endsWith(".com")
+        const SLescolha = select_escolha.value
         let temNum = false;
         for (let count = 0; count <= 9; count++) {
             let numConvetido = count.toString();
@@ -143,7 +153,7 @@ function cadastrar() {
         }
 
 
-        if (user == '' || email == '' || senha == '' || confirmar == '') {
+        if (user == '' || email == '' || senha == '' || confirmar == '' || SLescolha == '#' ) {
             msgArea.style.display = 'block'
             msgArea.innerHTML = 'Preencha todos os campos!';
             return false

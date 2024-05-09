@@ -1,4 +1,4 @@
-input {
+input,select {
     height: 30px;
     background: none;
     border: 1px solid var(--cor-borda);
@@ -8,6 +8,13 @@ input {
     height: 45px;
     color: var(--cor-ne);
 }
+
+option{
+    background-color: var(--cor-secundaria);
+    color: var(--cor-ne);
+}
+
+
 .content {
     display: flex;
     align-items: center;

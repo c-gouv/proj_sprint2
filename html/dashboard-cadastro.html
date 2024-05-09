@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/dashboardGeral.css">
     <link rel="stylesheet" href="../css/dashboardCadastro.css">
     <link rel="script" href="../js/scriptHeader.js">
+    <link rel="stylesheet" href="../css/modal.css">
     <link rel="shortcut icon" href="../img/logo.svg">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
@@ -105,6 +106,13 @@
                     </div>
                 </div>
             </div>
+            <dialog id="logado">
+                <div class="modal">
+                    <p id="p">CADASTRO EFETUADO COM SUCESSO!</p>
+                    <img style="width: 5vw; margin-bottom: 5vh;" src="../img/verificado.png" alt="verificado">
+
+                </div><button class="btnModal" onclick="login()">OK</button>
+            </dialog>
         </div>
         
     </main>
@@ -162,7 +170,23 @@ function cadastrar() {
         } else {
             msgArea.style.display = 'none'
             logado.showModal()
+
         }
+    }
+
+
+    function login() {
+        const user = input_user.value
+
+        const listaUser = document.querySelectorAll(".containerFieldList")[1];
+        listaUser.innerHTML += `
+        <div class="userList">
+                        <i class="fa-solid fa-user"></i>
+                        <span>${user}</span>
+                        <i class="fa-solid fa-xmark deleteIcon" style="color: #ff0000;"></i>
+                    </div>
+        `
+        logado.close()
     }
 
 </script>

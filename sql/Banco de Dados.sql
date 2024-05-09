@@ -69,10 +69,10 @@ CREATE TABLE silo (
     idSilo INT AUTO_INCREMENT,
     nome VARCHAR(45),
     fkComplexo INT,
-    fkParametro INT,
+    fkMedida INT,
     CONSTRAINT fkComplexoSilo FOREIGN KEY (fkComplexo) REFERENCES complexo(idComplexo),
-    CONSTRAINT fkSiloParametro FOREIGN KEY (fkParametro) REFERENCES parametro(idParametro),
-    CONSTRAINT pkSiloParametro PRIMARY KEY (idSilo, fkParametro)
+    CONSTRAINT fkSiloParametro FOREIGN KEY (fkMedida) REFERENCES parametro(idParametro),
+    CONSTRAINT pkSiloParametro PRIMARY KEY (idSilo, fkMedida)
 );
 
 INSERT INTO silo VALUES  
@@ -107,13 +107,11 @@ SELECT * FROM monitoramento;
 
 CREATE TABLE alerta(
 	idAlerta INT AUTO_INCREMENT,
-    motivo VARCHAR(100),
-    dataHora DATETIME,
-    temperaturaMomento DECIMAL(4,2),
-    umidadeMomento DECIMAL(4,2),
-    fkSensor INT,
-    CONSTRAINT fkSensorAlerta FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
-    CONSTRAINT pkAlertaSensor PRIMARY KEY (idAlerta, fkSensor)
+    status VARCHAR(45),
+    motivo VARCHAR(45),
+    fkMonitoramento INT,
+    CONSTRAINT fkMonitoramentoAlerta FOREIGN KEY (fkMonitoramento) REFERENCES monitoramento(idMonitoramento),
+    CONSTRAINT pkMonitoramentoAlerta PRIMARY KEY (idAlerta, fkMonitoramento)
 );
 
 INSERT INTO monitoramento
@@ -123,8 +121,8 @@ VALUES  (default, 14.23, 10.00,'2024-03-21 13:30:00', 1),
         (default, 18.20, 13.00,'2024-03-18 12:00:00', 4);
         
 INSERT INTO alerta
-VALUES  (default, 'Temperatura Elevada','2024-03-21 13:30:00', '30.00', '15.00', 1),
-		(default, 'Umidade Elevada','2024-06-19 10:00:00', '10.00', '25.00', 2);
+VALUES  (default, 'Estado Crítico', 'Temperatura Elevada', 3),
+		(default, 'Estado Crítico', 'Umidade Elevada', 3);
         
 SELECT * FROM usuario;
 SELECT * FROM complexo;
@@ -139,7 +137,7 @@ JOIN silo ON silo.fkComplexo = complexo.idComplexo
 JOIN sensor ON sensor.fkSilo = silo.idSilo
 JOIN monitoramento ON monitoramento.fkSensor = sensor.idSensor; 
         
-CREATE TABLE contatoSite(
+CREATE TABLE leads(
     idContatoSite INT PRIMARY KEY AUTO_INCREMENT,
     empresa VARCHAR(100),
     email VARCHAR(200) NOT NULL,
@@ -147,7 +145,7 @@ CREATE TABLE contatoSite(
     mensagem VARCHAR(500) NOT NULL
 );
 
-INSERT INTO contatoSite VALUES 
+INSERT INTO leads VALUES 
 	(default, 'TrigoBrasil', 'contato@trigobrasil.com', 'Contrato', 'Gostaria de mais informações'),
 	(default, 'TrigoCeara', 'contato@trigoceara.com', 'Contrato', 'Gostaria de mais informações'),
 	(default, 'TrigoSãoPaulo', 'contato@trigosaopaulo.com', 'Contrato', 'Gostaria de mais informações');

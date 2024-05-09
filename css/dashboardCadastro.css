@@ -97,3 +97,20 @@ h2 {
     margin-left: auto;
     cursor: pointer;
 }
+
+.errorMsg {
+    width: 15%;
+    display: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
+    right: 82%;
+    padding: 20px;
+    margin-top: 10%;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background-color: var(--cor-secundaria);
+    border: 1px solid var(--cor-borda);
+    top: 0;
+    position: absolute;
+}

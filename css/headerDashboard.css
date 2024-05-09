@@ -93,7 +93,6 @@ header {
     padding-inline: 3.55vh;
     box-sizing: border-box;
     position: fixed;
-    font-size: 22px;
     gap: 20px;
     border-right: var(--cor-borda) solid 2px;
     transform: translateX(-100%);

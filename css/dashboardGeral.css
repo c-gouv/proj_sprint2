@@ -87,7 +87,7 @@
 .complexoOption i {
     padding-inline: 30px
 }
-.complexoSelecionado {
+.select {
     display: flex;
     margin-left: auto;
     font-weight: 800;

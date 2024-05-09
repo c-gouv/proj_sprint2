@@ -33,12 +33,12 @@
                 Cadastrar Usuário
             </a>
           </div>
-        <button onclick="fecharMenu()"> <i class="fa-solid fa-angle-left"></i> </button>
+        <button class="fecharMenu" onclick="fecharMenu()"> <i class="fa-solid fa-angle-left"></i> </button>
       </header>
       <main>
         <div class="topHeader">
             <nav class="navbar">
-                <i class="fa-solid fa-bars" style="font-size: 25px;" onclick="exibirMenu()"></i>
+                <i class="fa-solid fa-bars" style="font-size: 25px; cursor: pointer;" onclick="exibirMenu()"></i>
                 <div class="navbarButtons">
                     <div class="userArea" onclick="userOptions()">
                       <i class="fa-solid fa-angle-up" id="pfIcon"></i>
@@ -146,32 +146,77 @@ function cadastrar() {
         if (user == '' || email == '' || senha == '' || confirmar == '') {
             msgArea.style.display = 'block'
             msgArea.innerHTML = 'Preencha todos os campos!';
+            return false
         } else if (arrob < 1 || !ponto) {
             msgArea.style.display = 'block'
             msgArea.innerHTML = 'Seu email deve conter um "@" e um ".com"';
+            return false
         } else if (arrob < 0) {
             msgArea.style.display = 'block'
             msgArea.innerHTML = 'Seu email deve conter um "@"';
+            return false
         } else if (ponto < 0) {
             msgArea.style.display = 'block'
             msgArea.innerHTML = 'Seu email deve conter um ".com"';
-        } else if (senha.length < 10) {
+            return false
+
+        } else if ((senha.length < 10) && (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0)
+                   && (temNum == false) ) {
             msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres!';
-        } else if (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) {
+            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres<br>'; 
+            msgArea.innerHTML += '<br>Pelo menos 1 caracter especial<br>';
+            msgArea.innerHTML += '<br>E pelo menos 1 número!';
+            return false
+        }
+        
+        else if ((senha.length < 10) && (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0)) {
             msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter pelo menos 1 caracter especial!';
-        } else if (temNum == false) {
+            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres<br>'; 
+            msgArea.innerHTML += '<br>E pelo menos 1 caracter especial<br>';
+            return false
+
+        }  
+         else if ((senha.length < 10) && (temNum == false)) {
             msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter pelo menos 1 número!';
-        } else if (senha != confirmar || confirmar != senha) {
+            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres<br>'; 
+            msgArea.innerHTML += '<br>E pelo menos 1 número<br>';
+            return false
+        }
+        else if ((arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) && (temNum == false)) {
+            msgArea.style.display = 'block'
+            msgArea.innerHTML = 'Sua senha deve conter no minimo 1 caracter especial<br>'; 
+            msgArea.innerHTML += '<br>E pelo menos 1 número<br>';
+            return false
+        }
+        else if (temNum == false) {
+            msgArea.style.display = 'block'
+            msgArea.innerHTML = 'Sua senha deve conter pelo menos 1 número!<br>';
+            return false
+        }
+        else if (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) {
+            msgArea.style.display = 'block'
+            msgArea.innerHTML = 'Sua senha deve conter pelo menos 1 caracter especial!<br>';
+            return false
+        }
+        else if (senha.length < 10) {
+            msgArea.style.display = 'block'
+            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres!<br>';
+            return false
+        }
+
+        
+         else if (senha != confirmar || confirmar != senha) {
             msgArea.style.display = 'block'
             msgArea.innerHTML = 'Suas senhas precisam estar iguais!';
-        } else {
-            msgArea.style.display = 'none'
+            return false
+        } else{
+             msgArea.style.display = 'none'
             logado.showModal()
-
         }
+         
+           
+
+        
     }
 
 

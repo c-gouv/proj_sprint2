@@ -85,7 +85,7 @@ body{
 header {
     display: flex;
     flex-direction: column;
-    background-color: #181b1f;
+    background-color: var(--cor-secundaria);
     width: 19.53vw;
     min-height: 100%;
     padding-inline: 3.55vh;
@@ -93,7 +93,7 @@ header {
     position: fixed;
     font-size: 22px;
     gap: 20px;
-    border-right: white solid 1px;
+    border-right: var(--cor-borda) solid 2px;
     transform: translateX(-100%);
     transition: transform 1s ease;
     z-index: 10;
@@ -132,7 +132,7 @@ header div {
     color: var(--cor-texto);
 }
 .selected {
-    color: white;
+    color: var(--cor-texto);
 }
 .leftHeaderButtons a i {
     display: flex;

@@ -14,55 +14,61 @@
 
 <body>
     <div class="bg_site">
-    <div class="back">
-        <header>
-            <nav class="navbar">
-                <div class="navbarLogo">
-                    <img onclick="home()" style="cursor: pointer;" src="../img/logo.svg">
-                    Fitteya Tech
+        <div class="back">
+            <header>
+                <nav class="navbar">
+                    <div class="navbarLogo">
+                        <img onclick="home()" style="cursor: pointer;" src="../img/logo.svg">
+                        Fitteya Tech
+                    </div>
+                    <div class="navbarButtons">
+                        <ul>
+                            <a href="home.html">Início</a>
+                            <a href="sobre.html">Sobre Nós</a>
+                            <a href="contato.html">Contato</a>
+                            <a href="hist.html">Nossa História</a>
+                            <a href="calc.html">Simulador Financeiro</a>
+                        </ul>
+                        <button onclick="loginScreen()">Login</button>
+                    </div>
+                </nav>
+            </header>
+            <div class="main">
+                <div>
+                <h1>
+                    Contato:<br>
+                </h1>
+                <h4>
+                    
+                </h4>
                 </div>
-                <div class="navbarButtons">
-                    <ul>
-                        <a href="home.html">Início</a>
-                        <a href="sobre.html">Sobre Nós</a>
-                        <a href="contato.html">Contato</a>
-                        <a href="hist.html">Nossa História</a>
-                        <a href="calc.html">Simulador Financeiro</a>
-                    </ul>
-                    <button onclick="loginScreen()">Login</button>
+                <div class="form">
+                    <p>Envie sua mensagem</p>
+                    <input type="text" placeholder="Nome da empresa" id="nome_empresa" class="form-field">
+                    <input type="text" placeholder="Email" id="email_empresa" class="form-field">
+                    <input type="text" placeholder="Assunto" id="assunto_empresa" class="form-field">
+                    <textarea type="text" placeholder="Motivo do contato" id="contar_mais"
+                        class="form-field form-field-msg"></textarea>
+                    <div id="exibir"></div>
+                    <button onclick="enviar()" id="enviar">Enviar</button>
                 </div>
-            </nav>
-        </header>
-        <div class="main">
-            <h1>Fale conosco sobre<br>
-                o seu projeto.</h1>
-            <div class="form">
-                <p>Nos mande uma mensagem</p>
-                <input type="text" placeholder="Nome da empresa" id="nome_empresa" class="form-field">
-                <input type="text" placeholder="Email" id="email_empresa" class="form-field">
-                <input type="text" placeholder="Assunto" id="assunto_empresa" class="form-field">
-                <textarea type="text" placeholder="Nos conte mais sobre o seu projeto" id="contar_mais"
-                    class="form-field form-field-msg"></textarea>
-                <div id="exibir"></div>
-                <button onclick="enviar()" id="enviar">Enviar mensagem</button>
-            </div>
-            <dialog id="logado">
-                <div class="modal">
-                    <p id="p">Mensagem enviada com sucesso!<br>
-                        Em breve retornaremos!</p>
-                    <img style="width: 5vw; margin-bottom: 5vh;" src="../img/verificado.png" alt="verificado">
+                <dialog id="logado">
+                    <div class="modal">
+                        <p id="p">Mensagem enviada com sucesso!<br>
+                            Em breve retornaremos!</p>
+                        <img style="width: 5vw; margin-bottom: 5vh;" src="../img/verificado.png" alt="verificado">
 
-                </div><button class="btnModal" onclick="login()">OK</button>
-            </dialog>
-        </div><br><br><br>
-        <footer>
-            <div class="footerContainer">
-                <div class="footerItem">
-                    <span>Privacy Policy</span> | <span>Terms & Conditions</span> | <span>Cookies</span>
+                    </div><button class="btnModal" onclick="login()">OK</button>
+                </dialog>
+            </div><br><br><br>
+            <footer>
+                <div class="footerContainer">
+                    <div class="footerItem">
+                        <span>Privacy Policy</span> | <span>Terms & Conditions</span> | <span>Cookies</span>
+                    </div>
                 </div>
-            </div>
-        </footer>
-    </div>
+            </footer>
+        </div>
     </div>
 </body>
 
@@ -85,7 +91,7 @@
         }
         else if (arroba < 0 || ponto < 0) {
             exibir.innerHTML = '<p style="color:red;">Insira um email válido!</p>'
-        }else {
+        } else {
             logado.showModal()
         }
 
@@ -97,7 +103,7 @@
         window.location.href = "contato.html"
     }
 
-    function home(){
-        window.location.href="home.html"
+    function home() {
+        window.location.href = "home.html"
     }
 </script>

@@ -129,10 +129,11 @@
         const exclamacao = senha.indexOf("!")
         const int = senha.indexOf("?")
         const arrob = email.indexOf("@")
-        const ponto = email.endsWith(".com")
+        const ponto = email.endsWith(".com") 
+        const emailEmpresa = input_emailEmpresa.value
         const arrobaEmpresa = emailEmpresa.indexOf("@")
         const pontoEmpresa = emailEmpresa.endsWith(".com")
-        const emailEmpresa = input_emailEmpresa.value
+       
         const nomeEmpresa = input_nomeEmpresa.value
         const cnpj = input_cnpj.value
         let temNum = false;
@@ -220,7 +221,7 @@
             return false
         }
 
-            
+
          else if (senha != confirmar || confirmar != senha) {
             msgArea.style.display = 'block'
             msgArea.innerHTML = 'Suas senhas precisam estar iguais!';

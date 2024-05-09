@@ -17,17 +17,17 @@
         <img src="../img/logo-extended.svg">
       </div>
       <div class="leftHeaderButtons">
-        <a href="./dashboard teste.html">
+        <a href="#">
             <div class="menuSection selected">
                 <i class="fa-solid fa-gauge-high"></i>
             </div>
             <span class="selected">Dashboard</span>
         </a>
-        <a>
+        <a href="./dashboard-cadastro.html">
             <div class="menuSection">
-                <i class="fa-solid fa-ellipsis-vertical"></i>
+                <i class="fa-solid fa-user icon-position"></i>
             </div>
-            Silo
+            Cadastrar Usuário
         </a>
       </div>
       <button onclick="fecharMenu()"> <i class="fa-solid fa-angle-left"></i> </button>
@@ -223,14 +223,15 @@
 <script>
     var corTexto = getComputedStyle(document.body).getPropertyValue('--cor-texto');
 
-    // Dados de exemplo
+    // ------------------- Dados de exemplo
     const hours = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
     const dataUmidade = [10, 11, 14, 12, 12, 11, 10, 15, 17, 13, 12, 10, 11, 11, 10];
     const dataTemp = [15, 16, 19, 16, 16, 17, 18, 20, 22, 17, 17, 18, 17, 16, 15];
     let day = []
     let day2 = []
     let dia = []
-    // Configuração do gráfico de umidade
+
+    // ------------------- Configuração do gráfico de umidade
     const umidade = document.getElementById('umidadeHist').getContext('2d');
     const humidityChart = new Chart(umidade, {
       type: 'line',
@@ -239,16 +240,16 @@
         datasets: [{
           data: dataUmidade,
           label: 'Umidade (%)',
-          backgroundColor: '#329BFC',
+          backgroundColor: '#329afc55',
           borderColor: '#329BFC',
           borderWidth: 1,
+          fill: 'origin'
         }
       ]
       },
       options: {
         maintainAspectRatio: false,
         responsive: true,
-
         scales: {
           y: {
             beginAtZero: true,
@@ -276,7 +277,7 @@
       }
     });
 
-    // Configuração do gráfico de temperatura
+    // ------------------- Configuração do gráfico de temperatura
     const temp = document.getElementById('temperaturaHist');
     const tempGrafico = new Chart(temp, {
       type: 'line',
@@ -285,9 +286,10 @@
         datasets: [{
           data: dataTemp,
           label: 'Temperatura (°C)',
-          backgroundColor: '#fcab32',
+          backgroundColor: '#fcab3255',
           borderColor: '#fcab32',
           borderWidth: 1,
+          fill: true
         }]
       },
       options: {
@@ -329,41 +331,41 @@
         humidityChart.update()
     }
 
-        function inserirDadosGrafico(dataHis){
-            var valores = []
-            valores.push(Math.floor(Math.random() * (20-5+1) + 5))
-            valores.forEach((valor, index) => {
-                //Máximo de 60 itens exibidos no gráfico
-                dataHis.push(valor)
-                console.log(dataHis.length);
-         })}
+    function inserirDadosGrafico(dataHis){
+        var valores = []
+        valores.push(Math.floor(Math.random() * (20-5+1) + 5))
+        valores.forEach((valor, index) => {
+            //Máximo de 60 itens exibidos no gráfico
+            dataHis.push(valor)
+            console.log(dataHis.length);
+      })}
 
-         function inserirDadosMonitoramento(grafico){
-          let valor = Math.floor(Math.random() * (20-5+1) + 5);
-          grafico.innerHTML = valor;
-       
-          if(grafico.id == 'monitoramento_umidade'){
-                  let item = document.querySelector(".background-umidade")
-                  if(valor > 16){
-                    item.style.backgroundColor = '#FC3232'
-                  }else if(valor > 13){
-                    item.style.backgroundColor = '#ffc916'
-                  }else {
-                    item.style.backgroundColor = '#329BFC' 
-                  }
-                }else if(grafico.id == 'monitoramento_temperatura'){
-                  let item = document.querySelector(".background-temperatura")
-                  if(valor >= 20 || valor < 10){
-                    item.style.backgroundColor = '#FC3232'
-                  }else if(valor > 18 || valor < 15){
-                    item.style.backgroundColor = '#ffc916'
-                  }else{
-                    item.style.backgroundColor = '#329BFC'
-                  }
-                }
-         }
+      function inserirDadosMonitoramento(grafico){
+      let valor = Math.floor(Math.random() * (20-5+1) + 5);
+      grafico.innerHTML = valor;
+    
+      if(grafico.id == 'monitoramento_umidade'){
+              let item = document.querySelector(".background-umidade")
+              if(valor > 16){
+                item.style.backgroundColor = '#FC3232'
+              }else if(valor > 13){
+                item.style.backgroundColor = '#ffc916'
+              }else {
+                item.style.backgroundColor = '#329BFC' 
+              }
+            }else if(grafico.id == 'monitoramento_temperatura'){
+              let item = document.querySelector(".background-temperatura")
+              if(valor >= 20 || valor < 10){
+                item.style.backgroundColor = '#FC3232'
+              }else if(valor > 18 || valor < 15){
+                item.style.backgroundColor = '#ffc916'
+              }else{
+                item.style.backgroundColor = '#329BFC'
+              }
+            }
+      }
 
-    // // VALORES RANDOMICOS
+    // ------------------- VALORES RANDOMICOS
      setInterval(() => {
         // if (day.length < 24) {
         //   inserirDadosGrafico(day);

@@ -1,127 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitteya Tech | Dashboard</title>
-    <link rel="stylesheet" href="../css/headerDashboard.css">
-    <link rel="stylesheet" href="../css/dashboardGeral.css">
-    <link rel="script" href="../js/scriptHeader.js">
-    <link rel="shortcut icon" href="../img/logo.svg">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitteya Tech | Dashboard</title>
+  <link rel="stylesheet" href="../css/headerDashboard.css">
+  <link rel="stylesheet" href="../css/dashboardGeral.css">
+  <link rel="script" href="../js/scriptHeader.js">
+  <link rel="shortcut icon" href="../img/logo.svg">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <header id="header">
-        <div class="leftHeaderLogo">
-          <img src="../img/logo-extended.svg">
+  <header id="header">
+    <div class="leftHeaderLogo">
+      <img src="../img/logo-extended.svg">
+    </div>
+    <div class="leftHeaderButtons">
+      <a href="#">
+        <div class="menuSection selected">
+          <i class="fa-solid fa-gauge-high"></i>
         </div>
-        <div class="leftHeaderButtons">
-          <a href="#">
-              <div class="menuSection selected">
-                  <i class="fa-solid fa-gauge-high"></i>
-              </div>
-              <span class="selected">Dashboard</span>
-          </a>
-          <a href="./dashboard-cadastro.html">
-              <div class="menuSection">
-                  <i class="fa-solid fa-user"></i>
-              </div>
-              Cadastrar Usuário
-          </a>
+        <span class="selected">Dashboard</span>
+      </a>
+      <a href="./dashboard-cadastro.html">
+        <div class="menuSection">
+          <i class="fa-solid fa-user"></i>
         </div>
-        <button onclick="fecharMenu()"> <i class="fa-solid fa-angle-left"></i> </button>
-      </header>
-      <main>
-        <div class="topHeader">
-            <nav class="navbar">
-                <i class="fa-solid fa-bars" style="font-size: 25px;" onclick="exibirMenu()"></i>
-    
-                <div class="navbarButtons">
-                    <div class="userArea" onclick="userOptions()">
-                      <i class="fa-solid fa-angle-up" id="pfIcon"></i>
-                      Olá Isaque
-                      <img src="../img/avatar_user.webp" class="pfpPicture">
-                    </div>
-                    <div>
-                      <div class="dropdownContent hidden" id="menuPerfil"">
-                        <a href="#">Configurações do Usuário</a>
-                        <a onclick="voltarHome()">Sair</a>
-                      </div>
-                    </div>
-                    <div class="themeArea">
-                      <i class="fa-solid tema fa-moon" id="themeIcon" onclick="mudarTema()"></i>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <div class="kpiArea">
-          <span class="titulo">Complexo SUL - Visão Geral</span>
-          <div class="kpiAreaContentContainer">
-            <div class="kpiAreaContent" style="background-color: #fcab32;">
-              <h3>Silos em alerta</h3>
-              <p>2</p>
+        Cadastrar Usuário
+      </a>
+    </div>
+    <button onclick="fecharMenu()"> <i class="fa-solid fa-angle-left"></i> </button>
+  </header>
+  <main>
+    <div class="topHeader">
+      <nav class="navbar">
+        <i class="fa-solid fa-bars" style="font-size: 25px;" onclick="exibirMenu()"></i>
+
+        <div class="navbarButtons">
+          <div class="userArea" onclick="userOptions()">
+            <i class="fa-solid fa-angle-up" id="pfIcon"></i>
+            Olá Isaque
+            <img src="../img/avatar_user.webp" class="pfpPicture">
+          </div>
+          <div>
+            <div class="dropdownContent hidden" id="menuPerfil"">
+                        <a href=" #">Configurações do Usuário</a>
+              <a onclick="voltarHome()">Sair</a>
             </div>
-            <div class="kpiAreaContent" style="background-color: #fc3232;">
-              <h3>Silo mais crítico</h3>
-              <p>SILO 1</p>
-            </div>
-            <div class="kpiAreaContent"></div>
+          </div>
+          <div class="themeArea">
+            <i class="fa-solid tema fa-moon" id="themeIcon" onclick="mudarTema()"></i>
           </div>
         </div>
-        <div class="ButtonContainer">
-            <div class="ButtonContainerComplexo">
-              <span class="titulo">Lista de complexos</span>
-              <div class="legenda">
-                  <span><i class="fa-solid fa-circle" style="color: #fc3232;"></i> SILOS EM ALERTAS</span>
-                  <span><i class="fa-solid fa-circle" style="color: #00c366;"></i> ESTÁVEL</span>
-              </div>
-              <div class="selectComplexo">
-                  <div class="legendaOption">
-                      <span>Status</span>
-                      <span>Nome</span>
-                  </div>
-                  <div class="complexoOption">
-                    <i class="fa-solid fa-circle" style="color: #fc3232;"></i> COMPLEXO SUL <div class="complexoSelecionado"><i class="fa-solid fa-angle-right"></i></div>
-                  </div>
-                  <div class="complexoOption">
-                    <i class="fa-solid fa-circle" style="color: #00c366;"></i> COMPLEXO LESTE
-                  </div>
-                  <div class="complexoOption">
-                    <i class="fa-solid fa-circle" style="color: #00c366;"></i> COMPLEXO OESTE
-                  </div>
-              </div>
-            </div>
-
-            <div class="ButtonContainerSilo">
-              <span class="titulo">Lista de silos</span>
-              <div class="legenda">
-                  <span><i class="fa-solid fa-circle" style="color: #fc3232;"></i> ALERTAS NAS ÚLTIMAS 24H</span>
-                  <span><i class="fa-solid fa-circle" style="color: #00c366;"></i> NENHUM ALERTA</span>
-              </div>
-              <div class="selectComplexo">
-                  <div class="legendaOption">
-                      <span>Status</span>
-                      <span>Nome</span>
-                  </div>
-                  <div class="complexoOption cursorNormal">
-                    <i class="fa-solid fa-circle" style="color: #fc3232;"></i> SILO 1 <div class="exibirDashboard"><span onclick="dashboardSensor()">VER DETALHES</span></div>
-                  </div>
-                  <div class="complexoOption cursorNormal">
-                    <i class="fa-solid fa-circle" style="color: #00c366;"></i> SILO 2 <div class="exibirDashboard"><span onclick="dashboardSensor()">VER DETALHES</span></div>
-                  </div>
-                  <div class="complexoOption cursorNormal">
-                    <i class="fa-solid fa-circle" style="color: #00c366;"></i> SILO 3 <div class="exibirDashboard"><span onclick="dashboardSensor()">VER DETALHES</span></div>
-                  </div>
-              </div>
-            </div>
+      </nav>
+    </div>
+    <div class="kpiArea">
+      <span class="titulo">Complexo SUL - Visão Geral</span>
+      <div class="kpiAreaContentContainer">
+        <div id="kpi1" class="kpiAreaContent" style="background-color: #fcab32;">
+          <h3>Silos em alerta</h3>
+          <p>2</p>
         </div>
-      </main>
+        <div id="kpi2" class="kpiAreaContent" style="background-color: #fc3232;">
+          <h3>Silo mais crítico</h3>
+          <p>SILO 1</p>
+        </div>
+        <div class="kpiAreaContent"></div>
+      </div>
+    </div>
+    <div class="ButtonContainer">
+      <div class="ButtonContainerComplexo">
+        <span class="titulo">Lista de complexos</span>
+        <div class="legenda">
+          <span><i class="fa-solid fa-circle" style="color: #fc3232;"></i> SILOS EM ALERTAS</span>
+          <span><i class="fa-solid fa-circle" style="color: #00c366;"></i> ESTÁVEL</span>
+        </div>
+        <div class="selectComplexo">
+          <div class="legendaOption">
+            <span>Status</span>
+            <span>Nome</span>
+          </div>
+          <div id="complexoSulContainer" class="complexoOption">
+            <i class="fa-solid fa-circle" style="color: #fc3232;"></i> COMPLEXO SUL <i id="complexoSul"
+              class="select fa-solid fa-angle-right"></i>
+          </div>
+          <div id="complexoLesteContainer" class="complexoOption">
+            <i class="fa-solid fa-circle" style="color: #00c366;"></i> COMPLEXO LESTE <i id="complexoLeste"
+              class="select fa-solid "></i>
+          </div>
+          <div id="complexoOesteContainer" class="complexoOption">
+            <i class="fa-solid fa-circle" style="color: #00c366;"></i> COMPLEXO OESTE <i id="complexoOeste"
+              class="select fa-solid "></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="ButtonContainerSilo">
+        <span class="titulo">Lista de silos</span>
+        <div class="legenda">
+          <span><i class="fa-solid fa-circle" style="color: #fc3232;"></i> ALERTAS NAS ÚLTIMAS 24H</span>
+          <span><i class="fa-solid fa-circle" style="color: #00c366;"></i> NENHUM ALERTA</span>
+        </div>
+        <div class="selectComplexo">
+          <div class="legendaOption">
+            <span>Status</span>
+            <span>Nome</span>
+          </div>
+          <div class="complexoOption cursorNormal">
+            <i class="fa-solid fa-circle" style="color: #fc3232;"></i> SILO 1 <div class="exibirDashboard"><span
+                onclick="dashboardSensor()">VER DETALHES</span></div>
+          </div>
+          <div class="complexoOption cursorNormal">
+            <i class="fa-solid fa-circle" style="color: #00c366;"></i> SILO 2 <div class="exibirDashboard"><span
+                onclick="dashboardSensor()">VER DETALHES</span></div>
+          </div>
+          <div class="complexoOption cursorNormal">
+            <i class="fa-solid fa-circle" style="color: #00c366;"></i> SILO 3 <div class="exibirDashboard"><span
+                onclick="dashboardSensor()">VER DETALHES</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </body>
+
 </html>
 <script src="../js/scriptHeader.js"></script>
 <script>
   function dashboardSensor() {
     window.location.href = "dashboard-sensor.html"
   }
+
+  function removerSelecao() {
+    const select = document.querySelectorAll('.select');
+    select.forEach(item => {
+      item.classList.remove('fa-angle-right')
+    })
+  }
+
+
+  document.querySelectorAll('.complexoOption').forEach(item => {
+    item.addEventListener("click", (e) => {
+      removerSelecao()
+      const listUser = document.querySelectorAll('.selectComplexo')[1];
+      const titleDash = document.querySelector('.titulo');
+      const primeiraKPI = document.querySelector("#kpi1");
+      const segundaKPI = document.querySelector("#kpi2");
+      primeiraKPI.children[1].innerHTML = '2'
+      segundaKPI.children[1].innerHTML = 'SILO 1'
+      primeiraKPI.style.backgroundColor = '#fcab32'
+      segundaKPI.style.backgroundColor = '#fc3232'
+      listUser.innerHTML = `
+      <div class="legendaOption">
+            <span>Status</span>
+            <span>Nome</span>
+          </div>
+          <div class="complexoOption cursorNormal">
+            <i class="fa-solid fa-circle" style="color: #00c366;"></i> SILO 1 <div class="exibirDashboard"><span
+                onclick="dashboardSensor()">VER DETALHES</span></div>
+          </div>
+          <div class="complexoOption cursorNormal">
+            <i class="fa-solid fa-circle" style="color: #00c366;"></i> SILO 2 <div class="exibirDashboard"><span
+                onclick="dashboardSensor()">VER DETALHES</span></div>
+          </div>
+          <div class="complexoOption cursorNormal">
+            <i class="fa-solid fa-circle" style="color: #00c366;"></i> SILO 3 <div class="exibirDashboard"><span
+                onclick="dashboardSensor()">VER DETALHES</span></div>
+          </div>`
+      console.log(e.target.children[1])
+      console.log(e.target.children[1].getAttribute('id'))
+      if (e.target.children[1].getAttribute('id') == 'complexoSul') {
+        e.target.children[1].classList.add('fa-angle-right')
+        titleDash.innerHTML = 'Complexo SUL - Visão Geral'
+        listUser.innerHTML = `
+        <div class="legendaOption">
+            <span>Status</span>
+            <span>Nome</span>
+          </div>
+          <div class="complexoOption cursorNormal">
+            <i class="fa-solid fa-circle" style="color: #fc3232;"></i> SILO 1 <div class="exibirDashboard"><span
+                onclick="dashboardSensor()">VER DETALHES</span></div>
+          </div>
+          <div class="complexoOption cursorNormal">
+            <i class="fa-solid fa-circle" style="color: #00c366;"></i> SILO 2 <div class="exibirDashboard"><span
+                onclick="dashboardSensor()">VER DETALHES</span></div>
+          </div>
+          <div class="complexoOption cursorNormal">
+            <i class="fa-solid fa-circle" style="color: #00c366;"></i> SILO 3 <div class="exibirDashboard"><span
+                onclick="dashboardSensor()">VER DETALHES</span></div>
+          </div>
+        
+        `
+      } else if (e.target.children[1].getAttribute('id') == 'complexoLeste') {
+        primeiraKPI.children[1].innerHTML = 'ESTÁVEL'
+        segundaKPI.children[1].innerHTML = 'ESTÁVEL'
+        primeiraKPI.style.backgroundColor = '#00c366'
+        segundaKPI.style.backgroundColor = '#00c366'
+        titleDash.innerHTML = 'Complexo Leste - Visão Geral'
+        e.target.children[1].classList.add('fa-angle-right')
+      } else if (e.target.children[1].getAttribute('id') == 'complexoOeste') {
+        primeiraKPI.children[1].innerHTML = 'ESTÁVEL'
+        segundaKPI.children[1].innerHTML = 'ESTÁVEL'
+        primeiraKPI.style.backgroundColor = '#00c366'
+        segundaKPI.style.backgroundColor = '#00c366'
+        titleDash.innerHTML = 'Complexo Oeste - Visão Geral'
+        e.target.children[1].classList.add('fa-angle-right')
+      }
+    })
+  })
+
+
+  // document.getElementById('complexoSulContainer').addEventListener("click", (e) =>{
+  //   removerSelecao()
+  //   console.log(e.target.children[1])
+  //   console.log(e.target.children[1].getAttribute('id'))
+  //   if(e.target.children[1].getAttribute('id') == 'complexoSul'){
+  //     e.target.children[1].classList.add('fa-angle-right')
+  //   }
+  // })
+  // document.getElementById('complexoLesteContainer').addEventListener("click", (e) =>{
+  //   removerSelecao()
+  //   console.log(e.target.children[1])
+  //   console.log(e.target.children[1].getAttribute('id'))
+  //   if(e.target.children[1].getAttribute('id') == 'complexoLeste'){
+  //     e.target.children[1].classList.add('fa-angle-right')
+  //   }
+  // })
+  // document.getElementById('complexoOesteContainer').addEventListener("click", (e) =>{
+  //   removerSelecao()
+  //   console.log(e.target.children[1])
+  //   console.log(e.target.children[1].getAttribute('id'))
+  //   if(e.target.children[1].getAttribute('id') == 'complexoOeste'){
+  //     e.target.children[1].classList.add('fa-angle-right')
+  //   }
+  // })
+
+
+
+
+
 </script>

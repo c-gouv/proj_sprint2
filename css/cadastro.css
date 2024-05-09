@@ -66,15 +66,13 @@ h1{
     margin-bottom: 5px;
     align-items: center;
     box-sizing: border-box;
-    
 }
 .elementos h1 {
     margin-bottom: 10px;
 }
 .elementos span {
     font-weight: 200;
-    font-size: 14px;
-    
+    font-size: 14px; 
 }
 #login {
     font-weight: bold;
@@ -108,7 +106,6 @@ transition:color 0.2s ease;
     flex-direction: column;
     margin-top: 10px;
 }
-
 .singupField span {
     position: relative;
     font-size: 15px;

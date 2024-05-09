@@ -6,7 +6,8 @@
     --cor-borda: #24282b;
     --cor-texto: #888888;
     --cor-destaque: #434343;
-    --cor-ne: white
+    --cor-ne: white;
+    --cor-contraria: black;
 }
 .light-theme{
     --cor-primaria: #999999;
@@ -15,6 +16,7 @@
     --cor-texto: #3a3a3a;
     --cor-destaque: #bcbcbc;
     --cor-ne: black;
+    --cor-contraria: white;
 }
 body{
     margin: 0;

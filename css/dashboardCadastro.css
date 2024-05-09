@@ -1,0 +1,99 @@
+input {
+    height: 30px;
+    background: none;
+    border: 1px solid var(--cor-borda);
+    border-radius: 30px;
+    padding: 10px 10px 10px 10px;
+    box-sizing: border-box;
+    height: 45px;
+    color: var(--cor-ne);
+}
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 87vh;
+}
+.container {
+    width: 400px;
+    height: max-content;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 20px 35px 30px 35px;
+    border-radius: 15px;
+    background-color: var(--cor-secundaria);
+    border: 1px solid var(--cor-borda);
+}
+.containerFieldList{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.inputField {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.icon-position {
+    position: absolute;
+    right: 15px;
+    top: 55%;
+    width: 20px;
+    height: 20px;
+    font-size: 18px;
+}
+.buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+.buttons button {
+    height: 43px;
+    width: 100%;
+    border: 0px;
+    border-radius: 20px;
+    font-weight: bold;
+    padding: 10px 20px;
+    color: var(--cor-contraria);
+    background-color: var(--cor-ne);
+    transition: background-color 0.3s ease, color 0.5s ease;
+}
+.buttons button:hover {
+    transition: background-color 0.3s ease, color 0.5s ease;
+    color: var(--cor-ne);
+    background-color: #eeb122;
+    cursor:pointer;
+}
+.buttons span {
+    margin-top: 10px;
+}
+h2 {
+    margin-bottom: 10px;
+}
+.divisor {
+    height: 100%;
+    border: 1px solid var(--cor-borda);
+    margin-inline: 5vw;
+}
+.userList {
+    background-color: var(--cor-primaria);
+    padding-inline: 20px;
+    padding-block: 10px;
+    border-radius: 10px;
+    align-items: center;
+    display: flex;
+    margin-bottom: 10px;
+}
+.userList span {
+    margin-left: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+.deleteIcon {
+    margin-left: auto;
+    cursor: pointer;
+}

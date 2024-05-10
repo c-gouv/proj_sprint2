@@ -8,13 +8,14 @@ CREATE TABLE empresa(
     nome VARCHAR(45),
     telefoneFixo VARCHAR(8),
     telefoneCel VARCHAR(11),
-    email VARCHAR(45)
+    email VARCHAR(45),
+    cnpj char(14)
 );
 
 INSERT INTO empresa
-VALUES  (default, 'TrigoBrasil', '22223333', '11912345678', 'contato@trigobrasil.com.br'),
-        (default, 'TrigoCeara', '33334444', '85987654321', 'contato@trigoceara.com.br'),
-        (default, 'TrigoSãoPaulo', '55556666', '11876543210', 'contato@trigosp.com.br');
+VALUES  (default, 'TrigoBrasil', '22223333', '11912345678', 'contato@trigobrasil.com.br', '42841532000132'),
+        (default, 'TrigoCeara', '33334444', '85987654321', 'contato@trigoceara.com.br', '73967214000165'),
+        (default, 'TrigoSãoPaulo', '55556666', '11876543210', 'contato@trigosp.com.br', '20513786000104');
 
 CREATE TABLE usuario(
 	idUsuario INT AUTO_INCREMENT,
@@ -56,10 +57,10 @@ VALUES  (default, 'TrigoBrasil',  'SP', 'São Paulo', 'Rua das Trigoiras', 123, 
 
 CREATE TABLE parametro(
 	idParametro INT PRIMARY KEY AUTO_INCREMENT,
-    temperaturaMin DECIMAL(4, 2),
-    temperaturaMax DECIMAL(4, 2),
-    umidadeMin DECIMAL (4, 2),
-    umidadeMax DECIMAL (4, 2)
+    temperaturaMin DECIMAL(5, 2),
+    temperaturaMax DECIMAL(5, 2),
+    umidadeMin DECIMAL (5, 2),
+    umidadeMax DECIMAL (5, 2)
 );
 
 INSERT INTO parametro
@@ -69,10 +70,10 @@ CREATE TABLE silo (
     idSilo INT AUTO_INCREMENT,
     nome VARCHAR(45),
     fkComplexo INT,
-    fkMedida INT,
+    fkParametro INT,
     CONSTRAINT fkComplexoSilo FOREIGN KEY (fkComplexo) REFERENCES complexo(idComplexo),
-    CONSTRAINT fkSiloParametro FOREIGN KEY (fkMedida) REFERENCES parametro(idParametro),
-    CONSTRAINT pkSiloParametro PRIMARY KEY (idSilo, fkMedida)
+    CONSTRAINT fkSiloParametro FOREIGN KEY (fkParametro) REFERENCES parametro(idParametro),
+    CONSTRAINT pkSiloParametro PRIMARY KEY (idSilo, fkParametro)
 );
 
 INSERT INTO silo VALUES  
@@ -95,8 +96,8 @@ VALUES  (default, 1),
 
 CREATE TABLE monitoramento ( 
     idMonitoramento INT AUTO_INCREMENT,
-    temperatura DECIMAL(4,2),
-    umidade DECIMAL(4,2),
+    temperatura DECIMAL(5,2),
+    umidade DECIMAL(5,2),
     dataHora DATETIME,
     fkSensor INT,
     CONSTRAINT fkSensorMonitoramento FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
@@ -107,11 +108,13 @@ SELECT * FROM monitoramento;
 
 CREATE TABLE alerta(
 	idAlerta INT AUTO_INCREMENT,
-    status VARCHAR(45),
-    motivo VARCHAR(45),
-    fkMonitoramento INT,
-    CONSTRAINT fkMonitoramentoAlerta FOREIGN KEY (fkMonitoramento) REFERENCES monitoramento(idMonitoramento),
-    CONSTRAINT pkMonitoramentoAlerta PRIMARY KEY (idAlerta, fkMonitoramento)
+    motivo VARCHAR(100),
+    dataHora DATETIME,
+    temperaturaMomento DECIMAL(5,2),
+    umidadeMomento DECIMAL(5,2),
+    fkSensor INT,
+    CONSTRAINT fkSensorAlerta FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
+    CONSTRAINT pkAlertaSensor PRIMARY KEY (idAlerta, fkSensor)
 );
 
 INSERT INTO monitoramento
@@ -121,10 +124,11 @@ VALUES  (default, 14.23, 10.00,'2024-03-21 13:30:00', 1),
         (default, 18.20, 13.00,'2024-03-18 12:00:00', 4);
         
 INSERT INTO alerta
-VALUES  (default, 'Estado Crítico', 'Temperatura Elevada', 3),
-		(default, 'Estado Crítico', 'Umidade Elevada', 3);
+VALUES  (default, 'Temperatura Elevada','2024-03-21 13:30:00', '30.00', '15.00', 1),
+		(default, 'Umidade Elevada','2024-06-19 10:00:00', '10.00', '25.00', 2);
         
 SELECT * FROM usuario;
+SELECT * FROM empresa;
 SELECT * FROM complexo;
 SELECT * FROM silo;
 SELECT * FROM sensor;
@@ -137,7 +141,7 @@ JOIN silo ON silo.fkComplexo = complexo.idComplexo
 JOIN sensor ON sensor.fkSilo = silo.idSilo
 JOIN monitoramento ON monitoramento.fkSensor = sensor.idSensor; 
         
-CREATE TABLE leads(
+CREATE TABLE contatoSite(
     idContatoSite INT PRIMARY KEY AUTO_INCREMENT,
     empresa VARCHAR(100),
     email VARCHAR(200) NOT NULL,
@@ -145,7 +149,7 @@ CREATE TABLE leads(
     mensagem VARCHAR(500) NOT NULL
 );
 
-INSERT INTO leads VALUES 
+INSERT INTO contatoSite VALUES 
 	(default, 'TrigoBrasil', 'contato@trigobrasil.com', 'Contrato', 'Gostaria de mais informações'),
 	(default, 'TrigoCeara', 'contato@trigoceara.com', 'Contrato', 'Gostaria de mais informações'),
 	(default, 'TrigoSãoPaulo', 'contato@trigosaopaulo.com', 'Contrato', 'Gostaria de mais informações');

@@ -93,12 +93,15 @@
         if (email == '' || senha == '') {
             exibir.style.display = 'block'
             exibir.innerHTML = 'Preencha todos os campos!';
-        } else if (arroba < 1 || ponto < 0) {
+        }  else if ((senha.length < 10) && (arroba < 1 || ponto < 0)) {
+            exibir.style.display = 'block'
+            exibir.innerHTML = "Email e senha inválidos!"
+        } else if ((arroba < 1 || ponto < 0) && (senha.length >=10)) {
             exibir.style.display = 'block'
             exibir.innerHTML = 'Insira um email válido!';
-        } else if (senha.length < 10) {
+        } else if ((senha.length < 10) &&  (arroba >= 1 && ponto >= 0)) {
             exibir.style.display = 'block'
-            exibir.innerHTML = "Senha incorreta!"
+            exibir.innerHTML = "Senha inválida!"
         } else {
             exibir.style.display = 'none'
             logado.showModal()

@@ -5,17 +5,27 @@ USE fitteya;
 -- CRIAR UMA TABELA DE CADASTRO DE USUÁRIO/RESPONSÁVEL DA EMPRESA, ONDE 1 USUÁRIO PODE TER MAIS DE UM COMPLEXO
 CREATE TABLE empresa(
 	idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(45),
+    razaoSocial VARCHAR(45),
+    nomeFantasia VARCHAR(45),
     telefoneFixo VARCHAR(8),
-    telefoneCel VARCHAR(11),
     email VARCHAR(45),
     cnpj char(14)
 );
 
 INSERT INTO empresa
-VALUES  (default, 'TrigoBrasil', '22223333', '11912345678', 'contato@trigobrasil.com.br', '42841532000132'),
-        (default, 'TrigoCeara', '33334444', '85987654321', 'contato@trigoceara.com.br', '73967214000165'),
-        (default, 'TrigoSãoPaulo', '55556666', '11876543210', 'contato@trigosp.com.br', '20513786000104');
+VALUES  (default, 'Agricultores Unidos do Brasil Ltda.','TrigoBrasil', '22223333','contato@trigobrasil.com.br', '42841532000132'),
+        (default, 'Agrícola Nordestina de Trigo S.A.','TrigoCeara', '33334444', 'contato@trigoceara.com.br', '73967214000165'),
+        (default, 'Agroindústria Paulista de Trigo Ltda.','TrigoSãoPaulo', '55556666', 'contato@trigosp.com.br', '20513786000104');
+
+CREATE TABLE cargo(
+	idCargo INT PRIMARY KEY AUTO_INCREMENT,
+    tipoCargo VARCHAR(45)
+);
+
+INSERT INTO cargo(tipoCargo)
+VALUES 	('Administração'),
+		('Leitura'),
+        ('Edição');
 
 CREATE TABLE usuario(
 	idUsuario INT AUTO_INCREMENT,
@@ -23,18 +33,18 @@ CREATE TABLE usuario(
     email VARCHAR(45) UNIQUE,
     telefone CHAR(11) UNIQUE,
     senha VARCHAR(244),
-    fkAdm INT,
     fkEmpresa INT,
-    CONSTRAINT fkUsuarioAdm FOREIGN KEY (fkAdm) REFERENCES usuario(idUsuario),
+    fkCargo INT,
+    CONSTRAINT fkCargoUsuario FOREIGN KEY (fkCargo) REFERENCES cargo(idCargo),
     CONSTRAINT fkUsuarioEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
-    CONSTRAINT pkUsuarioEmpresa PRIMARY KEY (idUsuario, fkEmpresa)
+    CONSTRAINT pkUsuarioCargoEmpresa PRIMARY KEY (idUsuario, fkEmpresa, fkCargo)
 );
 
 INSERT INTO usuario VALUES 
-	(default, 'Carlinhos', 'carlinhos@gmail.com', '11999999999', 'fa2d4e0f016d8fcaf758d307c857b3e3', null, 1),
-	(default, 'João Victor', 'joao@gmail.com', '11999999998', '3dfcab79ed21fd89c9eb25e9864a6155', 1, 1),
-	(default, 'Erick Gomes', 'erick@gmail.com', '11999999997', '4da77e6afb73aaaabd18cdfe8d3e0262', null, 2),
-	(default, 'Cauã Gouvea', 'gouvea@gmail.com', '11999999996', '0e3a650faff671a35b335526bae4aa05', 3, 2);
+	(default, 'Carlinhos', 'carlinhos@gmail.com', '11999999999', 'fa2d4e0f016d8fcaf758d307c857b3e3', 1, 1),
+	(default, 'João Victor', 'joao@gmail.com', '11999999998', '3dfcab79ed21fd89c9eb25e9864a6155', 2, 2),
+	(default, 'Erick Gomes', 'erick@gmail.com', '11999999997', '4da77e6afb73aaaabd18cdfe8d3e0262', 3, 3),
+	(default, 'Cauã Gouvea', 'gouvea@gmail.com', '11999999996', '0e3a650faff671a35b335526bae4aa05', 1, 2);
 
 -- COMPLEXO - CONJUNTO DE SILOS
 CREATE TABLE complexo(
@@ -57,14 +67,18 @@ VALUES  (default, 'TrigoBrasil',  'SP', 'São Paulo', 'Rua das Trigoiras', 123, 
 
 CREATE TABLE parametro(
 	idParametro INT PRIMARY KEY AUTO_INCREMENT,
-    temperaturaMin DECIMAL(5, 2),
-    temperaturaMax DECIMAL(5, 2),
-    umidadeMin DECIMAL (5, 2),
-    umidadeMax DECIMAL (5, 2)
+    temperaturaMinPerigo DECIMAL(5, 2),
+    temperaturaMinCuidado DECIMAL(5, 2),
+    temperaturaMaxPerigo DECIMAL(5, 2),
+    temperaturaMaxCuidado DECIMAL(5, 2),
+    umidadeMinPerigo DECIMAL (5, 2),
+    umidadeMinCuidado DECIMAL (5, 2),
+    umidadeMaxPerigo DECIMAL (5, 2),
+    umidadeMaxCuidado DECIMAL (5, 2)
 );
 
 INSERT INTO parametro
-VALUES 	(DEFAULT, 15, 18, 13, 16);
+VALUES 	(DEFAULT, 10, 15, 20, 18, 7, 10, 16, 13);
 
 CREATE TABLE silo ( 
     idSilo INT AUTO_INCREMENT,
@@ -106,27 +120,12 @@ CREATE TABLE monitoramento (
 
 SELECT * FROM monitoramento;
 
-CREATE TABLE alerta(
-	idAlerta INT AUTO_INCREMENT,
-    motivo VARCHAR(100),
-    dataHora DATETIME,
-    temperaturaMomento DECIMAL(5,2),
-    umidadeMomento DECIMAL(5,2),
-    fkSensor INT,
-    CONSTRAINT fkSensorAlerta FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
-    CONSTRAINT pkAlertaSensor PRIMARY KEY (idAlerta, fkSensor)
-);
-
 INSERT INTO monitoramento
 VALUES  (default, 14.23, 10.00,'2024-03-21 13:30:00', 1),
         (default, 20.24, 12.00,'2024-03-20 10:45:00', 2),
         (default, 25.25, 25.00,'2024-03-19 14:00:30', 3),
         (default, 18.20, 13.00,'2024-03-18 12:00:00', 4);
-        
-INSERT INTO alerta
-VALUES  (default, 'Temperatura Elevada','2024-03-21 13:30:00', '30.00', '15.00', 1),
-		(default, 'Umidade Elevada','2024-06-19 10:00:00', '10.00', '25.00', 2);
-        
+           
 SELECT * FROM usuario;
 SELECT * FROM empresa;
 SELECT * FROM complexo;
@@ -134,7 +133,7 @@ SELECT * FROM silo;
 SELECT * FROM sensor;
 SELECT * FROM monitoramento;
 
-SELECT usuario.nome as usuarioName, empresa.nome, complexo.nome as complexoNome, silo.*, sensor.idSensor, monitoramento.* 
+SELECT usuario.nome as usuarioName, empresa.nomeFantasia, complexo.nome as complexoNome, silo.*, sensor.idSensor, monitoramento.* 
 FROM usuario JOIN empresa ON usuario.fkEmpresa = empresa.idEmpresa
 JOIN complexo ON complexo.fkEmpresa = empresa.idEmpresa
 JOIN silo ON silo.fkComplexo = complexo.idComplexo
@@ -153,7 +152,23 @@ INSERT INTO contatoSite VALUES
 	(default, 'TrigoBrasil', 'contato@trigobrasil.com', 'Contrato', 'Gostaria de mais informações'),
 	(default, 'TrigoCeara', 'contato@trigoceara.com', 'Contrato', 'Gostaria de mais informações'),
 	(default, 'TrigoSãoPaulo', 'contato@trigosaopaulo.com', 'Contrato', 'Gostaria de mais informações');
-    
-select * from monitoramento
-join sensor
+
+CREATE VIEW vw_historicoHora AS 
+select monitoramento.* from monitoramento
+join sensor ON idSensor = fkSensor
 where dataHora like '2024-03-18%' and minute(dataHora) = 0 and second(dataHora) = 0;
+
+CREATE VIEW vw_alertas AS
+SELECT monitoramento.* from monitoramento
+JOIN sensor ON idSensor = fkSensor
+JOIN silo ON idSilo = fkSilo
+JOIN parametro ON idParametro = fkParametro
+WHERE 
+temperatura<temperaturaMinPerigo OR
+temperatura<temperaturaMinCuidado OR
+temperatura>temperaturaMaxPerigo OR
+temperatura>temperaturaMaxCuidado OR
+umidade<umidadeMinPerigo OR
+umidade<umidadeMinCuidado OR
+umidade>umidadeMaxPerigo OR
+umidade>umidadeMaxCuidado;

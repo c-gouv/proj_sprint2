@@ -12,7 +12,7 @@ body{
 }
 
 .bg_site{
-    background-image: url(../img/trigo.jpg);
+    background-image: url(../assets/img/trigo.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;

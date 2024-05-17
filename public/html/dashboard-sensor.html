@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header id="header">
+    <header id="menuLateral">
       <div class="leftHeaderLogo">
         <img src="../img/logo-extended.svg">
       </div>
@@ -34,7 +34,7 @@
     </header>
 
     <main>
-      <div class="topHeader">
+      <div class="topHeader" id="header">
         <nav class="navbar">
             <i class="fa-solid fa-bars" style="font-size: 25px; cursor: pointer;" onclick="exibirMenu()"></i>
 
@@ -215,11 +215,12 @@
                 </div>
               </section>
             </section>
-          </main>
-        </body>
-        </html>
-        
+    </main>
+</body>
+
 <script src="../js/scriptHeader.js"></script>
+<script src="../js/criarHeaders.js"></script>
+</html>
 <script>
     var corTexto = getComputedStyle(document.body).getPropertyValue('--cor-texto');
 

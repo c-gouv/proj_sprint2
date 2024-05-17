@@ -14,15 +14,15 @@ function userOptions() {
     menu.classList.add(novoEstado);
 }
 function fecharMenu() {
-    let cabecalho = document.getElementById("header");
-    header.classList.remove("exibirMenu")
+    let cabecalho = document.getElementById("menuLateral");
+    cabecalho.classList.remove("exibirMenu")
 }
 function exibirMenu() {
-    let cabecalho = document.getElementById("header");
-    header.classList.add("exibirMenu")
+    let cabecalho = document.getElementById("menuLateral");
+    cabecalho.classList.add("exibirMenu")
 }
 function voltarHome() { 
-    window.location.href="home.html"
+    window.location.href="../index.html"
 }
 function mudarTema() {
     let icon = document.getElementById("themeIcon");

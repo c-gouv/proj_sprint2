@@ -9,9 +9,9 @@
     <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header id="header"></header>
+    <header id="menuLateral"></header>
     <main>
-        <div class="topHeader" id="banana"></div>
+        <div class="topHeader" id="header"></div>
         <div class="contentContainer">
             <div class="content">
                 <div class="containerPergunta">
@@ -19,22 +19,14 @@
                     <i class="fa-solid fa-arrow-right" onclick="gerarResposta()" id="botaoEnviar"></i>
                 </div>
                 <div class="containerChat" id="chatMensagem">
-                    <div class="direita">
-                        <div class="respostaChat msgUser">
-                            <span>Eu quero saber como eu configuro o sensor para dias de chuvas</span>
-                        </div>
-                    </div>
-                    <div class="respostaChat msgIA">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto animi ducimus harum error? Beatae ducimus atque, repellendus odio voluptatem officia modi quis sit dicta enim doloribus molestias cumque tenetur aliquam.
-                    </div>
                 </div>
             </div>
         </div>
     </main>
 </body>
 
-<!-- <script src="../js/scriptHeader.js"></script>
-<script src="../js/criarHeaders.js"></script> -->
+<script src="../js/scriptHeader.js"></script>
+<script src="../js/criarHeaders.js"></script>
 </html>
 
 <script>
@@ -49,12 +41,18 @@
             btnEnviar.style.backgroundColor = "var(--cor-pseudoTexto)";
         }
     }
-    // textarea.addEventListener("input", corBotao());
-    textarea.addEventListener("input", element => {
+    // FUNÇÃO PARA MUDAR O TAMANHO DO INPUT A MEDIA QUE VAI SUBINDO AS LINHAS;
+    function batatinha(element) {
         textarea.style.height = "max-content";
         let taHeight = element.target.scrollHeight;
         textarea.style.height = `${taHeight}px`;
-        corBotao()});
+        corBotao();
+    }
+
+    // CHAMA A FUNÇÃO QUANDO O INPUT RECEBE ALGUM VALOR
+    textarea.addEventListener("input", element => {
+        batatinha(element);
+    });
 
     // Imprimir mensagem na tela
     async function gerarResposta() {
@@ -85,15 +83,14 @@
             document.getElementById('chatMensagem').innerHTML += data.resultado;
             
         });
-
-        
     }
 
     // Tecla ENTER enviar a mensagem
     textarea.onkeypress = function(event) {
         if(event.keyCode==13) {
             event.preventDefault();
-            gerarResposta()
+            gerarResposta();
+            batatinha(event.target);
         }
     }
 </script>

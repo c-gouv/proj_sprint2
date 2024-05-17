@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <header id="header">
+    <header id="menuLateral">
         <div class="leftHeaderLogo">
           <img src="../img/logo-extended.svg">
         </div>
@@ -36,7 +36,7 @@
         <button class="fecharMenu" onclick="fecharMenu()"> <i class="fa-solid fa-angle-left"></i> </button>
       </header>
       <main>
-        <div class="topHeader">
+        <div class="topHeader" id="header">
             <nav class="navbar">
                 <i class="fa-solid fa-bars" style="font-size: 25px; cursor: pointer;" onclick="exibirMenu()"></i>
                 <div class="navbarButtons">
@@ -126,8 +126,9 @@
         
     </main>
 </body>
-
 <script src="../js/scriptHeader.js"></script>
+<script src="../js/criarHeaders.js"></script>
+</html>
 <script>
 function cadastrar() {
         msgArea.innerHTML = ""
@@ -213,22 +214,15 @@ function cadastrar() {
             msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres!<br>';
             return false
         }
-
-        
-         else if (senha != confirmar || confirmar != senha) {
+        else if (senha != confirmar || confirmar != senha) {
             msgArea.style.display = 'block'
             msgArea.innerHTML = 'Suas senhas precisam estar iguais!';
             return false
         } else{
              msgArea.style.display = 'none'
             logado.showModal()
-        }
-         
-           
-
-        
+        }  
     }
-
 
     function login() {
         const user = input_user.value

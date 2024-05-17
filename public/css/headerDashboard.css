@@ -5,6 +5,7 @@
     --cor-secundaria: #181b1f;
     --cor-borda: #24282b;
     --cor-texto: #888888;
+    --cor-pseudoTexto: #b5b5b5;
     --cor-destaque: #434343;
     --cor-ne: white;
     --cor-contraria: black;
@@ -14,6 +15,7 @@
     --cor-secundaria: #cccccc;
     --cor-borda: rgb(29, 29, 29,0.5);
     --cor-texto: #3a3a3a;
+    --cor-pseudoTexto: #3d3d3d;
     --cor-destaque: #bcbcbc;
     --cor-ne: black;
     --cor-contraria: white;
@@ -31,10 +33,11 @@ body{
 }
 .topHeader {
     border-bottom: 1px solid var(--cor-borda);
-    height: 12.94vh;
+    height: 13vh;
     position: sticky;
     top: 0;
     background-color: var(--cor-primaria);
+    z-index: 2;
 }
 .navbar{
     display: flex;

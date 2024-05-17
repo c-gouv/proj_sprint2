@@ -1,11 +1,11 @@
-
 .contentContainer {
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: 100vw;
+    height: 86vh;
 }
 .content {
-    width: 60vw;
+    width: 60%;
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
@@ -62,34 +62,34 @@
 
 /* CHAT / MENSAGEM */
 .containerChat {
+    width: 90%;
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding-bottom: 2.3%;
-    
 }
 .respostaChat {
     width: 84%;
     position: relative;
-    margin-left: 8.5%;
-    margin-right: 8.5%;
+    margin-left: 4%;
+    margin-right: 4%;
     font-size:16px;
-    font-weight: 400;
-    
+    font-weight: 400; 
 }
-
 .direita {
     text-align: right;
 }
-.msgIA {
-
-}
 .msgUser {
     width: fit-content;
+    display: inline-block !important;
     max-width: 70%;
     border-radius: 20px;
     padding: 10px;
     padding-inline: 20px;
     display: inline-block;
     background-color: var(--cor-secundaria);
+}
+.msgUser span {
+    line-break: auto;
+    word-wrap: break-word;
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,65 +10,50 @@
   <link rel="stylesheet" href="../css/footer.css">
   <link rel="shortcut icon" href="../img/logo.svg">
 </head>
+
 <body>
   <div class="bg_site">
-  
+
     <div class="back">
-    <header>
-        <nav class="navbar">
-            <div class="navbarLogo">
-                <img onclick="home()" style="cursor: pointer;" src="../assets/img/logo.svg">
-                Fitteya Tech
-            </div>
-            <div class="navbarButtons">
-                <ul>
-                    <a href="home.html">Início</a>
-                    <a href="sobre.html">Sobre Nós</a>
-                    <a href="contato.html">Contato</a>
-                    <a href="hist.html">Nossa História</a>
-                    <a href="calc.html">Simulador Financeiro</a>
-                </ul>
-                <button onclick="loginScreen()">Login</button>
-              </div>
-        </nav>
-    </header>
 
-    <main>
-      <div id="voltar" class="formCalc">
-        <img src="../assets/img/logo.svg" class="formCalcLogo">
-        <h3>Capacidade de armazenamento por silo:</h3>
-        <div class="formCalcSelect">
-          <input type="number" id="capArmazenamento" placeholder="Insira o valor">
-          <select id="Capacidade">
-            <option value="ton">Toneladas</option>
-            <option value="kg">Quilogramas</option>
-          </select>
-        </div>
-        <h3>Quantidade de silos total:</h3>
-        <input type="number" id="siloTotal" placeholder="Insira a quantidade">
-        <h3>Por quanto é vendido a saca de trigo:</h3>
-        <input type="number" id="valorSaca" placeholder="R$ 00,00"><br><br>
-        <div id="exibir1" style="color: red; font-size: 25px; text-align: center;"></div>
-        <button class="formCalcButton" onclick="calcularInvestimento()">Iniciar Simulação</button>
-      </div>
-      <div class="formResult">
-        <img src="../assets/img/logo.svg" class="formCalcLogo">
-        <span style="color: black;" id='exibir'>
+      <header id="chamarHeaderInstitucional"></header>
 
-        </span>
-      </div>
-    </main>
-    <footer>
-      <div class="footerContainer">
-          <div class="footerItem">
-                  <span>Privacy Policy</span> | <span>Terms & Conditions</span> | <span>Cookies</span>
+      <main>
+        <div id="voltar" class="formCalc">
+          <img src="../assets/img/logo.svg" class="formCalcLogo">
+          <h3>Capacidade de armazenamento por silo:</h3>
+          <div class="formCalcSelect">
+            <input type="number" id="capArmazenamento" placeholder="Insira o valor">
+            <select id="Capacidade">
+              <option value="ton">Toneladas</option>
+              <option value="kg">Quilogramas</option>
+            </select>
           </div>
-      </div>
-  </footer>
+          <h3>Quantidade de silos total:</h3>
+          <input type="number" id="siloTotal" placeholder="Insira a quantidade">
+          <h3>Por quanto é vendido a saca de trigo:</h3>
+          <input type="number" id="valorSaca" placeholder="R$ 00,00"><br><br>
+          <div id="exibir1" style="color: red; font-size: 25px; text-align: center;"></div>
+          <button class="formCalcButton" onclick="calcularInvestimento()">Iniciar Simulação</button>
+        </div>
+        <div class="formResult">
+          <img src="../assets/img/logo.svg" class="formCalcLogo">
+          <span style="color: black;" id='exibir'>
+
+          </span>
+        </div>
+      </main>
+      <footer>
+        <div class="footerContainer">
+          <div class="footerItem">
+            <span>Privacy Policy</span> | <span>Terms & Conditions</span> | <span>Cookies</span>
+          </div>
+        </div>
+      </footer>
     </div>
   </div>
 </body>
-
+<script src="./js/criarHeaderInstitucional.js"></script>
 </html>
 
 <script>
@@ -81,30 +67,30 @@
 
     exibir1.innerHTML = ''
 
-    if (capacidadePorSilo == '' || qtdSilo == '' || valor == ''){
+    if (capacidadePorSilo == '' || qtdSilo == '' || valor == '') {
       exibir1.innerHTML = `Preencha todos os campos!`
     } else {
 
-    if (Capacidade.value == 'ton') {
-      capacidadePorSilo = capacidadePorSilo * 1000
-    }
+      if (Capacidade.value == 'ton') {
+        capacidadePorSilo = capacidadePorSilo * 1000
+      }
 
-    let qtdTrigo = qtdSilo * capacidadePorSilo
-    let qtdSacas = qtdTrigo / 60
-    let perdaTrigo = qtdTrigo * 0.2
-    let producaoReais = qtdTrigo * valor
-    let perdaProducao = producaoReais * 0.2
+      let qtdTrigo = qtdSilo * capacidadePorSilo
+      let qtdSacas = qtdTrigo / 60
+      let perdaTrigo = qtdTrigo * 0.2
+      let producaoReais = qtdTrigo * valor
+      let perdaProducao = producaoReais * 0.2
 
-    exibir.innerHTML = `CONSIDERE UMA PERDA MÉDIA DE <span style="color:#FF0000">20%</span> DURANTE O ARMAZENAMENTO SEGUNDO A EMBRAPA (Empresa Brasileira de Pesquisa Agropecuária)<br>
+      exibir.innerHTML = `CONSIDERE UMA PERDA MÉDIA DE <span style="color:#FF0000">20%</span> DURANTE O ARMAZENAMENTO SEGUNDO A EMBRAPA (Empresa Brasileira de Pesquisa Agropecuária)<br>
 	<br>SITUAÇÃO:<br> 
 	- Quantidade de Trigo perdido: <span style="color:#FF0000">${perdaTrigo} Quilogramas</span><br>
-	- Quantidade em dinheiro perdido: <span style="color:#FF0000"> ${perdaProducao.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span><br>
+	- Quantidade em dinheiro perdido: <span style="color:#FF0000"> ${perdaProducao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span><br>
   <br>Não ter dados precisos de umidade e temperatura abre as portas para o surgimento de fungos e pragas em sua produção.
   Com a Fitteya, tenha essas informações ao seu alcance com um dashboard em tempo real e gráficos que mostram o histórico de coletas anteriores.`
-  }
-  }
-  
-  function home(){
-        window.location.href="home.html"
     }
+  }
+
+  function home() {
+    window.location.href = "home.html"
+  }
 </script>

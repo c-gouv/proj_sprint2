@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,10 +15,10 @@
     <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body onload="validarSessao()">
     <header id="menuLateral">
         <div class="leftHeaderLogo">
-          <img src="../img/logo-extended.svg">
+            <img src="../img/logo-extended.svg">
         </div>
         <div class="leftHeaderButtons">
             <a href="./dashboard-geral.html">
@@ -32,27 +33,27 @@
                 </div>
                 Cadastrar Usuário
             </a>
-          </div>
+        </div>
         <button class="fecharMenu" onclick="fecharMenu()"> <i class="fa-solid fa-angle-left"></i> </button>
-      </header>
-      <main>
+    </header>
+    <main>
         <div class="topHeader" id="header">
             <nav class="navbar">
                 <i class="fa-solid fa-bars" style="font-size: 25px; cursor: pointer;" onclick="exibirMenu()"></i>
                 <div class="navbarButtons">
                     <div class="userArea" onclick="userOptions()">
-                      <i class="fa-solid fa-angle-up" id="pfIcon"></i>
-                      Olá Isaque
-                      <img src="../img/avatar_user.webp" class="pfpPicture">
+                        <i class="fa-solid fa-angle-up" id="pfIcon"></i>
+                        Olá Isaque
+                        <img src="../img/avatar_user.webp" class="pfpPicture">
                     </div>
                     <div>
-                      <div class="dropdownContent hidden" id="menuPerfil"">
-                        <a href="#">Configurações do Usuário</a>
-                        <a onclick="voltarHome()">Sair</a>
-                      </div>
+                        <div class="dropdownContent hidden" id="menuPerfil"">
+                        <a href=" #">Configurações do Usuário</a>
+                            <a onclick="voltarHome()">Sair</a>
+                        </div>
                     </div>
                     <div class="themeArea">
-                      <i class="fa-solid tema fa-moon" id="themeIcon" onclick="mudarTema()"></i>
+                        <i class="fa-solid tema fa-moon" id="themeIcon" onclick="mudarTema()"></i>
                     </div>
                 </div>
             </nav>
@@ -82,7 +83,7 @@
                         <input type="password" id="input_confirmar" placeholder="**********">
                         <i class="fa-solid fa-lock icon-position"></i>
                     </div>
-                    <div  class="inputField">
+                    <div class="inputField">
                         <span>Selecione uma Permissão</span>
                         <select id="select_escolha">
                             <option value="#">Selecione uma opção</option>
@@ -99,7 +100,7 @@
             </div>
 
             <div class="divisor"></div>
-            
+
             <div class="container">
                 <div class="containerFieldList">
                     <h2>Usuários Cadastrados</h2>
@@ -123,14 +124,16 @@
                 </div><button class="btnModal" onclick="login()">OK</button>
             </dialog>
         </div>
-        
+
     </main>
 </body>
+<script src="../js/sessao.js"></script>
 <script src="../js/scriptHeader.js"></script>
 <script src="../js/criarHeaders.js"></script>
+
 </html>
 <script>
-function cadastrar() {
+    function cadastrar() {
         msgArea.innerHTML = ""
 
         const user = input_user.value
@@ -154,7 +157,7 @@ function cadastrar() {
         }
 
 
-        if (user == '' || email == '' || senha == '' || confirmar == '' || SLescolha == '#' ) {
+        if (user == '' || email == '' || senha == '' || confirmar == '' || SLescolha == '#') {
             msgArea.style.display = 'block'
             msgArea.innerHTML = 'Preencha todos os campos!';
             return false
@@ -172,30 +175,30 @@ function cadastrar() {
             return false
 
         } else if ((senha.length < 10) && (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0)
-                   && (temNum == false) ) {
+            && (temNum == false)) {
             msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres<br>'; 
+            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres<br>';
             msgArea.innerHTML += '<br>Pelo menos 1 caracter especial<br>';
             msgArea.innerHTML += '<br>E pelo menos 1 número!';
             return false
         }
-        
+
         else if ((senha.length < 10) && (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0)) {
             msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres<br>'; 
+            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres<br>';
             msgArea.innerHTML += '<br>E pelo menos 1 caracter especial<br>';
             return false
 
-        }  
-         else if ((senha.length < 10) && (temNum == false)) {
+        }
+        else if ((senha.length < 10) && (temNum == false)) {
             msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres<br>'; 
+            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres<br>';
             msgArea.innerHTML += '<br>E pelo menos 1 número<br>';
             return false
         }
         else if ((arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) && (temNum == false)) {
             msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter no minimo 1 caracter especial<br>'; 
+            msgArea.innerHTML = 'Sua senha deve conter no minimo 1 caracter especial<br>';
             msgArea.innerHTML += '<br>E pelo menos 1 número<br>';
             return false
         }
@@ -218,10 +221,10 @@ function cadastrar() {
             msgArea.style.display = 'block'
             msgArea.innerHTML = 'Suas senhas precisam estar iguais!';
             return false
-        } else{
-             msgArea.style.display = 'none'
+        } else {
+            msgArea.style.display = 'none'
             logado.showModal()
-        }  
+        }
     }
 
     function login() {

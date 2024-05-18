@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +9,16 @@
     <link rel="stylesheet" href="../css/chatIA.css">
     <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
 </head>
-<body>
+
+<body onload="validarSessao()">
     <header id="menuLateral"></header>
     <main>
         <div class="topHeader" id="header"></div>
         <div class="contentContainer">
             <div class="content">
                 <div class="containerPergunta">
-                    <textarea type="text" rows="1" id="inputPergunta" class="textoPergunta" placeholder="Pergunte ao Leornado" required></textarea>    
+                    <textarea type="text" rows="1" id="inputPergunta" class="textoPergunta"
+                        placeholder="Pergunte ao Leornado" required></textarea>
                     <i class="fa-solid fa-arrow-right" onclick="gerarResposta()" id="botaoEnviar"></i>
                 </div>
                 <div class="containerChat" id="chatMensagem">
@@ -24,9 +27,10 @@
         </div>
     </main>
 </body>
-
+<script src="../js/sessao.js"></script>
 <script src="../js/scriptHeader.js"></script>
 <script src="../js/criarHeaders.js"></script>
+
 </html>
 
 <script>
@@ -35,7 +39,7 @@
     const btnEnviar = document.getElementById("botaoEnviar");
 
     function corBotao() {
-        if(textarea.value.trim() === "") {
+        if (textarea.value.trim() === "") {
             btnEnviar.style.backgroundColor = "var(--cor-destaque)";
         } else {
             btnEnviar.style.backgroundColor = "var(--cor-pseudoTexto)";
@@ -57,7 +61,7 @@
     // Imprimir mensagem na tela
     async function gerarResposta() {
         const pergunta = document.getElementById('inputPergunta').value;
-        const mensagemUser= `<div class="direita">
+        const mensagemUser = `<div class="direita">
                                 <div class="respostaChat msgUser">
                                     <span>${pergunta}</span>
                                 </div>
@@ -76,18 +80,18 @@
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ pergunta })
-        }).then(async function (resposta){
+        }).then(async function (resposta) {
             const data = await resposta.json();
 
             // resposta.style.display = 'block';
             document.getElementById('chatMensagem').innerHTML += data.resultado;
-            
+
         });
     }
 
     // Tecla ENTER enviar a mensagem
-    textarea.onkeypress = function(event) {
-        if(event.keyCode==13) {
+    textarea.onkeypress = function (event) {
+        if (event.keyCode == 13) {
             event.preventDefault();
             gerarResposta();
             batatinha(event.target);

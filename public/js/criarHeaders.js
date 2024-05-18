@@ -27,19 +27,20 @@
 })();
 
 (() => {
+
     document.getElementById("header").innerHTML = `
             <nav class="navbar">
                 <i class="fa-solid fa-bars" style="font-size: 25px; cursor: pointer;" onclick="exibirMenu()"></i>
                 <div class="navbarButtons">
                     <div class="userArea" onclick="userOptions()">
                         <i class="fa-solid fa-angle-up" id="pfIcon"></i>
-                        Olá Isaque
+                        Olá ${sessionStorage.NOME_USUARIO}
                         <img src="../assets/img/avatar_user.webp" class="pfpPicture">
                     </div>
                     <div>
                         <div class="dropdownContent hidden" id="menuPerfil"">
                       <a href=" #">Configurações do Usuário</a>
-                            <a onclick="voltarHome()">Sair</a>
+                            <a onclick="limparSessao()">Sair</a>
                         </div>
                     </div>
                     <div class="themeArea">

@@ -15,53 +15,55 @@
 
 <body>
     <div class="bg_site">
-    <div class="back">
-        <header id="chamarHeaderInstitucional"></header>
-        <main>
-            <div class="container">
-                <div class="elementos">
-                    <h1>Login</h1>
-                    <div>
-                        <div class="loginField">
-                            <span>Email</span>
-                            <input type="text" id="input_email" placeholder="Email">
-                            <i class="fa-solid fa-envelope icon-position"></i>
+        <div class="back">
+            <header id="chamarHeaderInstitucional"></header>
+            <main>
+                <div class="container">
+                    <div class="elementos">
+                        <h1>Login</h1>
+                        <div>
+                            <div class="loginField">
+                                <span>Email</span>
+                                <input type="text" id="input_email" placeholder="Email">
+                                <i class="fa-solid fa-envelope icon-position"></i>
+                            </div>
+                            <div class="loginField">
+                                <span>Senha</span>
+                                <input type="password" id="input_senha" placeholder="Senha">
+                                <i class="fa-solid fa-lock icon-position"></i>
+                            </div>
+                            <span><a>Esqueceu a senha?</a></span>
                         </div>
-                        <div class="loginField">
-                            <span>Senha</span>
-                            <input type="password" id="input_senha" placeholder="Senha">
-                            <i class="fa-solid fa-lock icon-position"></i>
+                        <div class="buttons">
+                            <button id="btn_entrar" onclick="logar()">Entrar</button>
+                            <span>Não tem um login? <b><a href="cadastro.html" id="cadastro"> Cadastre-se</a></b></span>
                         </div>
-                        <span><a>Esqueceu a senha?</a></span>
                     </div>
-                    <div class="buttons">
-                        <button id="btn_entrar" onclick="logar()">Entrar</button>
-                        <span>Não tem um login? <b><a href="cadastro.html" id="cadastro"> Cadastre-se</a></b></span>
-                    </div>
-                </div>  
-                <div id="exibir" class="errorMsg"></div>
-                <dialog id="logado">
-                    <div class="modal">
-                        <p id="p">LOGIN EFETUADO COM SUCESSO!<br>
-                            BEM VINDO!</p>
-                        <img style="width: 5vw; margin-bottom: 5vh;" src="../assets/img/verificado.png" alt="verificado">
-                            
-                    </div><button class="btn" onclick="dash()">OK</button>
-                </dialog>
-            </div> 
-          
-        </main>
-        <footer>
-            <div class="footerContainer">
-                <div class="footerItem">
-                        <span>Privacy Policy</span> | <span>Terms & Conditions</span> | <span>Cookies</span>
+                    <div id="exibir" class="errorMsg"></div>
+                    <dialog id="logado">
+                        <div class="modal">
+                            <p id="p">LOGIN EFETUADO COM SUCESSO!<br>
+                                BEM VINDO!</p>
+                            <img style="width: 5vw; margin-bottom: 5vh;" src="../assets/img/verificado.png"
+                                alt="verificado">
+
+                        </div><button class="btn" onclick="dash()">OK</button>
+                    </dialog>
                 </div>
-            </div>
-        </footer>
-    </div>
+
+            </main>
+            <footer>
+                <div class="footerContainer">
+                    <div class="footerItem">
+                        <span>Privacy Policy</span> | <span>Terms & Conditions</span> | <span>Cookies</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
     </div>
 </body>
 <script src="./js/criarHeaderInstitucional.js"></script>
+
 </html>
 
 <script>
@@ -76,24 +78,62 @@
         if (email == '' || senha == '') {
             exibir.style.display = 'block'
             exibir.innerHTML = 'Preencha todos os campos!';
-        }  else if ((senha.length < 10) && (arroba < 1 || ponto < 0)) {
+        } else if ((senha.length < 10) && (arroba < 1 || ponto < 0)) {
             exibir.style.display = 'block'
             exibir.innerHTML = "Email e senha inválidos!"
-        } else if ((arroba < 1 || ponto < 0) && (senha.length >=10)) {
+        } else if ((arroba < 1 || ponto < 0) && (senha.length >= 10)) {
             exibir.style.display = 'block'
             exibir.innerHTML = 'Insira um email válido!';
-        } else if ((senha.length < 10) &&  (arroba >= 1 && ponto >= 0)) {
+        } else if ((senha.length < 10) && (arroba >= 1 && ponto >= 0)) {
             exibir.style.display = 'block'
             exibir.innerHTML = "Senha inválida!"
         } else {
             exibir.style.display = 'none'
-            logado.showModal()
+            fetch("/usuarios/autenticar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emailServer: email,
+                    senhaServer: senha
+                })
+            }).then(function (resposta) {
+                console.log("ESTOU NO THEN DO entrar()!")
+
+                if (resposta.ok) {
+                    console.log(resposta);
+                    logado.showModal()
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        sessionStorage.EMAIL_USUARIO = json.email;
+                        sessionStorage.NOME_USUARIO = json.nome;
+                        sessionStorage.ID_USUARIO = json.id;
+                        sessionStorage.COMPLEXOS = JSON.stringify(json.complexos)
+
+                    });
+
+                } else {
+
+                    console.log("Houve um erro ao tentar realizar o login!");
+
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                        finalizarAguardar(texto);
+                    });
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+            })
         }
     }
-    function dash(){
-        window.location.href="html/dashboard-geral.html"
+    function dash() {
+        window.location.href = "html/dashboard-geral.html"
     }
-    function home(){
-        window.location.href="home.html"
+    function home() {
+        window.location.href = "home.html"
     }
 </script>

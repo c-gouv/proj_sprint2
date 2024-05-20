@@ -34,7 +34,7 @@
                 <div class="navbarButtons">
                     <div class="userArea" onclick="userOptions()">
                         <i class="fa-solid fa-angle-up" id="pfIcon"></i>
-                        Olá ${sessionStorage.NOME_USUARIO}
+                        Olá, ${sessionStorage.NOME_USUARIO}
                         <img src="../assets/img/avatar_user.webp" class="pfpPicture">
                     </div>
                     <div>

@@ -1,9 +1,25 @@
 var complexoModel = require("../models/complexoModel");
 
 function buscarComplexosPorEmpresa(req, res) {
-  var idUsuario = req.params.idUsuario;
+  var empresaId = req.params.empresaId;
 
-  complexoModel.buscarComplexosPorEmpresa(idUsuario).then((resultado) => {
+  complexoModel.buscarComplexosPorEmpresa(empresaId).then((resultado) => {
+    if (resultado.length > 0) {
+      res.status(200).json(resultado);
+    } else {
+      res.status(204).json([]);
+    }
+  }).catch(function (erro) {
+    console.log(erro);
+    console.log("Houve um erro ao buscar os aquarios: ", erro.sqlMessage);
+    res.status(500).json(erro.sqlMessage);
+  });
+}
+
+function buscarComplexoPorId(req, res) {
+  var complexoId = req.params.complexoId;
+
+  complexoModel.buscarComplexoPorId(complexoId).then((resultado) => {
     if (resultado.length > 0) {
       res.status(200).json(resultado);
     } else {
@@ -45,5 +61,6 @@ function cadastrar(req, res) {
 
 module.exports = {
   buscarComplexosPorEmpresa,
+  buscarComplexoPorId,
   cadastrar
 }

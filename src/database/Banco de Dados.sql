@@ -125,6 +125,17 @@ VALUES  (default, 14.23, 10.00,'2024-03-21 13:30:00', 1),
         (default, 20.24, 12.00,'2024-03-20 10:45:00', 2),
         (default, 25.25, 25.00,'2024-03-19 14:00:30', 3),
         (default, 18.20, 13.00,'2024-03-18 12:00:00', 4);
+
+-- INSERTS PARA TESTES DE QTD_DE_ALERTAS
+INSERT INTO monitoramento VALUES 
+(default, 20.00, 15.00, '2024-03-18 15:00:00', 4),
+(default, 20.00, 15.00, '2024-03-18 17:00:00', 4);
+
+INSERT INTO monitoramento VALUES 
+(default, 25.00, 13.00, '2024-03-18 10:00:00', 3),
+(default, 28.00, 10.00, '2024-03-18 11:00:00', 3);
+
+
            
 SELECT * FROM usuario;
 SELECT * FROM empresa;
@@ -172,3 +183,32 @@ umidade<umidadeMinPerigo OR
 umidade<umidadeMinCuidado OR
 umidade>umidadeMaxPerigo OR
 umidade>umidadeMaxCuidado;
+
+SELECT * FROM vw_alertas;
+
+-- QTD DE SILOS EM ALERTAS DO COMPLEXO 'X'
+select COUNT(*) from monitoramento
+join sensor ON idSensor = fkSensor
+join silo on sensor.fkSilo = silo.idSilo
+join complexo on silo.fkComplexo = complexo.idComplexo
+where dataHora like '2024-03-18%' and minute(dataHora) = 0 and second(dataHora) = 0 AND complexo.idComplexo = 3;
+
+-- LISTA DE COMPLEXOS E QUANTOS SILO ESTÃO EM ALERTAS NAS ÚLTIMAS 24H
+SELECT c.* ,
+(select COUNT(*) from monitoramento
+join sensor ON idSensor = fkSensor
+join silo on sensor.fkSilo = silo.idSilo
+join complexo on silo.fkComplexo = complexo.idComplexo
+where dataHora like '2024-03-18%' and minute(dataHora) = 0 and second(dataHora) = 0 
+AND complexo.idComplexo = c.idComplexo) as qtdSilosAlertas
+FROM complexo c WHERE c.fkEmpresa = 3;
+
+-- LISTAS DE SILOS DE UM DETERMINANDO COMPLEXO COM A QTD DE ALERTAS EM CADA SILO NAS ULTIMAS 24H
+SELECT s.*,
+(select COUNT(*) from monitoramento
+join sensor ON idSensor = fkSensor
+join silo on sensor.fkSilo = silo.idSilo
+join complexo on silo.fkComplexo = complexo.idComplexo
+where dataHora like '2024-03-18%' and minute(dataHora) = 0 and second(dataHora) = 0 
+AND silo.idSilo= s.idSilo) as qtdAlertas
+FROM silo s WHERE s.fkComplexo = 3;

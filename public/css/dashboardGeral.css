@@ -74,7 +74,7 @@
     margin-bottom: 5px;
     padding-left: 18px;
 }
-.complexoOption {
+.complexoOption, .complexoItem {
     font-size: 13px;
     height: 55px;
     display: flex;
@@ -83,7 +83,7 @@
     border-bottom: 1px solid var(--cor-borda);
     cursor: pointer;
 }
-.complexoOption i {
+.complexoOption>i, .complexoItem>i {
     padding-inline: 30px
 }
 .select {

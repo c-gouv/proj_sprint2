@@ -13,10 +13,10 @@
   <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="validarSessao()">
+<body onload="validarSessao(); listarComplexos()">
   <header id="menuLateral">
     <div class="leftHeaderLogo">
-      <img src="../img/logo-extended.svg">
+      <img src="../assets/img/logo-extended.svg">
     </div>
     <div class="leftHeaderButtons">
       <a href="#">
@@ -43,7 +43,7 @@
           <div class="userArea" onclick="userOptions()">
             <i class="fa-solid fa-angle-up" id="pfIcon"></i>
             Olá Isaque
-            <img src="../img/avatar_user.webp" class="pfpPicture">
+            <img src="../assets/img/avatar_user.webp" class="pfpPicture">
           </div>
           <div>
             <div class="dropdownContent hidden" id="menuPerfil"">
@@ -58,7 +58,7 @@
       </nav>
     </div>
     <div class="kpiArea">
-      <span class="titulo">Complexo SUL - Visão Geral</span>
+      <span id="tituloDash" class="titulo">Nenhum complexo selecinado</span>
       <div class="legenda">
         <span><i class="fa-solid fa-circle" style="color: #fc3232;"></i> EM ALERTA</span>
         <span><i class="fa-solid fa-circle" style="color: #00c366;"></i> ESTÁVEL</span>
@@ -89,23 +89,12 @@
           <span><i class="fa-solid fa-circle" style="color: #fc3232;"></i> SILOS EM ALERTAS</span>
           <span><i class="fa-solid fa-circle" style="color: #00c366;"></i> ESTÁVEL</span>
         </div>
-        <div class="selectComplexo">
+        <div id="listComplexos" class="selectComplexo">
           <div class="legendaOption">
             <span>Status</span>
             <span>Nome</span>
           </div>
-          <div id="complexoSulContainer" class="complexoOption">
-            <i class="fa-solid fa-circle" style="color: #fc3232;"></i> COMPLEXO SUL <i id="complexoSul"
-              class="select fa-solid fa-angle-right"></i>
-          </div>
-          <div id="complexoLesteContainer" class="complexoOption">
-            <i class="fa-solid fa-circle" style="color: #00c366;"></i> COMPLEXO LESTE <i id="complexoLeste"
-              class="select fa-solid "></i>
-          </div>
-          <div id="complexoOesteContainer" class="complexoOption">
-            <i class="fa-solid fa-circle" style="color: #00c366;"></i> COMPLEXO OESTE <i id="complexoOeste"
-              class="select fa-solid "></i>
-          </div>
+
         </div>
       </div>
 
@@ -120,17 +109,8 @@
             <span>Status</span>
             <span>Nome</span>
           </div>
-          <div class="complexoOption cursorNormal">
-            <i class="fa-solid fa-circle" style="color: #fc3232;"></i> SILO 1 <div class="exibirDashboard"><span
-                onclick="dashboardSensor()">VER DETALHES</span></div>
-          </div>
-          <div class="complexoOption cursorNormal">
-            <i class="fa-solid fa-circle" style="color: #00c366;"></i> SILO 2 <div class="exibirDashboard"><span
-                onclick="dashboardSensor()">VER DETALHES</span></div>
-          </div>
-          <div class="complexoOption cursorNormal">
-            <i class="fa-solid fa-circle" style="color: #00c366;"></i> SILO 3 <div class="exibirDashboard"><span
-                onclick="dashboardSensor()">VER DETALHES</span></div>
+          <div id="listSilos">
+            <p>Nenhum complexo selecionado</p>
           </div>
         </div>
       </div>
@@ -140,118 +120,113 @@
 <script src="../js/sessao.js"></script>
 <script src="../js/scriptHeader.js"></script>
 <script src="../js/criarHeaders.js"></script>
+
 </html>
 <script>
+  console.log(sessionStorage.COMPLEXOS)
+
+
   function dashboardSensor() {
     window.location.href = "dashboard-sensor.html"
+
   }
 
-  function removerSelecao() {
-    const select = document.querySelectorAll('.select');
-    select.forEach(item => {
-      item.classList.remove('fa-angle-right')
-    })
+  function listarComplexos() {
+    let listaComplexos = JSON.parse(sessionStorage.COMPLEXOS);
+
+    for (let posicao = 0; posicao < listaComplexos.length; posicao++) {
+      const complexoAtual = listaComplexos[posicao];
+
+      listComplexos.innerHTML += `
+        <div class="complexoItem" id="${complexoAtual.idComplexo}">
+            <i class="fa-solid fa-circle" style="color: ${complexoAtual.qtdSilosAlertas > 0 ? '#fc3232' : '#00c366'};"></i> 
+            ${complexoAtual.nome} 
+            <i class="select fa-solid"></i>
+          </div>
+      `
+    }
+
+    const complexoOptions = document.querySelectorAll('.complexoItem');
+
+    complexoOptions.forEach(option => {
+      console.log(option)
+      option.addEventListener('click', function () {
+        // Remove a classe 'active' e o ícone 'fa-angle-right' de todas as opções
+        complexoOptions.forEach(opt => {
+          opt.querySelector('.select').classList.remove('fa-angle-right');
+        });
+        // Adiciona a classe 'active' e exibe o ícone 'fa-angle-right' na opção clicada
+        this.querySelector('.select').classList.add('fa-angle-right');
+        const complexoId = this.getAttribute('id')
+
+        listarSilos(complexoId)
+        pegarDadosComplexo(complexoId)
+
+
+      });
+    });
+
   }
 
+  function pegarDadosComplexo(complexoId) {
+    fetch(`/complexos/${complexoId}`, {
+      method: "GET"
+    }).then(function (resposta) {
 
-  document.querySelectorAll('.complexoOption').forEach(item => {
-    item.addEventListener("click", (e) => {
-      removerSelecao()
-      const listUser = document.querySelectorAll('.selectComplexo')[1];
-      const titleDash = document.querySelector('.titulo');
-      const primeiraKPI = document.querySelector("#kpi1");
-      const segundaKPI = document.querySelector("#kpi2");
-      primeiraKPI.children[1].innerHTML = '2'
-      segundaKPI.children[1].innerHTML = 'SILO 1'
-      primeiraKPI.style.backgroundColor = '#fcab32'
-      segundaKPI.style.backgroundColor = '#fc3232'
-      listUser.innerHTML = `
-      <div class="legendaOption">
-            <span>Status</span>
-            <span>Nome</span>
-          </div>
-          <div class="complexoOption cursorNormal">
-            <i class="fa-solid fa-circle" style="color: #00c366;"></i> SILO 1 <div class="exibirDashboard"><span
-                onclick="dashboardSensor()">VER DETALHES</span></div>
-          </div>
-          <div class="complexoOption cursorNormal">
-            <i class="fa-solid fa-circle" style="color: #00c366;"></i> SILO 2 <div class="exibirDashboard"><span
-                onclick="dashboardSensor()">VER DETALHES</span></div>
-          </div>
-          <div class="complexoOption cursorNormal">
-            <i class="fa-solid fa-circle" style="color: #00c366;"></i> SILO 3 <div class="exibirDashboard"><span
-                onclick="dashboardSensor()">VER DETALHES</span></div>
-          </div>`
-      console.log(e.target.children[1])
-      console.log(e.target.children[1].getAttribute('id'))
-      if (e.target.children[1].getAttribute('id') == 'complexoSul') {
-        e.target.children[1].classList.add('fa-angle-right')
-        titleDash.innerHTML = 'Complexo SUL - Visão Geral'
-        listUser.innerHTML = `
-        <div class="legendaOption">
-            <span>Status</span>
-            <span>Nome</span>
-          </div>
-          <div class="complexoOption cursorNormal">
-            <i class="fa-solid fa-circle" style="color: #fc3232;"></i> SILO 1 <div class="exibirDashboard"><span
-                onclick="dashboardSensor()">VER DETALHES</span></div>
-          </div>
-          <div class="complexoOption cursorNormal">
-            <i class="fa-solid fa-circle" style="color: #00c366;"></i> SILO 2 <div class="exibirDashboard"><span
-                onclick="dashboardSensor()">VER DETALHES</span></div>
-          </div>
-          <div class="complexoOption cursorNormal">
-            <i class="fa-solid fa-circle" style="color: #00c366;"></i> SILO 3 <div class="exibirDashboard"><span
-                onclick="dashboardSensor()">VER DETALHES</span></div>
-          </div>
-        
-        `
-      } else if (e.target.children[1].getAttribute('id') == 'complexoLeste') {
-        primeiraKPI.children[1].innerHTML = 'ESTÁVEL'
-        segundaKPI.children[1].innerHTML = 'ESTÁVEL'
-        primeiraKPI.style.backgroundColor = '#00c366'
-        segundaKPI.style.backgroundColor = '#00c366'
-        titleDash.innerHTML = 'Complexo Leste - Visão Geral'
-        e.target.children[1].classList.add('fa-angle-right')
-      } else if (e.target.children[1].getAttribute('id') == 'complexoOeste') {
-        primeiraKPI.children[1].innerHTML = 'ESTÁVEL'
-        segundaKPI.children[1].innerHTML = 'ESTÁVEL'
-        primeiraKPI.style.backgroundColor = '#00c366'
-        segundaKPI.style.backgroundColor = '#00c366'
-        titleDash.innerHTML = 'Complexo Oeste - Visão Geral'
-        e.target.children[1].classList.add('fa-angle-right')
+      if (resposta.ok) {
+        console.log(resposta);
+        console.log('funcionou')
+        resposta.json().then(res => {
+          const complexoAtual = res[0]
+          tituloDash.innerHTML = `${complexoAtual.nome} - Visão Geral`
+        });
+
+      } else {
+        resposta.text().then(texto => {
+          console.error(texto);
+        });
       }
+
+    }).catch(function (erro) {
+      console.log(erro);
     })
-  })
+  }
 
+  function listarSilos(complexoId) {
+    fetch(`/silos/${complexoId}`, {
+      method: "GET"
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
 
-  // document.getElementById('complexoSulContainer').addEventListener("click", (e) =>{
-  //   removerSelecao()
-  //   console.log(e.target.children[1])
-  //   console.log(e.target.children[1].getAttribute('id'))
-  //   if(e.target.children[1].getAttribute('id') == 'complexoSul'){
-  //     e.target.children[1].classList.add('fa-angle-right')
-  //   }
-  // })
-  // document.getElementById('complexoLesteContainer').addEventListener("click", (e) =>{
-  //   removerSelecao()
-  //   console.log(e.target.children[1])
-  //   console.log(e.target.children[1].getAttribute('id'))
-  //   if(e.target.children[1].getAttribute('id') == 'complexoLeste'){
-  //     e.target.children[1].classList.add('fa-angle-right')
-  //   }
-  // })
-  // document.getElementById('complexoOesteContainer').addEventListener("click", (e) =>{
-  //   removerSelecao()
-  //   console.log(e.target.children[1])
-  //   console.log(e.target.children[1].getAttribute('id'))
-  //   if(e.target.children[1].getAttribute('id') == 'complexoOeste'){
-  //     e.target.children[1].classList.add('fa-angle-right')
-  //   }
-  // })
+      if (resposta.ok) {
+        console.log(resposta);
 
+        resposta.json().then(res => {
+          listSilos.innerHTML = '';
+          for (let posicao = 0; posicao < res.length; posicao++) {
+            const siloAtual = res[posicao];
 
+            listSilos.innerHTML += `
+                <div class="complexoOption cursorNormal">
+                  <i class="fa-solid fa-circle" style="color: ${siloAtual.qtdAlertas > 0 ? '#fc3232' : '#00c366'};">
+                    </i> ${siloAtual.nome} <div class="exibirDashboard"><span
+                      onclick="dashboardSensor()">VER DETALHES</span></div>
+                </div>
+                `
+          }
+        });
 
+      } else {
+        console.log("Houve um erro ao tentar realizar o login!");
+        resposta.text().then(texto => {
+          console.error(texto);
+        });
+      }
+
+    }).catch(function (erro) {
+      console.log(erro);
+    })
+  }
 
 
 </script>

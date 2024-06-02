@@ -3,8 +3,12 @@ var router = express.Router();
 
 var complexoController = require("../controllers/complexoController");
 
-router.get("/:empresaId", function (req, res) {
+router.get("listar/:empresaId", function (req, res) {
   complexoController.buscarComplexosPorEmpresa(req, res);
+});
+
+router.get("/:complexoId", function (req, res) {
+  complexoController.buscarComplexoPorId(req, res);
 });
 
 router.post("/cadastrar", function (req, res) {

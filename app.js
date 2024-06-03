@@ -21,6 +21,7 @@ var empresasRouter = require("./src/routes/empresas");
 var usuarioRouter = require("./src/routes/usuarios");
 var complexoRouter = require("./src/routes/complexos");
 var siloRouter = require("./src/routes/silos");
+var contatosRouter = require("./src/routes/contatos");
 // var avisosRouter = require("./src/routes/avisos");
 // var medidasRouter = require("./src/routes/medidas");
 // var aquariosRouter = require("./src/routes/aquarios");
@@ -37,6 +38,8 @@ app.use("/empresas", empresasRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/complexos", complexoRouter);
 app.use("/silos", siloRouter);
+app.use("/contatos", contatosRouter);
+
 // app.use("/avisos", avisosRouter);
 // app.use("/medidas", medidasRouter);
 // app.use("/aquarios", aquariosRouter);

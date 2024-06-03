@@ -61,25 +61,51 @@
     function loginScreen() {
         window.location.href = "login.html"
     }
+
+    
     function enviar() {
-        const nomeEmpresa = nome_empresa.value
-        const email = email_empresa.value
-        const assunto = assunto_empresa.value
-        const contar = contar_mais.value
-        const arroba = email.indexOf('@')
-        const ponto = email.indexOf('.com')
+        var empresaVar = nome_empresa.value;
+        var emailVar = email_empresa.value;
+        var assuntoVar = assunto_empresa.value;
+        var mensagemVar = contar_mais.value;
+        var arrobaVar = emailVar.indexOf('@');
+        var pontoVar = emailVar.indexOf('.com');
 
-        if (nomeEmpresa == '' || email == '' || assunto == '' || contar == '') {
-            exibir.innerHTML = '<p style="color:red;">Preencha todos os campos!</p>'
+        exibir.innerHTML = '';
+
+        if (empresaVar === '' || emailVar === '' || assuntoVar === '' || mensagemVar === '') {
+            exibir.innerHTML = 'Preencha todos os campos!';
+            return false;
+        } else if (arrobaVar < 0 || pontoVar < 0) {
+            exibir.innerHTML = 'Insira um email válido!';
+            return false;
         }
-        else if (arroba < 0 || ponto < 0) {
-            exibir.innerHTML = '<p style="color:red;">Insira um email válido!</p>'
-        } else {
-            logado.showModal()
-        }
 
+        fetch("/contatos/enviar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                empresaServer: empresaVar,
+                emailServer: emailVar,
+                assuntoServer: assuntoVar,
+                mensagemServer: mensagemVar,
+            }),
+        })
+        .then(function (resposta) {
+            console.log("Resposta: ", resposta);
+            if (resposta.ok) {
+                logado.showModal();
+            } else {
+                throw "Houve um erro ao tentar mandar a mensagem!";
+            }
+        })
+        .catch(function (resposta) {
+            console.log("#ERRO: ", resposta);
+        });
 
-
+        return false;
     }
 
     function login() {

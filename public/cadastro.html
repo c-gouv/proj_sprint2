@@ -108,83 +108,119 @@
         window.location.href = "login.html"
     }
     function cadastrar() {
-        msgArea.innerHTML = ""
+    msgArea.innerHTML = "";
 
-        const user = input_user.value
-        const email = input_email.value
-        const senha = input_senha.value
-        const confirmar = input_confirmar.value
-        const arroba = senha.indexOf("@")
-        const cifrao = senha.indexOf("$")
-        const velha = senha.indexOf("#")
-        const exclamacao = senha.indexOf("!")
-        const int = senha.indexOf("?")
-        const arrob = email.indexOf("@")
-        const ponto = email.endsWith(".com")
-        const emailEmpresa = input_emailEmpresa.value
-        const arrobaEmpresa = emailEmpresa.indexOf("@")
-        const pontoEmpresa = emailEmpresa.endsWith(".com")
-        const razaoSocial = input_razao.value
-        const nomeFantasia = input_fantasia.value
+    const user = input_user.value;
+    const email = input_email.value;
+    const senha = input_senha.value;
+    const confirmar = input_confirmar.value;
+    const arroba = senha.indexOf("@");
+    const cifrao = senha.indexOf("$");
+    const velha = senha.indexOf("#");
+    const exclamacao = senha.indexOf("!");
+    const int = senha.indexOf("?");
+    const arrob = email.indexOf("@");
+    const ponto = email.endsWith(".com");
+    const emailEmpresa = input_emailEmpresa.value;
+    const arrobaEmpresa = emailEmpresa.indexOf("@");
+    const pontoEmpresa = emailEmpresa.endsWith(".com");
+    const razaoSocial = input_razao.value;
+    const nomeFantasia = input_fantasia.value;
+    const cnpj = input_cnpj.value;
 
-
-        const cnpj = input_cnpj.value
-        let temNum = false;
-        for (let count = 0; count <= 9; count++) {
-            let numConvetido = count.toString();
-            if (senha.indexOf(numConvetido) > 0) {
-                temNum = true
-            }
+    let temNum = false;
+    for (let count = 0; count <= 9; count++) {
+        let numConvetido = count.toString();
+        if (senha.indexOf(numConvetido) > 0) {
+            temNum = true;
         }
-        if (user == '' || email == '' || senha == '' || confirmar == '' || emailEmpresa == '' || razaoSocial == '' || nomeFantasia == '' || cnpj == '') {
-            msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Preencha todos os campos!';
-            return false
-        }
-        if (senha.length < 10 || (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) || !temNum || (arrob < 1 || !ponto) || (arrobaEmpresa < 1 || !pontoEmpresa)) {
-            msgArea.style.display = 'block';
-            msgArea.innerHTML = `Seu email deve conter um "@" e um ".com"<br><br>
-                Sua senha deve conter no mínimo 10 caracteres,<br><br>
-                 pelo menos 1 caractere especial <br><br>e pelo menos 1 número!`;
+    }
 
-        } else if (senha !== confirmar || confirmar !== senha) {
-            msgArea.style.display = 'block';
-            msgArea.innerHTML = 'Suas senhas precisam estar iguais!';
-            r
-        } else {
-            msgArea.style.display = 'none';
-            fetch("/empresas/cadastrar", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    // crie um atributo que recebe o valor recuperado aqui
-                    // Agora vá para o arquivo routes/usuario.js
-                    razaoServer: razaoSocial,
-                    fantasiaServer: nomeFantasia,
-                    cnpjServer: cnpj,
-                    emailServer: emailEmpresa
-                }),
-            })
-                .then(async function (resposta) {
-                    console.log("resposta: ", resposta);
+    // Limpar a msgArea antes de exibir as mensagens de erro
+    msgArea.innerHTML = "";
+    let controle = 0
 
-                    if (resposta.ok) {
-                        buscarEmpresaPorCnpj(cnpj)
+    if (user == '' || email == '' || senha == '' || confirmar == '' || emailEmpresa == '' || razaoSocial == '' || nomeFantasia == '' || cnpj == '') {
+        msgArea.style.display = 'block';
+        msgArea.innerHTML += 'Preencha todos os campos!';
+        return false
+    }
 
-                    } else {
-                        throw "Houve um erro ao tentar realizar o cadastro!";
-                    }
-                })
-                .catch(function (resposta) {
-                    console.log(`#ERRO: ${resposta}`);
+    if (senha.length < 10) {
+        msgArea.style.display = 'block';
+        msgArea.innerHTML += 'Sua senha deve conter no mínimo 10 caracteres<br><br>';
+        controle ++
+    }
 
-                });
-        }
-
+    if (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) {
+        msgArea.style.display = 'block';
+        msgArea.innerHTML += 'Sua senha deve conter no mínimo 1 caractere especial<br><br>';
+        controle ++
 
     }
+
+    if (!temNum) {
+        msgArea.style.display = 'block';
+        msgArea.innerHTML += 'Sua senha deve conter no mínimo 1 número<br><br>';
+        controle ++
+
+    }
+
+    if (arrob < 1 || !ponto) {
+        msgArea.style.display = 'block';
+        msgArea.innerHTML += `Seu email deve conter um "@" e um ".com"<br><br>`;
+        controle ++
+
+    }  if (arrobaEmpresa < 1 || !pontoEmpresa) {
+        msgArea.style.display = 'block';
+        msgArea.innerHTML += `Seu email da empresa deve conter um "@" e um ".com"<br><br>`;
+        controle ++
+
+    }
+
+    if (senha !== confirmar ) {
+        msgArea.style.display = 'block';
+        msgArea.innerHTML += 'As senhas devem ser compatíveis!';
+        controle ++
+    
+    } if(controle != 0){
+        return false
+    } else {
+
+    // Se todas as validações passarem, enviar os dados via fetch
+    msgArea.style.display = 'none'; // Esconder msgArea
+
+    fetch("/empresas/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            razaoServer: razaoSocial,
+            fantasiaServer: nomeFantasia,
+            cnpjServer: cnpj,
+            emailServer: emailEmpresa
+        }),
+    })
+        .then(async function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                buscarEmpresaPorCnpj(cnpj);
+
+            } else {
+                throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+
+        });
+    }
+}
+
 
     function buscarEmpresaPorCnpj(cnpj) {
         fetch(`/empresas/buscar?cnpj=${cnpj}`, {

@@ -11,7 +11,7 @@ function buscarComplexosPorEmpresa(req, res) {
     }
   }).catch(function (erro) {
     console.log(erro);
-    console.log("Houve um erro ao buscar os aquarios: ", erro.sqlMessage);
+    console.log("Houve um erro ao buscar os dados: ", erro.sqlMessage);
     res.status(500).json(erro.sqlMessage);
   });
 }
@@ -27,7 +27,55 @@ function buscarComplexoPorId(req, res) {
     }
   }).catch(function (erro) {
     console.log(erro);
-    console.log("Houve um erro ao buscar os aquarios: ", erro.sqlMessage);
+    console.log("Houve um erro ao buscar os dados: ", erro.sqlMessage);
+    res.status(500).json(erro.sqlMessage);
+  });
+}
+
+function silosEmAlerta(req,res){
+  var complexoId = req.params.complexoId;
+
+  complexoModel.silosEmAlerta(complexoId).then((resultado) => {
+    if(resultado.length > 0) {
+      res.status(200).json(resultado);
+    }else{
+      res.status(204).json([]);
+    }
+  }).catch(function (erro) {
+    console.log(erro);
+    console.log("Houve um erro ao buscar os dados: ", erro.sqlMessage);
+    res.status(500).json(erro.sqlMessage);
+  });
+}
+
+function siloMaisCritico(req,res){
+  var complexoId = req.params.complexoId;
+
+  complexoModel.siloMaisCritico(complexoId).then((resultado) => {
+    if(resultado.length > 0) {
+      res.status(200).json(resultado);
+    }else{
+      res.status(204).json([]);
+    }
+  }).catch(function (erro) {
+    console.log(erro);
+    console.log("Houve um erro ao buscar os dados: ", erro.sqlMessage);
+    res.status(500).json(erro.sqlMessage);
+  });
+}
+
+function temperaturaUmidadeMedia(req,res){
+  var complexoId = req.params.complexoId;
+
+  complexoModel.temperaturaUmidadeMedia(complexoId).then((resultado) => {
+    if(resultado.length > 0) {
+      res.status(200).json(resultado);
+    }else{
+      res.status(204).json([]);
+    }
+  }).catch(function (erro) {
+    console.log(erro);
+    console.log("Houve um erro ao buscar os dados: ", erro.sqlMessage);
     res.status(500).json(erro.sqlMessage);
   });
 }
@@ -62,5 +110,8 @@ function cadastrar(req, res) {
 module.exports = {
   buscarComplexosPorEmpresa,
   buscarComplexoPorId,
+  silosEmAlerta,
+  siloMaisCritico,
+  temperaturaUmidadeMedia,
   cadastrar
 }

@@ -11,6 +11,18 @@ router.get("/:complexoId", function (req, res) {
   complexoController.buscarComplexoPorId(req, res);
 });
 
+router.get("/silosEmAlerta/:complexoId", function (req, res) {
+  complexoController.silosEmAlerta(req, res);
+});
+
+router.get("/siloMaisCritico/:complexoId", function (req, res) {
+  complexoController.siloMaisCritico(req, res);
+});
+
+router.get("/temperaturaUmidadeMedia/:complexoId", function (req, res) {
+  complexoController.temperaturaUmidadeMedia(req, res);
+});
+
 router.post("/cadastrar", function (req, res) {
   complexoController.cadastrar(req, res);
 })

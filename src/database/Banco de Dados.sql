@@ -212,3 +212,27 @@ join complexo on silo.fkComplexo = complexo.idComplexo
 where dataHora like '2024-03-18%' and minute(dataHora) = 0 and second(dataHora) = 0 
 AND silo.idSilo= s.idSilo) as qtdAlertas
 FROM silo s WHERE s.fkComplexo = 3;
+
+SELECT 
+TRUNCATE(SUM(temperatura)/COUNT(fkSensor), 2) mediaTemperatura, 
+TRUNCATE(SUM(umidade)/COUNT(fkSensor), 2) mediaUmidade 
+FROM monitoramento 
+JOIN sensor ON fkSensor = idSensor 
+JOIN silo ON fkSilo = idSilo 
+WHERE fkComplexo = 1 
+AND dataHora > NOW() - INTERVAL 1 DAY;
+
+SELECT silo.nome maisCritico, MAX(temperatura), MAX(umidade) FROM vw_alertas
+JOIN sensor ON fkSensor = idSensor 
+JOIN silo ON fkSilo = idSilo
+WHERE fkComplexo = 1
+AND dataHora > NOW() - INTERVAL 1 DAY
+GROUP BY silo.nome, temperatura, umidade
+ORDER BY temperatura DESC, umidade DESC
+LIMIT 1;
+
+SELECT COUNT(DISTINCT idSilo) emAlerta FROM vw_alertas
+JOIN sensor ON fkSensor = idSensor 
+JOIN silo ON fkSilo = idSilo 
+WHERE fkComplexo = 1
+AND dataHora > NOW() - INTERVAL 1 DAY;

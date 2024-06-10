@@ -15,7 +15,7 @@
     <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="validarSessao()">
+<body onload="validarSessao();  fetchUsuarios()">
     <header id="menuLateral">
         <div class="leftHeaderLogo">
             <img src="../img/logo-extended.svg">
@@ -47,8 +47,8 @@
                         <img src="../img/avatar_user.webp" class="pfpPicture">
                     </div>
                     <div>
-                        <div class="dropdownContent hidden" id="menuPerfil"">
-                        <a href=" #">Configurações do Usuário</a>
+                        <div class="dropdownContent hidden" id="menuPerfil">
+                            <a href="#">Configurações do Usuário</a>
                             <a onclick="voltarHome()">Sair</a>
                         </div>
                     </div>
@@ -87,9 +87,9 @@
                         <span>Selecione uma Permissão</span>
                         <select id="select_escolha">
                             <option value="#">Selecione uma opção</option>
-                            <option value="">Administração</option>
-                            <option value="">Leitura</option>
-                            <option value="">Edição</option>
+                            <option value="Administracao">Administração</option>
+                            <option value="Leitura">Leitura</option>
+                            <option value="Edicao">Edição</option>
                         </select>
                     </div>
                     <div class="buttons">
@@ -104,24 +104,15 @@
             <div class="container">
                 <div class="containerFieldList">
                     <h2>Usuários Cadastrados</h2>
-                    <div class="userList">
-                        <i class="fa-solid fa-user"></i>
-                        <span>Usuário 1</span>
-                        <i class="fa-solid fa-xmark deleteIcon" style="color: #ff0000;"></i>
-                    </div>
-                    <div class="userList">
-                        <i class="fa-solid fa-user"></i>
-                        <span>Usuário</span>
-                        <i class="fa-solid fa-xmark deleteIcon" style="color: #ff0000;"></i>
-                    </div>
+                    <div id="userListContainer"></div>
                 </div>
             </div>
             <dialog id="logado">
                 <div class="modal">
                     <p id="p">CADASTRO EFETUADO COM SUCESSO!</p>
-                    <img style="width: 5vw; margin-bottom: 5vh;" src="../img/verificado.png" alt="verificado">
-
-                </div><button class="btnModal" onclick="login()">OK</button>
+                    <img style="width: 5vw; margin-bottom: 5vh;" src="../assets/img/verificado.png" alt="verificado">
+                </div>
+                <button class="btnModal" onclick="login()">OK</button>
             </dialog>
         </div>
 
@@ -130,115 +121,130 @@
 <script src="../js/sessao.js"></script>
 <script src="../js/scriptHeader.js"></script>
 <script src="../js/criarHeaders.js"></script>
-
-</html>
 <script>
-    function cadastrar() {
-        msgArea.innerHTML = ""
+    function fetchUsuarios() {
+        fetch(`/cadastroDash/listarUsuarios/${sessionStorage.ID_EMPRESA}`)
+            .then(response => response.json())
+            .then(usuarios => atualizarListaUsuarios(usuarios))
+            .catch(error => console.error('Erro ao buscar usuários:', error));
+    }
 
-        const user = input_user.value
-        const email = input_email.value
-        const senha = input_senha.value
-        const confirmar = input_confirmar.value
-        const arroba = senha.indexOf("@")
-        const cifrao = senha.indexOf("$")
-        const velha = senha.indexOf("#")
-        const exclamacao = senha.indexOf("!")
-        const int = senha.indexOf("?")
-        const arrob = email.indexOf("@")
-        const ponto = email.endsWith(".com")
-        const SLescolha = select_escolha.value
+    function atualizarListaUsuarios(usuarios) {
+        const userListContainer = document.getElementById("userListContainer");
+        userListContainer.innerHTML = "";
+
+        usuarios.forEach(usuario => {
+            userListContainer.innerHTML += `
+                <div class="userList">
+                    <i class="fa-solid fa-user"></i>
+                    <span>${usuario.nome}</span>
+                    <i class="fa-solid fa-xmark deleteIcon" style="color: #ff0000;"></i>
+                </div>
+            `;
+        });
+    }
+
+    function cadastrar() {
+        msgArea.innerHTML = "";
+
+        const nome = input_user.value;
+        const email = input_email.value;
+        const senha = input_senha.value;
+        const confirmar = input_confirmar.value;
+        const cargo = select_escolha.value
+        const arroba = senha.indexOf("@");
+        const cifrao = senha.indexOf("$");
+        const velha = senha.indexOf("#");
+        const exclamacao = senha.indexOf("!");
+        const int = senha.indexOf("?");
+        const arrob = email.indexOf("@");
+        const ponto = email.endsWith(".com");
+
         let temNum = false;
         for (let count = 0; count <= 9; count++) {
             let numConvetido = count.toString();
             if (senha.indexOf(numConvetido) > 0) {
-                temNum = true
+                temNum = true;
             }
         }
 
+        msgArea.innerHTML = "";
+        let controle = 0
 
-        if (user == '' || email == '' || senha == '' || confirmar == '' || SLescolha == '#') {
-            msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Preencha todos os campos!';
-            return false
-        } else if (arrob < 1 || !ponto) {
-            msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Seu email deve conter um "@" e um ".com"';
-            return false
-        } else if (arrob < 0) {
-            msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Seu email deve conter um "@"';
-            return false
-        } else if (ponto < 0) {
-            msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Seu email deve conter um ".com"';
-            return false
-
-        } else if ((senha.length < 10) && (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0)
-            && (temNum == false)) {
-            msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres<br>';
-            msgArea.innerHTML += '<br>Pelo menos 1 caracter especial<br>';
-            msgArea.innerHTML += '<br>E pelo menos 1 número!';
+        if (nome == '' || email == '' || senha == '' || confirmar == '' || cargo == "#") {
+            msgArea.style.display = 'block';
+            msgArea.innerHTML += 'Preencha todos os campos!';
             return false
         }
 
-        else if ((senha.length < 10) && (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0)) {
-            msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres<br>';
-            msgArea.innerHTML += '<br>E pelo menos 1 caracter especial<br>';
-            return false
+        if (senha.length < 10) {
+            msgArea.style.display = 'block';
+            msgArea.innerHTML += 'Sua senha deve conter no mínimo 10 caracteres<br><br>';
+            controle++
+        }
 
+        if (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) {
+            msgArea.style.display = 'block';
+            msgArea.innerHTML += 'Sua senha deve conter no mínimo 1 caractere especial<br><br>';
+            controle++
         }
-        else if ((senha.length < 10) && (temNum == false)) {
-            msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres<br>';
-            msgArea.innerHTML += '<br>E pelo menos 1 número<br>';
-            return false
+
+        if (!temNum) {
+            msgArea.style.display = 'block';
+            msgArea.innerHTML += 'Sua senha deve conter no mínimo 1 número<br><br>';
+            controle++
         }
-        else if ((arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) && (temNum == false)) {
-            msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter no minimo 1 caracter especial<br>';
-            msgArea.innerHTML += '<br>E pelo menos 1 número<br>';
-            return false
+
+        if (arrob < 1 || !ponto) {
+            msgArea.style.display = 'block';
+            msgArea.innerHTML += `Seu email deve conter um "@" e um ".com"<br><br>`;
+            controle++
         }
-        else if (temNum == false) {
-            msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter pelo menos 1 número!<br>';
-            return false
+
+        if (senha !== confirmar) {
+            msgArea.style.display = 'block';
+            msgArea.innerHTML += 'As senhas devem ser compatíveis!';
+            controle++
         }
-        else if (arroba < 0 && cifrao < 0 && velha < 0 && exclamacao < 0 && int < 0) {
-            msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter pelo menos 1 caracter especial!<br>';
-            return false
-        }
-        else if (senha.length < 10) {
-            msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Sua senha deve conter no mínimo 10 caracteres!<br>';
-            return false
-        }
-        else if (senha != confirmar || confirmar != senha) {
-            msgArea.style.display = 'block'
-            msgArea.innerHTML = 'Suas senhas precisam estar iguais!';
+
+        if (controle != 0) {
             return false
         } else {
-            msgArea.style.display = 'none'
-            logado.showModal()
+            // Se todas as validações passarem, enviar os dados via fetch
+            msgArea.style.display = 'none'; // Esconder msgArea
+
+            fetch("/cadastroDash/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    nomeServer: nome,
+                    emailServer: email,
+                    senhaServer: senha,
+                    empresaServer: sessionStorage.ID_EMPRESA,
+                    cargoServer: cargo
+                }),
+            })
+                .then(async function (resposta) {
+                    if (resposta.ok) {
+                        const usuarios = await resposta.json();
+                        logado.showModal();
+                        
+                    } else {
+                        throw new Error("Houve um erro ao tentar realizar o cadastro!");
+                    }
+                })
+                .catch(function (erro) {
+                    console.error(`#ERRO: ${erro}`);
+                });
         }
     }
 
     function login() {
-        const user = input_user.value
-
-        const listaUser = document.querySelectorAll(".containerFieldList")[1];
-        listaUser.innerHTML += `
-        <div class="userList">
-                        <i class="fa-solid fa-user"></i>
-                        <span>${user}</span>
-                        <i class="fa-solid fa-xmark deleteIcon" style="color: #ff0000;"></i>
-                    </div>
-        `
-        logado.close()
+        logado.close();
+        window.location.href="dashboard-cadastro.html"
     }
-
 </script>
+
+</html>

@@ -127,3 +127,7 @@ input::placeholder {
     top: 0;
     position: absolute;
 }
+
+.modal{
+    text-align: center;
+}

@@ -136,6 +136,9 @@ INSERT INTO monitoramento VALUES
 (default, 28.00, 10.00, '2024-03-18 11:00:00', 3);
 
 
+INSERT INTO monitoramento VALUES 
+(default, 50.00, 5.00, '2024-03-18 21:00:00', 4);
+
            
 SELECT * FROM usuario;
 SELECT * FROM empresa;
@@ -143,6 +146,7 @@ SELECT * FROM complexo;
 SELECT * FROM silo;
 SELECT * FROM sensor;
 SELECT * FROM monitoramento;
+SELECT * FROM parametro;
 
 SELECT usuario.nome as usuarioName, empresa.nomeFantasia, complexo.nome as complexoNome, silo.*, sensor.idSensor, monitoramento.* 
 FROM usuario JOIN empresa ON usuario.fkEmpresa = empresa.idEmpresa
@@ -169,6 +173,29 @@ select monitoramento.* from monitoramento
 join sensor ON idSensor = fkSensor
 where dataHora like '2024-03-18%' and minute(dataHora) = 0 and second(dataHora) = 0;
 
+
+-- HISTORICO POR HORA DO SILO
+select truncate(monitoramento.temperatura, 1) as temperatura,
+truncate(monitoramento.umidade, 1) as umidade, 
+DATE_FORMAT(monitoramento.dataHora, '%H:%i') as hora 
+from monitoramento
+join sensor ON idSensor = fkSensor
+join silo on fkSensor = idSilo
+where dataHora like '2024-03-18%' and minute(dataHora) = 0 and second(dataHora) = 0 and idSilo = 4 LIMIT 24;
+
+-- KPIs do historico por hora
+select
+coalesce(truncate(max(monitoramento.temperatura), 1), 0) as tempMax,
+coalesce(truncate(min(monitoramento.temperatura), 1), 0) as tempMin,
+coalesce(truncate(avg(monitoramento.temperatura), 1), 0) as tempMedia,
+coalesce(truncate(max(monitoramento.umidade), 1), 0) as umidMax,
+coalesce(truncate(min(monitoramento.umidade), 1), 0) as umidMin,
+coalesce(truncate(avg(monitoramento.umidade), 1), 0) as umidMedia
+from monitoramento
+join sensor ON idSensor = fkSensor
+join silo on fkSensor = idSilo
+where dataHora like '2024-03-18%' and minute(dataHora) = 0 and second(dataHora) = 0 and idSilo = 4;
+
 CREATE VIEW vw_alertas AS
 SELECT monitoramento.* from monitoramento
 JOIN sensor ON idSensor = fkSensor
@@ -185,6 +212,25 @@ umidade>umidadeMaxPerigo OR
 umidade>umidadeMaxCuidado;
 
 SELECT * FROM vw_alertas;
+
+-- ULTIMO REGISTRO + OS PARAMETROS DO SILO
+SELECT truncate(m.temperatura, 1) as temperatura, 
+	truncate(m.umidade, 1) as umidade, 
+    m.dataHora, 
+	round(p.temperaturaMinPerigo) as tempMinPerigo, 
+	round(p.temperaturaMaxPerigo) as tempMaxPerigo,
+	round(p.temperaturaMinCuidado) as tempMinCuidado,
+	round(p.temperaturaMaxCuidado) as tempMaxCuidado,
+	round(p.umidadeMinPerigo) as umidMinPerigo,
+	round(p.umidadeMaxPerigo) as umidMaxPerigo,
+    round(p.umidadeMinCuidado) as umidMinCuidado,
+	round(p.umidadeMaxCuidado) as umidMaxCuidado
+    FROM monitoramento as m 
+	JOIN sensor as s ON m.fkSensor = s.idSensor
+	JOIN silo as si ON s.fkSilo = si.idSilo 
+    JOIN parametro p ON si.fkParametro = p.idParametro
+    WHERE si.idSilo = 1 
+    ORDER BY m.idMonitoramento DESC LIMIT 1;
 
 -- QTD DE SILOS EM ALERTAS DO COMPLEXO 'X'
 select COUNT(*) from monitoramento

@@ -1,318 +1,404 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitteya Tech | Dashboard - Sensores</title>
-    <link rel="stylesheet" href="../css/headerDashboard.css">
-    <link rel="stylesheet" href="../css/dashboardSensor.css">
-    <link rel="script" href="../js/scriptHeader.js">
-    <link rel="shortcut icon" href="../img/logo.svg">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
-    <script src="../js/sessao.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitteya Tech | Dashboard - Sensores</title>
+  <link rel="stylesheet" href="../css/headerDashboard.css">
+  <link rel="stylesheet" href="../css/dashboardSensor.css">
+  <link rel="script" href="../js/scriptHeader.js">
+  <link rel="shortcut icon" href="../img/logo.svg">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
+  <script src="../js/sessao.js"></script>
+  <script src="../js/alerta.js"></script>
 </head>
-<body onload="validarSessao()">
-    <header id="menuLateral">
-      <div class="leftHeaderLogo">
-        <img src="../img/logo-extended.svg">
+
+<body onload="validarSessao(); atualizacaoPeriodica(); obterDadosGrafico()">
+  <header id="menuLateral">
+    <div class="leftHeaderLogo">
+      <img src="../img/logo-extended.svg">
+    </div>
+    <div class="leftHeaderButtons">
+      <a href="#">
+        <div class="menuSection selected">
+          <i class="fa-solid fa-gauge-high"></i>
+        </div>
+        <span class="selected">Dashboard</span>
+      </a>
+      <a href="./dashboard-cadastro.html">
+        <div class="menuSection">
+          <i class="fa-solid fa-user icon-position"></i>
+        </div>
+        Cadastrar Usuário
+      </a>
+    </div>
+    <button class="fecharMenu" onclick="fecharMenu()"> <i class="fa-solid fa-angle-left"></i> </button>
+  </header>
+
+  <main>
+    <div class="topHeader" id="header">
+      <nav class="navbar">
+        <i class="fa-solid fa-bars" onclick="exibirMenu()"></i>
+
+        <div class="navbarButtons">
+          <div class="userArea" onclick="userOptions()">
+            <i class="fa-solid fa-angle-up" id="pfIcon"></i>
+            Olá Isaque
+            <img src="../img/avatar_user.webp" class="pfpPicture">
+          </div>
+          <div class="themeArea">
+            <i class="fa-solid tema fa-moon" id="themeIcon" onclick="mudarTema()"></i>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="dropdownContent hidden" id="menuPerfil">
+      <a href="#">Configurações do Usuário</a>
+      <a onclick="voltarHome()">Sair</a>
+    </div>
+    <div class="main_grafico">
+      <h3><span style="color: var(--cor-destaque)">Complexo Sul ></span> Silo 1</h3>
+
+      <div class="button-section-container">
+        <button class="section-button section-active" id="botao_tempReal">Tempo Real</button>
+        <button class="section-button" id="botao_grafico">Gráfico de Alertas</button>
       </div>
-      <div class="leftHeaderButtons">
-        <a href="#">
-            <div class="menuSection selected">
-                <i class="fa-solid fa-gauge-high"></i>
+
+      <section class="section_grafico">
+        <div class="container-grafico" id="box_kpi">
+          <div class="content_grafico">
+            <div class="title-flex">
+              <div class="titulo_grafico umidade">Umidade do silo (%)</div>
+              <div style="display: flex; gap: 30px;">
+                <span class="kpi_flex"><span class="kpi danger_border"> PERIGO</span> <span
+                    id="perigo_umid_kpi"></span></span>
+                <span class="kpi_flex"><span class="kpi warning_border">CUIDADO</span> <span
+                    id="cuidado_umid_kpi"></span></span>
+                <span class="kpi_flex"><span class="kpi normal_border">NORMAL</span> <span
+                    id="ideal_umid_kpi"></span></span>
+              </div>
             </div>
-            <span class="selected">Dashboard</span>
-        </a>
-        <a href="./dashboard-cadastro.html">
-            <div class="menuSection">
-                <i class="fa-solid fa-user icon-position"></i>
+            <div id="back_umid" class="content_value"><span id="monitoramento_umidade">50</span>%</div>
+          </div>
+
+          <div class="content_grafico">
+            <div class="title-flex">
+
+              <span class="titulo_grafico temperatura">Temperatura do silo (ºC)</span>
+              <div style="display: flex; gap: 30px;">
+                <span class="kpi_flex"><span class="kpi danger_border"> PERIGO</span> <span
+                    id="perigo_temp_kpi"></span></span>
+                <span class="kpi_flex"><span class="kpi warning_border">CUIDADO</span> <span
+                    id="cuidado_temp_kpi"></span> </span>
+                <span class="kpi_flex"><span class="kpi normal_border">NORMAL</span> <span
+                    id="ideal_temp_kpi"></span></span>
+              </div>
             </div>
-            Cadastrar Usuário
-        </a>
-      </div>
-      <button class="fecharMenu" onclick="fecharMenu()"> <i class="fa-solid fa-angle-left"></i> </button>
-    </header>
+            <div id="back_temp" class="content_value"><span id="monitoramento_temperatura">35</span>ºC</div>
+          </div>
+        </div>
 
-    <main>
-      <div class="topHeader" id="header">
-        <nav class="navbar">
-            <i class="fa-solid fa-bars" onclick="exibirMenu()"></i>
+        <div class="container-grafico" id="box_graph">
+          <div class="content_grafico  historico_container">
+            <div class="title-flex">
+              <span class="titulo_grafico umidade">Histórico Diário - Umidade</span>
 
-            <div class="navbarButtons">
-                <div class="userArea" onclick="userOptions()">
-                  <i class="fa-solid fa-angle-up" id="pfIcon"></i>
-                  Olá Isaque
-                  <img src="../img/avatar_user.webp" class="pfpPicture">
-                </div>
-                <div class="themeArea">
-                  <i class="fa-solid tema fa-moon" id="themeIcon" onclick="mudarTema()"></i>
-                </div>
             </div>
-        </nav>
-      </div>
-      <div class="dropdownContent hidden" id="menuPerfil">
-        <a href="#">Configurações do Usuário</a>
-        <a onclick="voltarHome()">Sair</a>
-      </div>
-      <div class="main_grafico">
-              <h3><span style="color: var(--cor-destaque)">Complexo Sul ></span> Silo 1</h3>
+            <div class="kpi_container">
+              <div class="kpi_info">
+                <span>Máximo</span>
+                <h2 id="umidMax">17%</h2>
+              </div>
+              <div class="kpi_info">
+                <span>Mínimo</span>
+                <h2 id="umidMin">10%</h2>
+              </div>
+              <div class="kpi_info">
+                <span>Média</span>
+                <h2 id="umidMedia">11%</h2>
+              </div>
+            </div>
 
-                <div class="button-section-container">
-                  <button class="section-button section-active" id="botao_tempReal">Tempo Real</button>
-                  <button class="section-button" id="botao_grafico">Gráfico de Alertas</button>
-                </div>
+            <div id="umidade" class="containerCanvas">
+              <canvas id="umidadeHist" class="grafico-dashboard"></canvas>
+            </div>
 
-              <section class="section_grafico">
-                <div class="container-grafico" id="box_kpi">
-                  <div class="content_grafico">
-                    <div class="title-flex">
-                    <div class="titulo_grafico umidade">Umidade do silo (%)</div>
-                    <div style="display: flex; gap: 30px;">
-                      <span class="kpi_flex"><span class="kpi danger_border"> PERIGO</span> <span>(> 16%)</span></span>
-                      <span class="kpi_flex"><span class="kpi warning_border">CUIDADO</span> <span>(13% - 16%)</span></span>
-                      <span class="kpi_flex"><span class="kpi normal_border">NORMAL</span> <span>(< 13%)</span></span>
-                    </div>
-                    </div>
-                    <div class="content_value background-umidade"><span id="monitoramento_umidade" >50</span>%</div>
-                  </div>
 
-                  <div class="content_grafico">
-                    <div class="title-flex">
+          </div>
 
-                      <span class="titulo_grafico temperatura">Temperatura do silo (ºC)</span>
-                      <div style="display: flex; gap: 30px;">
-                        <span class="kpi_flex"><span class="kpi danger_border"> PERIGO</span> <span>(> 20ºC e < 10ºC)</span></span>
-                        <span class="kpi_flex"><span class="kpi warning_border">CUIDADO</span> <span>(> 18ºC e < 15 ºC)</span> </span>
-                        <span class="kpi_flex"><span class="kpi normal_border">NORMAL</span>  <span>(15ºC - 18ºC)</span></span>
-                      </div>
-                    </div>
-                      <div class="content_value background-temperatura"><span id="monitoramento_temperatura" >35</span>ºC</div>
-                  </div>
-                </div>
-                
-                <div class="container-grafico" id="box_graph">
-                  <div class="content_grafico  historico_container">
-                    <div class="title-flex">
-                      <span class="titulo_grafico umidade">Histórico Diário - Umidade</span>
-                      
-                    </div>
-                    <div class="kpi_container">
-                        <div class="kpi_info">
-                          <span>Máximo</span>
-                          <h2>17%</h2>
-                        </div>
-                        <div class="kpi_info">
-                          <span>Mínimo</span>
-                          <h2>10%</h2>
-                        </div>
-                        <div class="kpi_info">
-                          <span>Média</span>
-                          <h2>11%</h2>
-                        </div>
-                    </div>
-                   
-                    <div id="umidade" class="containerCanvas">
-                          <canvas id="umidadeHist" class="grafico-dashboard"></canvas>
-                      </div>
-                    
-                  
-                  </div>
-
-                <div class="content_grafico historico_container">
-                  <div class="title-flex">
-                    <span class="titulo_grafico temperatura"> Histórico Diário - Temperatura </span>
-                  </div>
-                    <div class="kpi_container">
-                      <div class="kpi_info">
-                        <span>Máximo</span>
-                        <h2>22ºC</h2>
-                      </div>
-                      <div class="kpi_info">
-                        <span>Mínimo</span>
-                        <h2>25ºC</h2>
-                      </div>
-                      <div class="kpi_info">
-                        <span>Média</span>
-                        <h2>17ºC</h2>
-                      </div>
-                  </div>
-                    <div id="temperatura" class="containerCanvas">
-                        <canvas id="temperaturaHist" class="grafico-dashboard"></canvas>
-                    </div>
-                </div>
-                </div>
-              </section>
-    </main>
+          <div class="content_grafico historico_container">
+            <div class="title-flex">
+              <span class="titulo_grafico temperatura"> Histórico Diário - Temperatura </span>
+            </div>
+            <div class="kpi_container">
+              <div class="kpi_info">
+                <span >Máximo</span>
+                <h2 id="tempMax">22ºC</h2>
+              </div>
+              <div class="kpi_info">
+                <span>Mínimo</span>
+                <h2 id="tempMin">25ºC</h2>
+              </div>
+              <div class="kpi_info">
+                <span>Média</span>
+                <h2 id="tempMedia">17ºC</h2>
+              </div>
+            </div>
+            <div id="temperatura" class="containerCanvas">
+              <canvas id="temperaturaHist" class="grafico-dashboard"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+  </main>
 </body>
 <script src="../js/sessao.js"></script>
 <script src="../js/scriptHeader.js"></script>
 <script src="../js/criarHeaders.js"></script>
+
 </html>
 <script>
-    var corTexto = getComputedStyle(document.body).getPropertyValue('--cor-texto');
+  var corTexto = getComputedStyle(document.body).getPropertyValue('--cor-texto');
 
-    // ------------------- Dados de exemplo
-    const hours = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
-    const dataUmidade = [10, 11, 14, 12, 12, 11, 10, 15, 17, 13, 12, 10, 11, 11, 10];
-    const dataTemp = [15, 16, 19, 16, 16, 17, 18, 20, 22, 17, 17, 18, 17, 16, 15];
-    let day = []
-    let day2 = []
-    let dia = []
+  // ------------------- Dados de exemplo
+  const hours = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
 
-    // ------------------- Configuração do gráfico de umidade
-    const umidade = document.getElementById('umidadeHist').getContext('2d');
-    const humidityChart = new Chart(umidade, {
-      type: 'line',
-      data: {
-        labels: hours,
-        datasets: [{
-          data: dataUmidade,
-          label: 'Umidade (%)',
-          backgroundColor: '#329afc55',
-          borderColor: '#329BFC',
-          borderWidth: 1,
-          fill: 'origin'
-        }
+  // ------------------- Configuração do gráfico de umidade
+  const umidade = document.getElementById('umidadeHist').getContext('2d');
+  const humidityChart = new Chart(umidade, {
+    type: 'line',
+    data: {
+      labels: hours,
+      datasets: [{
+        data: [],
+        label: 'Umidade (%)',
+        backgroundColor: '#329afc55',
+        borderColor: '#329BFC',
+        borderWidth: 1,
+        fill: 'origin'
+      }
       ]
-      },
-      options: {
-        maintainAspectRatio: false,
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Umidade (%)',
-              color: '#fff'
-            },
-            ticks: {
-                    color: '#fff'
-                }
+    },
+    options: {
+      maintainAspectRatio: false,
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Umidade (%)',
+            color: '#fff'
           },
-          x: {
-            beginAtZero: false,
-            title: {
-              display: true,
-              text: 'Horário',
-              color: '#fff'
-            },
-            ticks: {
-                    color: '#fff'
-                }
+          ticks: {
+            color: '#fff'
+          }
+        },
+        x: {
+          beginAtZero: false,
+          title: {
+            display: true,
+            text: 'Horário',
+            color: '#fff'
           },
-        }
+          ticks: {
+            color: '#fff'
+          }
+        },
       }
-    });
+    }
+  });
 
-    // ------------------- Configuração do gráfico de temperatura
-    const temp = document.getElementById('temperaturaHist');
-    const tempGrafico = new Chart(temp, {
-      type: 'line',
-      data: {
-        labels: hours,
-        datasets: [{
-          data: dataTemp,
-          label: 'Temperatura (°C)',
-          backgroundColor: '#fcab3255',
-          borderColor: '#fcab32',
-          borderWidth: 1,
-          fill: true
-        }]
-      },
-      options: {
-        maintainAspectRatio: false,
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: '(°C)',
-              color: '#fff'
-            },
-            ticks: {
-                    color: '#fff'
-                }
+  // ------------------- Configuração do gráfico de temperatura
+  const temp = document.getElementById('temperaturaHist');
+  const tempGrafico = new Chart(temp, {
+    type: 'line',
+    data: {
+      labels: hours,
+      datasets: [{
+        data: [],
+        label: 'Temperatura (°C)',
+        backgroundColor: '#fcab3255',
+        borderColor: '#fcab32',
+        borderWidth: 1,
+        fill: true
+      }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: '(°C)',
+            color: '#fff'
           },
-          x: {
-            beginAtZero: false,
-            title: {
-              display: true,
-              text: 'Horário',
-              color: '#fff'
-            },
-            ticks: {
-                    color: '#fff'
-                }
+          ticks: {
+            color: '#fff'
+          }
+        },
+        x: {
+          beginAtZero: false,
+          title: {
+            display: true,
+            text: 'Horário',
+            color: '#fff'
           },
-        }
+          ticks: {
+            color: '#fff'
+          }
+        },
       }
-    });
+    }
+  });
 
-    function mudarTemaChart(grafico, color){
-        grafico.options.scales.y.title.color = color
-        grafico.options.scales.y.ticks.color = color
-        grafico.options.scales.x.title.color = color
-        grafico.options.scales.x.ticks.color = color
-        tempGrafico.update()
-        humidityChart.update()
+  function mudarTemaChart(grafico, color) {
+    grafico.options.scales.y.title.color = color
+    grafico.options.scales.y.ticks.color = color
+    grafico.options.scales.x.title.color = color
+    grafico.options.scales.x.ticks.color = color
+    tempGrafico.update()
+    humidityChart.update()
+  }
+
+  // function inserirDadosGrafico(dataHis) {
+  //   var valores = []
+  //   valores.push(Math.floor(Math.random() * (20 - 5 + 1) + 5))
+  //   valores.forEach((valor, index) => {
+  //     //Máximo de 60 itens exibidos no gráfico
+  //     dataHis.push(valor)
+  //     console.log(dataHis.length);
+  //   })
+  // }
+
+
+  // 1. Obter a data atual
+  const now = new Date();
+  // 2. Formatar a data em uma string no formato ISO 8601 (YYYY-MM-DD)
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // getMonth() retorna meses de 0 a 11
+  const day = String(now.getDate()).padStart(2, '0');
+
+  const idSilo = sessionStorage.ID_SILO
+  const formattedDate = `${year}-${month}-${day}`;
+
+  function obterKpisGrafico() {
+    fetch("/medidas/kpis", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        idSilo: idSilo,
+        dataHoje: formattedDate
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+            resposta.json().then(function (res) {
+
+            console.log(`Dados recebidos: ${JSON.stringify(res)}`);
+            tempMax.innerHTML = res[0].tempMax + 'ºC'
+            tempMin.innerHTML = res[0].tempMin + 'ºC'
+            tempMedia.innerHTML = res[0].tempMedia + 'ºC'
+            umidMin.innerHTML = res[0].umidMax + '%'
+            umidMax.innerHTML = res[0].umidMin + '%'
+            umidMedia.innerHTML = res[0].umidMedia + '%'
+
+          });
+        } else {
+          console.error(`Nenhum dado encontrado para o id ${idSilo} ou erro na API`);
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+
+      });
+  }
+
+  function obterDadosGrafico() {
+    obterKpisGrafico();
+
+    tempGrafico.data.datasets[0].data = [];
+    humidityChart.data.datasets[0].data = [];
+
+
+    console.log(formattedDate); // Exemplo: "2024-06-11"
+    fetch("/medidas/ultimas", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        idSilo: idSilo,
+        dataHoje: formattedDate
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta grafico: ", resposta);
+
+        if (resposta.status == 200) {
+          resposta.json().then(function (res) {
+
+            console.log(`Dados recebidos: ${JSON.stringify(res)}`);
+            plotarGrafico(res, idSilo);
+
+
+          });
+        } else {
+          console.error(`Nenhum dado encontrado para o id ${idSilo} ou erro na API`);
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+
+      });
+  }
+
+
+  function plotarGrafico(resposta, idSilo) {
+
+    console.log('iniciando plotagem do gráfico...');
+
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+    for (i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      const posicaoRegistroHora = hours.indexOf(registro.hora)
+      tempGrafico.data.datasets[0].data[posicaoRegistroHora] = registro.temperatura;
+      humidityChart.data.datasets[0].data[posicaoRegistroHora] = registro.umidade;
     }
 
-    function inserirDadosGrafico(dataHis){
-        var valores = []
-        valores.push(Math.floor(Math.random() * (20-5+1) + 5))
-        valores.forEach((valor, index) => {
-            //Máximo de 60 itens exibidos no gráfico
-            dataHis.push(valor)
-            console.log(dataHis.length);
-      })}
+    tempGrafico.update();
+    humidityChart.update();
 
-      function inserirDadosMonitoramento(grafico){
-      let valor = Math.floor(Math.random() * (20-5+1) + 5);
-      grafico.innerHTML = valor;
-    
-      if(grafico.id == 'monitoramento_umidade'){
-              let item = document.querySelector(".background-umidade")
-              if(valor > 16){
-                item.style.backgroundColor = '#FC3232'
-              }else if(valor > 13){
-                item.style.backgroundColor = '#ffc916'
-              }else {
-                item.style.backgroundColor = '#329BFC' 
-              }
-            }else if(grafico.id == 'monitoramento_temperatura'){
-              let item = document.querySelector(".background-temperatura")
-              if(valor >= 20 || valor < 10){
-                item.style.backgroundColor = '#FC3232'
-              }else if(valor > 18 || valor < 15){
-                item.style.backgroundColor = '#ffc916'
-              }else{
-                item.style.backgroundColor = '#329BFC'
-              }
-            }
-      }
+    setTimeout(() => obterDadosGrafico(), 2000);
 
-    // ------------------- VALORES RANDOMICOS
-    setInterval(() => {
-        inserirDadosMonitoramento(document.querySelector("#monitoramento_umidade"));
-        inserirDadosMonitoramento(document.querySelector("#monitoramento_temperatura"));
-    }, 1000);
-    // ------------------- TROCAR ABA
-    const botaoGrafico = document.getElementById("botao_grafico")
-    const botaoKpi = document.getElementById("botao_tempReal")
+  }
 
-    botaoGrafico.addEventListener("click", () => {
-      box_graph.style.display = "flex";
-      box_kpi.style.display = "none";
-      botaoGrafico.classList.add("section-active");
-      botaoKpi.classList.remove("section-active");
-    })
-    botaoKpi.addEventListener("click", () => {
-      box_graph.style.display = "none";
-      box_kpi.style.display = "flex";
-      botaoGrafico.classList.remove("section-active");
-      botaoKpi.classList.add("section-active");
-    })
+
+  const botaoGrafico = document.getElementById("botao_grafico")
+  const botaoKpi = document.getElementById("botao_tempReal")
+
+  botaoGrafico.addEventListener("click", () => {
+    box_graph.style.display = "flex";
+    box_kpi.style.display = "none";
+    botaoGrafico.classList.add("section-active");
+    botaoKpi.classList.remove("section-active");
+  })
+  botaoKpi.addEventListener("click", () => {
+    box_graph.style.display = "none";
+    box_kpi.style.display = "flex";
+    botaoGrafico.classList.remove("section-active");
+    botaoKpi.classList.add("section-active");
+  })
 </script>

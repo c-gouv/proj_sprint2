@@ -126,8 +126,9 @@
   console.log(sessionStorage.COMPLEXOS)
 
 
-  function dashboardSensor() {
+  function dashboardSensor(idSilo) {
     window.location.href = "dashboard-sensor.html"
+    sessionStorage.ID_SILO = idSilo;
 
   }
 
@@ -212,6 +213,7 @@
 
         resposta.json().then(res => {
           listSilos.innerHTML = '';
+          console.log(res)
           for (let posicao = 0; posicao < res.length; posicao++) {
             const siloAtual = res[posicao];
 
@@ -219,7 +221,7 @@
                 <div class="complexoOption cursorNormal">
                   <i class="fa-solid fa-circle" style="color: ${siloAtual.qtdAlertas > 0 ? '#fc3232' : '#00c366'};">
                     </i> ${siloAtual.nome} <div class="exibirDashboard"><span
-                      onclick="dashboardSensor()">VER DETALHES</span></div>
+                      onclick="dashboardSensor(${siloAtual.idSilo})">VER DETALHES</span></div>
                 </div>
                 `
           }

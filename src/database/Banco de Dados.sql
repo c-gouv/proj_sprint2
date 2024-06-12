@@ -41,10 +41,10 @@ CREATE TABLE usuario(
 );
 
 INSERT INTO usuario VALUES 
-	(default, 'Carlinhos', 'carlinhos@gmail.com', '11999999999', 'fa2d4e0f016d8fcaf758d307c857b3e3', 1, 1),
-	(default, 'João Victor', 'joao@gmail.com', '11999999998', '3dfcab79ed21fd89c9eb25e9864a6155', 2, 2),
-	(default, 'Erick Gomes', 'erick@gmail.com', '11999999997', '4da77e6afb73aaaabd18cdfe8d3e0262', 3, 3),
-	(default, 'Cauã Gouvea', 'gouvea@gmail.com', '11999999996', '0e3a650faff671a35b335526bae4aa05', 1, 2);
+	(default, 'Carlinhos', 'carlinhos@gmail.com', '11999999999', '417e024eaa6c935a4877d7c6bd64630ee9650e48728656d96c673fa4a5e99f37', 1, 1),
+	(default, 'João Victor', 'joao@gmail.com', '11999999998', '898d803f737fc386d17332ff318febe5e70a6fdc23e8d8b0ecafaceaeed1efc6', 2, 2),
+	(default, 'Erick Gomes', 'erick@gmail.com', '11999999997', 'a6d60db309101bed41cefa2c3016f012e16b6c3ed5037b53f5f6dca4f717904a', 3, 3),
+	(default, 'Cauã Gouvea', 'gouvea@gmail.com', '11999999996', '6b5e5cced76093e0e76f7221ea7a243fefa516e81eeeb422fd5874ba3a1cdff5', 1, 2);
 
 -- COMPLEXO - CONJUNTO DE SILOS
 CREATE TABLE complexo(

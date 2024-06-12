@@ -84,7 +84,7 @@ main {
 }
 
 .normal_border {
-    border-color: #329BFC;
+    border-color: #00c366;
 }
 
 .alert-title {
@@ -263,3 +263,17 @@ h3 {
     position: relative;
     width: 500px;
 }
+
+/* SENSORES COLORS */
+.perigo{
+    background-color: #FC3232;
+  }
+  
+.alerta{
+    color: black;
+    background-color: #FCE832;
+  }
+  
+.ideal {
+    background-color: #00c366;
+  }

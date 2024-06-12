@@ -23,6 +23,7 @@ var complexoRouter = require("./src/routes/complexos");
 var siloRouter = require("./src/routes/silos");
 var contatosRouter = require("./src/routes/contatos");
 var cadastroDashRouter = require("./src/routes/cadastroDash");
+var medidasRouter = require("./src/routes/medidas");
 
 // var avisosRouter = require("./src/routes/avisos");
 // var medidasRouter = require("./src/routes/medidas");
@@ -42,6 +43,7 @@ app.use("/complexos", complexoRouter);
 app.use("/silos", siloRouter);
 app.use("/contatos", contatosRouter);
 app.use("/cadastroDash", cadastroDashRouter);
+app.use("/medidas", medidasRouter);
 
 
 // app.use("/avisos", avisosRouter);

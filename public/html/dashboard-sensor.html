@@ -6,51 +6,16 @@
     <title>Fitteya Tech | Dashboard - Sensores</title>
     <link rel="stylesheet" href="../css/headerDashboard.css">
     <link rel="stylesheet" href="../css/dashboardSensor.css">
-    <link rel="script" href="../js/scriptHeader.js">
     <link rel="shortcut icon" href="../img/logo.svg">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
     <script src="../js/sessao.js"></script>
 </head>
 <body onload="validarSessao()">
-    <header id="menuLateral">
-      <div class="leftHeaderLogo">
-        <img src="../img/logo-extended.svg">
-      </div>
-      <div class="leftHeaderButtons">
-        <a href="#">
-            <div class="menuSection selected">
-                <i class="fa-solid fa-gauge-high"></i>
-            </div>
-            <span class="selected">Dashboard</span>
-        </a>
-        <a href="./dashboard-cadastro.html">
-            <div class="menuSection">
-                <i class="fa-solid fa-user icon-position"></i>
-            </div>
-            Cadastrar Usuário
-        </a>
-      </div>
-      <button class="fecharMenu" onclick="fecharMenu()"> <i class="fa-solid fa-angle-left"></i> </button>
-    </header>
-
+    <header id="menuLateral"></header>
     <main>
-      <div class="topHeader" id="header">
-        <nav class="navbar">
-            <i class="fa-solid fa-bars" onclick="exibirMenu()"></i>
+      <div class="topHeader" id="header"></div>
 
-            <div class="navbarButtons">
-                <div class="userArea" onclick="userOptions()">
-                  <i class="fa-solid fa-angle-up" id="pfIcon"></i>
-                  Olá Isaque
-                  <img src="../img/avatar_user.webp" class="pfpPicture">
-                </div>
-                <div class="themeArea">
-                  <i class="fa-solid tema fa-moon" id="themeIcon" onclick="mudarTema()"></i>
-                </div>
-            </div>
-        </nav>
-      </div>
       <div class="dropdownContent hidden" id="menuPerfil">
         <a href="#">Configurações do Usuário</a>
         <a onclick="voltarHome()">Sair</a>
@@ -145,9 +110,10 @@
               </section>
     </main>
 </body>
+
 <script src="../js/sessao.js"></script>
-<script src="../js/scriptHeader.js"></script>
-<script src="../js/criarHeaders.js"></script>
+<script src="../js/configHeader.js"></script>
+<script src="../js/headerDash.js"></script>
 </html>
 <script>
     var corTexto = getComputedStyle(document.body).getPropertyValue('--cor-texto');

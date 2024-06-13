@@ -1,54 +1,220 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitteya Tech | Dashboard - Sensores</title>
-    <link rel="stylesheet" href="../css/headerDashboard.css">
-    <link rel="stylesheet" href="../css/alertasDash.css">
-    <link rel="shortcut icon" href="../img/logo.svg">
-    <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitteya Tech | Dashboard - Sensores</title>
+  <link rel="stylesheet" href="../css/headerDashboard.css">
+  <link rel="stylesheet" href="../css/alertasDash.css">
+  <link rel="shortcut icon" href="../img/logo.svg">
+  <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
 </head>
-<body onload="">
-    <header id="menuLateral"></header>
-    <div class="topHeader" id="header"></div>
 
-    <main>
-      <h2><span style="color: var(--cor-texto);">Complexo Sul ></span><span style="color: var(--cor-texto)"> Silo 1 ></span><span> Lista de Alertas</span></h2>
-      <div class="legenda-box">
-        <span><i class="fa-solid fa-circle" style="color: red;"></i>PERIGO</span><span><i class="fa-solid fa-circle" style="color: yellow"></i> ALERTAS</span>
-      </div>
+<body onload="buscarParametros() ; buscarAlertas(); ">
+  <header id="menuLateral"></header>
+  <div class="topHeader" id="header"></div>
 
-      <div class="container-alertas">
-        <div class="alertas-header">
-          <div>Status</div>
-          <div>Sensor</div>
-          <div>Temperatura</div>
-          <div>Umidade</div>
-          <div>Data e Hora</div>
-        </div>
-        <div class="registro-alerta-box" id="box-alertas">
-          <div class="registro-alerta">
-            <div><i class="fa-solid fa-circle" style="color: red;"></i></div>
-            <div>Sensor 1</div>
-            <div>55ºC</div>
-            <div>20%</div>
-            <div>25/05/2024 - 10:00</div>
-          </div>
-          <div class="registro-alerta">
-            <div><i class="fa-solid fa-circle" style="color: red;"></i></div>
-            <div>Sensor 1</div>
-            <div>55ºC</div>
-            <div>20%</div>
-            <div>25/05/2024 - 10:00</div>
-          </div>
-        </div>
+  <main>
+    <h2><span style="color: var(--cor-texto);">Complexo Sul ></span><span style="color: var(--cor-texto)"> Silo 1
+        ></span><span> Lista de Alertas</span></h2>
+    <div class="legenda-box">
+      <span><i class="fa-solid fa-circle" style="color: red;"></i><span id="danger-kpi">PERIGO</span></span><span><i class="fa-solid fa-circle"
+          style="color: yellow"></i> <span id="warning-kpi">ALERTAS</span></span>
+    </div>
+
+    <div class="container-alertas">
+      <div class="alertas-header">
+        <div>Status</div>
+        <div>Sensor</div>
+        <div>Temperatura</div>
+        <div>Umidade</div>
+        <div>Data e Hora</div>
       </div>
-      
-    </main>
+      <div class="registro-alerta-box" id="box-alertas">
+
+      </div>
+      <div id="box-paginacao">
+
+      </div>
+    </div>
+
+  </main>
 </body>
 <script src="../js/sessao.js"></script>
 <script src="../js/headerDash.js"></script>
 <script src="../js/configHeader.js"></script>
 
 </html>
+
+<script>
+
+  const idSilo = sessionStorage.ID_SILO;
+  var limitesTemp = {}
+  var limitesUmid = {}
+  function buscarParametros() {
+    fetch(`/medidas/tempo-real/${idSilo}`)
+      .then(resposta => {
+        if (resposta.status == 200) {
+          resposta.json().then(resposta => {
+
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+            limitesTemp = {
+              muito_quente: Number(resposta[0].tempMaxPerigo),
+              quente: Number(resposta[0].tempMaxCuidado),
+              frio: Number(resposta[0].tempMinCuidado),
+              muito_frio: Number(resposta[0].tempMinPerigo)
+            };
+
+            limitesUmid = {
+              encharcado: Number(resposta[0].umidMaxPerigo),
+              muito_umido: Number(resposta[0].umidMaxCuidado),
+              pouco_umido: Number(resposta[0].umidMinCuidado),
+              seco: Number(resposta[0].umidMinPerigo)
+            };
+
+            const perigoTitle = document.getElementById("danger-kpi")
+            const alertaTitle = document.getElementById("warning-kpi")
+
+
+          });
+        } else {
+          console.error(`Nenhum dado encontrado para o id ${idSilo} ou erro na API`);
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
+      });
+  }
+
+  function buscarAlertas(offset = 0) {
+    let listaAlertas = document.getElementById("box-alertas")
+    listaAlertas.innerHTML = ''
+    let offsetValue = offset;
+    const limitSelect = 5;
+
+    fetch(`/medidas/buscarPaginaAlerta`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        idSilo: idSilo,
+        offSet: offsetValue,
+        limitSelect: limitSelect
+      })
+    })
+      .then(resposta => {
+        if (resposta.status == 200) {
+          montarPaginacao(offset, limitSelect)
+          resposta.json().then(resposta => {
+
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.map(alerta => {
+              var temp = alerta.temperatura;
+              var umid = alerta.umidade;
+
+              var classe_temperatura = 'fa-solid fa-play';
+              var classe_umidade = 'fa-solid fa-play';
+
+              // VALIDANDO LIMITES DA TEMPERATURA
+              if (temp >= limitesTemp.muito_quente) {
+                classe_temperatura = 'fa-solid fa-play direction-top danger';
+
+              }else if(temp <= limitesTemp.muito_frio){
+                classe_temperatura = 'fa-solid fa-play direction-bottom danger';
+              }
+              else if (temp >= limitesTemp.quente) {
+                classe_temperatura = 'fa-solid fa-play direction-top warning';
+
+              }else if(temp <= limitesTemp.frio){
+
+                classe_temperatura = 'fa-solid fa-play direction-bottom warning';
+              }
+
+              // VALIDANDO LIMITES DA UMIDADE
+              if (umid >= limitesUmid.encharcado ) {
+                classe_umidade = 'fa-solid fa-play direction-top danger';
+
+              }else if(umid <= limitesUmid.seco){
+                classe_umidade = 'fa-solid fa-play direction-bottom danger';
+              }
+              else if (umid >= limitesUmid.muito_umido) {
+                classe_umidade = 'fa-solid fa-play direction-top warning';
+
+              }else if(umid <= limitesUmid.pouco_umido){
+                classe_umidade = 'fa-solid fa-play direction-bottom warning';
+              }
+
+              listaAlertas.innerHTML += `
+                    <div class="registro-alerta">
+                      <div><i class="fa-solid fa-circle" style="color: red;"></i></div>
+                      <div>Sensor ${alerta.idSensor}</div>
+                      <div class="registro-flex">${alerta.temperatura}ºC <i class="${classe_temperatura}"></i></div>
+                      <div class="registro-flex">${alerta.umidade}% <i class="${classe_umidade}"></i></div>
+                      <div>${alerta.dataHora}</div>
+                    </div>
+                    `
+            })
+
+          });
+        } else {
+          console.error(`Nenhum dado encontrado para o id ${idSilo} ou erro na API`);
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
+      });
+
+  }
+
+  function montarPaginacao(offsetActive, limitSelect) {
+    let paginacao = document.getElementById("box-paginacao");
+    paginacao.innerHTML = '';
+    let actualPageNext = offsetActive;
+    let actualPagePrevious = offsetActive;
+    let offset = 0
+    fetch(`/medidas/alertas/${idSilo}`)
+      .then(resposta => {
+        if (resposta.status == 200) {
+          resposta.json().then(res => {
+            let qtdPaginas = Math.ceil(res[0].qtdAlertas / limitSelect);
+            console.log(qtdPaginas)
+
+            paginacao.innerHTML += `
+                        <span onclick="buscarAlertas(
+                        ${actualPagePrevious > 0 ? actualPagePrevious -= limitSelect : actualPagePrevious});" 
+                         class="btn_page"><</span>
+                        `
+
+            for (let index = 1; index <= qtdPaginas; index++) {
+              paginacao.innerHTML += `
+                            <span onclick="buscarAlertas(${offset})" id="${index}" class="btn_page ${offsetActive == offset ? 'pg_active' : ''}">${index}</span>
+                            `
+              offset += limitSelect
+              if (offset == (qtdPaginas * limitSelect)) {
+                offset -= limitSelect;
+              }
+
+            }
+
+            paginacao.innerHTML += `
+                        <span onclick="buscarAlertas(
+                        ${actualPageNext < offset ? actualPageNext += limitSelect : actualPageNext});" 
+                         class="btn_page">></span>
+                        `
+
+            // console.log(`Dados recebidos: ${JSON.stringify(res)}`);
+
+          });
+        } else {
+          console.error(`Nenhum dado encontrado para o id ${idSilo} ou erro na API`);
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
+      });
+  }
+
+</script>

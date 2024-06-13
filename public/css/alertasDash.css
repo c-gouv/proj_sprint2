@@ -55,3 +55,45 @@ main{
 .alertas-header div:nth-child(5), .registro-alerta div:nth-child(5) {
     width: 25%;
 }
+
+/* PAGINAÇÃO */
+#box-paginacao{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.btn_page{
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.registro-flex{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.direction-top, .direction-bottom{
+    font-size: 0.7rem;
+}
+
+.direction-top{
+    transform: rotate(-90deg);
+}
+
+.direction-bottom{
+    transform: rotate(90deg);
+}
+
+.pg_active{
+    background-color: var(--cor-destaque);
+}
+
+.danger{
+    color: #FC3232;
+}
+
+.warning{
+    color: #FCE832;
+}

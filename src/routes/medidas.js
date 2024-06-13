@@ -15,4 +15,12 @@ router.get("/tempo-real/:idSilo", function (req, res) {
     medidaController.buscarMedidasEmTempoReal(req, res);
 })
 
+router.get("/alertas/:idSilo", function (req, res) {
+    medidaController.buscarAlertasDoSilo(req, res);
+})
+
+router.post("/buscarPaginaAlerta", function (req, res) {
+    medidaController.buscarPaginaAlertas(req, res);
+})
+
 module.exports = router;

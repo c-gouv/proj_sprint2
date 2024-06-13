@@ -213,6 +213,27 @@ umidade>umidadeMaxCuidado;
 
 SELECT * FROM vw_alertas;
 
+-- PEGAR TODOS OS ALERTAS REGISTRADOS BASEADO NOS PARAMETROS NO SILO 4
+SELECT 
+idSensor,
+truncate(monitoramento.temperatura, 1) as temperatura,
+truncate(monitoramento.umidade, 1) as umidade, 
+DATE_FORMAT(monitoramento.dataHora, '%Y/%m/%d %H:%i') as hora 
+ from monitoramento
+JOIN sensor ON idSensor = fkSensor
+JOIN silo ON idSilo = fkSilo
+JOIN parametro ON idParametro = fkParametro
+WHERE 
+temperatura<temperaturaMinPerigo AND idSensor = 4 OR
+temperatura<temperaturaMinCuidado AND idSensor = 4 OR
+temperatura>temperaturaMaxPerigo AND idSensor = 4 OR
+temperatura>temperaturaMaxCuidado AND idSensor = 4 OR
+umidade<umidadeMinPerigo AND idSensor = 4 OR
+umidade<umidadeMinCuidado AND idSensor = 4 OR
+umidade>umidadeMaxPerigo AND idSensor = 4 OR
+umidade>umidadeMaxCuidado AND idSensor = 4;
+
+
 -- ULTIMO REGISTRO + OS PARAMETROS DO SILO
 SELECT truncate(m.temperatura, 1) as temperatura, 
 	truncate(m.umidade, 1) as umidade, 

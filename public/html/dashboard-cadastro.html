@@ -14,7 +14,7 @@
     <script data-jsd-embedded data-key="54cb2415-664a-4901-bd0c-e02e00486a9f" data-base-url="https://jsd-widget.atlassian.com" src="https://jsd-widget.atlassian.com/assets/embed.js"></script>
 </head>
 
-<body onload="validarSessao(); fetchUsuarios()">
+<body onload="fetchUsuarios()">
     <header id="menuLateral"></header>
     <main>
         <div class="topHeader" id="header"></div>
@@ -94,12 +94,13 @@
         const userListContainer = document.getElementById("userListContainer");
         userListContainer.innerHTML = "";
 
+
         usuarios.forEach(usuario => {
             userListContainer.innerHTML += `
                 <div class="userList">
                     <i class="fa-solid fa-user"></i>
                     <span>${usuario.nome}</span>
-                    <i class="fa-solid fa-xmark deleteIcon" style="color: #ff0000;"></i>
+                    <i onclick="deletarUsuario(${usuario.idUsuario})" class="fa-solid fa-xmark deleteIcon" style="color: #ff0000;"></i>
                 </div>
             `;
         });
@@ -206,6 +207,30 @@
         logado.close();
         window.location.href="dashboard-cadastro.html"
     }
+
+    function deletarUsuario(idUsuario){
+        fetch(`/usuarios/deletar`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    idUsuario: idUsuario
+                }),
+            })
+                .then(async function (resposta) {
+                    if (resposta.ok) {
+                        window.location = 'dashboard-cadastro.html'
+                        
+                    } else {
+                        throw new Error("Houve um erro ao tentar realizar o cadastro!");
+                    }
+                })
+                .catch(function (erro) {
+                    console.error(`#ERRO: ${erro}`);
+                });
+        }
+    
 </script>
 
 </html>

@@ -12,7 +12,7 @@ function cadastrar(nome, email, senha, idEmpresa, cargoId) {
 
 function listarUsuariosPorEmpresa(empresaId) {
     const instrucaoSql = `
-        SELECT nome, email FROM usuario WHERE fkEmpresa = ${empresaId};
+        SELECT idUsuario, nome, email FROM usuario WHERE fkEmpresa = ${empresaId};
     `;
     return database.executar(instrucaoSql);
 }

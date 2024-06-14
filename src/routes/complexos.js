@@ -3,7 +3,7 @@ var router = express.Router();
 
 var complexoController = require("../controllers/complexoController");
 
-router.get("listar/:empresaId", function (req, res) {
+router.get("/listar/:empresaId", function (req, res) {
   complexoController.buscarComplexosPorEmpresa(req, res);
 });
 

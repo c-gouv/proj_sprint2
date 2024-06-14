@@ -3,11 +3,11 @@ var database = require("../database/config");
 function buscarComplexosPorEmpresa(empresaId) {
 
   var instrucaoSql = `SELECT c.* ,
-  (SELECT COUNT(*) FROM monitoramento
+  (SELECT COUNT(*) FROM vw_alertas
   JOIN sensor ON idSensor = fkSensor
   JOIN silo ON sensor.fkSilo = silo.idSilo
   JOIN complexo ON silo.fkComplexo = complexo.idComplexo
-  where dataHora LIKE '2024-03-18%' AND minute(dataHora) = 0 AND second(dataHora) = 0 
+  where DATE(NOW()) = DATE(dataHora)  
   AND complexo.idComplexo = c.idComplexo) as qtdSilosAlertas
   FROM complexo c WHERE c.fkEmpresa = ${empresaId};`;
 

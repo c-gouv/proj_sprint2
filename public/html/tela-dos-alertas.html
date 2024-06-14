@@ -7,20 +7,21 @@
   <title>Fitteya Tech | Dashboard - Sensores</title>
   <link rel="stylesheet" href="../css/headerDashboard.css">
   <link rel="stylesheet" href="../css/alertasDash.css">
-  <link rel="shortcut icon" href="../img/logo.svg">
+  <link rel="shortcut icon" href="../assets/img/logo.svg">
   <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
+  <script data-jsd-embedded data-key="54cb2415-664a-4901-bd0c-e02e00486a9f" data-base-url="https://jsd-widget.atlassian.com" src="https://jsd-widget.atlassian.com/assets/embed.js"></script>
 </head>
 
-<body onload="buscarParametros() ; buscarAlertas(); ">
+<body onload="buscarParametros() ">
   <header id="menuLateral"></header>
   <div class="topHeader" id="header"></div>
 
   <main>
-    <h2><span style="color: var(--cor-texto);">Complexo Sul ></span><span style="color: var(--cor-texto)"> Silo 1
+    <h2 style="display: flex; align-items: center; gap: 5px;"><i style="font-size: 20px; cursor: pointer;" onclick="navegarPara('dashboard-sensor.html')" class="fa-solid fa-angle-left"></i><span style="color: var(--cor-texto);">Complexo Sul ></span><span style="color: var(--cor-texto)"> Silo 1
         ></span><span> Lista de Alertas</span></h2>
     <div class="legenda-box">
-      <span><i class="fa-solid fa-circle" style="color: red;"></i><span id="danger-kpi">PERIGO</span></span><span><i class="fa-solid fa-circle"
-          style="color: yellow"></i> <span id="warning-kpi">ALERTAS</span></span>
+      <span><i class="fa-solid fa-circle" style="color: #FC3232;"></i><span id="danger-kpi">PERIGO</span></span><span><i class="fa-solid fa-circle"
+          style="color: #FCE832"></i> <span id="warning-kpi">ALERTAS</span></span>
     </div>
 
     <div class="container-alertas">
@@ -52,6 +53,11 @@
   const idSilo = sessionStorage.ID_SILO;
   var limitesTemp = {}
   var limitesUmid = {}
+
+  function navegarPara(url){
+    window.location = url
+  }
+
   function buscarParametros() {
     fetch(`/medidas/tempo-real/${idSilo}`)
       .then(resposta => {
@@ -76,7 +82,7 @@
 
             const perigoTitle = document.getElementById("danger-kpi")
             const alertaTitle = document.getElementById("warning-kpi")
-
+            buscarAlertas();
 
           });
         } else {
@@ -111,12 +117,17 @@
           resposta.json().then(resposta => {
 
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-            resposta.map(alerta => {
-              var temp = alerta.temperatura;
-              var umid = alerta.umidade;
+            for (let index = 0; index < resposta.length; index++) {
+              const alerta = resposta[index];
+              
+              let temp = alerta.temperatura;
+              let umid = alerta.umidade;
 
-              var classe_temperatura = 'fa-solid fa-play';
-              var classe_umidade = 'fa-solid fa-play';
+              var classe_temperatura = '';
+              var classe_umidade = '';
+
+              var statusColor = '';
+
 
               // VALIDANDO LIMITES DA TEMPERATURA
               if (temp >= limitesTemp.muito_quente) {
@@ -147,16 +158,22 @@
                 classe_umidade = 'fa-solid fa-play direction-bottom warning';
               }
 
+              if(classe_umidade.indexOf("danger") != -1 || classe_temperatura.indexOf("danger") != -1){
+                statusColor = "#FC3232"
+              }else{
+                statusColor = "#FCE832"
+              }
+
               listaAlertas.innerHTML += `
                     <div class="registro-alerta">
-                      <div><i class="fa-solid fa-circle" style="color: red;"></i></div>
+                      <div><i class="fa-solid fa-circle" style="color: ${statusColor};"></i></div>
                       <div>Sensor ${alerta.idSensor}</div>
                       <div class="registro-flex">${alerta.temperatura}ºC <i class="${classe_temperatura}"></i></div>
                       <div class="registro-flex">${alerta.umidade}% <i class="${classe_umidade}"></i></div>
                       <div>${alerta.dataHora}</div>
                     </div>
                     `
-            })
+            }
 
           });
         } else {

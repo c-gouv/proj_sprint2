@@ -16,12 +16,6 @@
                 </div>
                 Cadastrar Usuário
             </a>
-            <a href="./dashboard-ia.html">
-            <div class="menuSection">
-                <i class="fa-solid fa-headset"></i>
-            </div>
-            Suporte IA
-            </a>
         </div>
         <button class="fecharMenu" onclick="fecharMenu()"> <i class="fa-solid fa-angle-left"></i> </button>`
 })();

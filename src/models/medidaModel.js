@@ -71,14 +71,15 @@ function buscarAlertasDoSilo(idSilo) {
     JOIN silo ON idSilo = fkSilo
     JOIN parametro ON idParametro = fkParametro
     WHERE 
-    temperatura<temperaturaMinPerigo AND idSensor = ${idSilo} OR
-    temperatura<temperaturaMinCuidado AND idSensor = ${idSilo} OR
-    temperatura>temperaturaMaxPerigo AND idSensor = ${idSilo} OR
-    temperatura>temperaturaMaxCuidado AND idSensor = ${idSilo} OR
-    umidade<umidadeMinPerigo AND idSensor = ${idSilo} OR
-    umidade<umidadeMinCuidado AND idSensor = ${idSilo} OR
-    umidade>umidadeMaxPerigo AND idSensor = ${idSilo} OR
-    umidade>umidadeMaxCuidado AND idSensor = ${idSilo};`;
+    (temperatura<temperaturaMinPerigo OR
+    temperatura<temperaturaMinCuidado OR
+    temperatura>temperaturaMaxPerigo OR
+    temperatura>temperaturaMaxCuidado OR
+    umidade<umidadeMinPerigo OR
+    umidade<umidadeMinCuidado OR
+    umidade>umidadeMaxPerigo OR
+    umidade>umidadeMaxCuidado) AND idSensor = ${idSilo}
+    AND second(monitoramento.dataHora) = 0;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -86,24 +87,55 @@ function buscarAlertasDoSilo(idSilo) {
 
 function buscarPaginaAlertas(idSilo, offSet, limitSelect) {
 
-    var instrucaoSql = `SELECT 
-    idSensor,
-    truncate(monitoramento.temperatura, 1) as temperatura,
-    truncate(monitoramento.umidade, 1) as umidade, 
-    DATE_FORMAT(monitoramento.dataHora, '%Y/%m/%d %H:%i') as dataHora  
-    from monitoramento
-    JOIN sensor ON idSensor = fkSensor
-    JOIN silo ON idSilo = fkSilo
-    JOIN parametro ON idParametro = fkParametro
-    WHERE 
-    temperatura<temperaturaMinPerigo AND idSensor = ${idSilo} OR
-    temperatura<temperaturaMinCuidado AND idSensor = ${idSilo} OR
-    temperatura>temperaturaMaxPerigo AND idSensor = ${idSilo} OR
-    temperatura>temperaturaMaxCuidado AND idSensor = ${idSilo} OR
-    umidade<umidadeMinPerigo AND idSensor = ${idSilo} OR
-    umidade<umidadeMinCuidado AND idSensor = ${idSilo} OR
-    umidade>umidadeMaxPerigo AND idSensor = ${idSilo} OR
-    umidade>umidadeMaxCuidado AND idSensor = ${idSilo} LIMIT ${limitSelect} OFFSET ${offSet};`;
+    var instrucaoSql = `SELECT
+        idSensor,
+        truncate(monitoramento.temperatura, 1) as temperatura,
+        truncate(monitoramento.umidade, 1) as umidade, 
+        DATE_FORMAT(monitoramento.dataHora, '%Y/%m/%d %H:%i') as dataHora  
+        from monitoramento
+        JOIN sensor ON idSensor = fkSensor
+        JOIN silo ON idSilo = fkSilo
+        JOIN parametro ON idParametro = fkParametro
+        WHERE 
+        (temperatura<temperaturaMinPerigo OR
+        temperatura<temperaturaMinCuidado OR
+        temperatura>temperaturaMaxPerigo OR
+        temperatura>temperaturaMaxCuidado OR
+        umidade<umidadeMinPerigo OR
+        umidade<umidadeMinCuidado OR
+        umidade>umidadeMaxPerigo OR
+        umidade>umidadeMaxCuidado) 
+        AND idSensor = ${idSilo} 
+        AND second(monitoramento.dataHora) = 0
+        ORDER BY monitoramento.dataHora DESC LIMIT ${limitSelect} OFFSET ${offSet};`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarUltimoAlerta(idSilo) {
+
+    var instrucaoSql = `SELECT
+        idSensor,
+        truncate(monitoramento.temperatura, 1) as temperatura,
+        truncate(monitoramento.umidade, 1) as umidade, 
+        DATE_FORMAT(monitoramento.dataHora, '%Y/%m/%d %H:%i') as dataHora  
+        from monitoramento
+        JOIN sensor ON idSensor = fkSensor
+        JOIN silo ON idSilo = fkSilo
+        JOIN parametro ON idParametro = fkParametro
+        WHERE 
+        (temperatura<temperaturaMinPerigo OR
+        temperatura<temperaturaMinCuidado OR
+        temperatura>temperaturaMaxPerigo OR
+        temperatura>temperaturaMaxCuidado OR
+        umidade<umidadeMinPerigo OR
+        umidade<umidadeMinCuidado OR
+        umidade>umidadeMaxPerigo OR
+        umidade>umidadeMaxCuidado) 
+        AND idSensor = ${idSilo} 
+        AND second(monitoramento.dataHora) = 0
+        ORDER BY monitoramento.dataHora DESC LIMIT 1;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -114,5 +146,6 @@ module.exports = {
     buscarMedidasEmTempoReal,
     buscarKpisHistorico,
     buscarAlertasDoSilo,
-    buscarPaginaAlertas
+    buscarPaginaAlertas,
+    buscarUltimoAlerta
 }

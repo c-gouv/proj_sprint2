@@ -9,7 +9,7 @@
 
 // Declarando as variáveis para o pino do sensor e os dados para o gráfico
 
-int Pino_do_DHT11 = A0;
+int Pino_do_DHT11 = A1;
 
 float temperatura = 0;
 float umidade = 0;

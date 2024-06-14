@@ -8,9 +8,10 @@
   <link rel="stylesheet" href="../css/headerDashboard.css">
   <link rel="stylesheet" href="../css/dashboardGeral.css">
   <link rel="script" href="../js/configHeader.js">
-  <link rel="shortcut icon" href="../img/logo.svg">
+  <link rel="shortcut icon" href="../assets/img/logo.svg">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
+  <script data-jsd-embedded data-key="54cb2415-664a-4901-bd0c-e02e00486a9f" data-base-url="https://jsd-widget.atlassian.com" src="https://jsd-widget.atlassian.com/assets/embed.js"></script>
 </head>
 
 <body onload="validarSessao(); listarComplexos()">
@@ -20,10 +21,6 @@
 
     <div class="kpiArea">
       <span id="tituloDash" class="titulo">Nenhum complexo selecinado</span>
-      <div class="legenda">
-        <span><i class="fa-solid fa-circle" style="color: #fc3232;"></i> EM ALERTA</span>
-        <span><i class="fa-solid fa-circle" style="color: #00c366;"></i> ESTÁVEL</span>
-      </div>
       <div class="kpiAreaContentContainer">
         <div id="kpi1" class="kpiAreaContent" style="background-color: #fcab32;">
           <h3>Silos em alerta</h3>
@@ -50,10 +47,14 @@
           <span><i class="fa-solid fa-circle" style="color: #fc3232;"></i> SILOS EM ALERTAS</span>
           <span><i class="fa-solid fa-circle" style="color: #00c366;"></i> ESTÁVEL</span>
         </div>
-        <div id="listComplexos" class="selectComplexo">
+        <div  class="selectComplexo">
           <div class="legendaOption">
             <span>Status</span>
             <span>Nome</span>
+          </div>
+
+          <div id="listComplexos">
+
           </div>
 
         </div>
@@ -84,7 +85,7 @@
 
 </html>
 <script>
-  console.log(sessionStorage.COMPLEXOS)
+  const idEmpresa = sessionStorage.ID_EMPRESA;
 
 
   function dashboardSensor(idSilo) {
@@ -94,39 +95,60 @@
   }
 
   function listarComplexos() {
-    let listaComplexos = JSON.parse(sessionStorage.COMPLEXOS);
+    listComplexos.innerHTML = ''
+    fetch(`/complexos/listar/${idEmpresa}`, {
+      method: "GET"
+    }).then(function (resposta) {
 
-    for (let posicao = 0; posicao < listaComplexos.length; posicao++) {
-      const complexoAtual = listaComplexos[posicao];
+      if (resposta.ok) {
+        resposta.json().then(res => {
+          console.log(res)
+          let listaComplexos = res;
 
-      listComplexos.innerHTML += `
+          for (let posicao = 0; posicao < listaComplexos.length; posicao++) {
+            const complexoAtual = listaComplexos[posicao];
+            console.log(complexoAtual.qtdSilosAlertas)
+            listComplexos.innerHTML += `
         <div class="complexoItem" id="${complexoAtual.idComplexo}">
             <i class="fa-solid fa-circle" style="color: ${complexoAtual.qtdSilosAlertas > 0 ? '#fc3232' : '#00c366'};"></i> 
             ${complexoAtual.nome} 
             <i class="select fa-solid"></i>
           </div>
       `
-    }
+          }
 
-    const complexoOptions = document.querySelectorAll('.complexoItem');
+          const complexoOptions = document.querySelectorAll('.complexoItem');
 
-    complexoOptions.forEach(option => {
-      console.log(option)
-      option.addEventListener('click', function () {
-        // Remove a classe 'active' e o ícone 'fa-angle-right' de todas as opções
-        complexoOptions.forEach(opt => {
-          opt.querySelector('.select').classList.remove('fa-angle-right');
+          complexoOptions.forEach(option => {
+            console.log(option)
+            option.addEventListener('click', function () {
+              // Remove a classe 'active' e o ícone 'fa-angle-right' de todas as opções
+              complexoOptions.forEach(opt => {
+                opt.querySelector('.select').classList.remove('fa-angle-right');
+              });
+              // Adiciona a classe 'active' e exibe o ícone 'fa-angle-right' na opção clicada
+              this.querySelector('.select').classList.add('fa-angle-right');
+              const complexoId = this.getAttribute('id')
+
+              listarSilos(complexoId)
+              pegarDadosComplexo(complexoId)
+
+
+            });
+          });
         });
-        // Adiciona a classe 'active' e exibe o ícone 'fa-angle-right' na opção clicada
-        this.querySelector('.select').classList.add('fa-angle-right');
-        const complexoId = this.getAttribute('id')
 
-        listarSilos(complexoId)
-        pegarDadosComplexo(complexoId)
+      } else {
+        resposta.text().then(texto => {
+          console.error(texto);
+        });
+      }
 
-
-      });
+    }).catch(function (erro) {
+      console.log(erro);
     });
+    
+
 
   }
 

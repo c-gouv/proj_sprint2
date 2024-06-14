@@ -7,27 +7,31 @@
   <title>Fitteya Tech | Dashboard - Sensores</title>
   <link rel="stylesheet" href="../css/headerDashboard.css">
   <link rel="stylesheet" href="../css/dashboardSensor.css">
-  <link rel="shortcut icon" href="../img/logo.svg">
+  <link rel="shortcut icon" href="../assets/img/logo.svg">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
   <script src="../js/sessao.js"></script>
   <script src="../js/alerta.js"></script>
+  <script data-jsd-embedded data-key="54cb2415-664a-4901-bd0c-e02e00486a9f"
+    data-base-url="https://jsd-widget.atlassian.com" src="https://jsd-widget.atlassian.com/assets/embed.js"></script>
 </head>
-<body onload="validarSessao();  atualizacaoPeriodica(); obterDadosGrafico()"">
-    <header id="menuLateral"></header>
-    <main>
-      <div class="topHeader" id="header"></div>
 
-      <div class="dropdownContent hidden" id="menuPerfil">
-        <a href="#">Configurações do Usuário</a>
-        <a onclick="voltarHome()">Sair</a>
-      </div>
-      <div class="main_grafico">
-              <h3><span style="color: var(--cor-destaque)">Complexo Sul ></span> Silo 1</h3>
+<body onload="validarSessao();  atualizacaoPeriodica(); obterDadosGrafico(); mostarUltimoAlerta();">
+  <header id="menuLateral"></header>
+  <main>
+    <div class="topHeader" id="header"></div>
+
+    <div class="dropdownContent hidden" id="menuPerfil">
+      <a href="#">Configurações do Usuário</a>
+      <a onclick="voltarHome()">Sair</a>
+    </div>
+    <div class="main_grafico">
+      <h3><span style="color: var(--cor-texto)">Complexo Sul ></span> Silo 1</h3>
 
       <div class="button-section-container">
         <button class="section-button section-active" id="botao_tempReal">Tempo Real</button>
         <button class="section-button" id="botao_grafico">Gráfico de Alertas</button>
+        <button class="section-button tela-alerta-button" onclick="telaAlertas()">Lista de Alertas</button>
       </div>
 
       <section class="section_grafico">
@@ -98,7 +102,7 @@
             </div>
             <div class="kpi_container">
               <div class="kpi_info">
-                <span >Máximo</span>
+                <span>Máximo</span>
                 <h2 id="tempMax">22ºC</h2>
               </div>
               <div class="kpi_info">
@@ -116,14 +120,34 @@
           </div>
         </div>
       </section>
+      <div id="containerModal" class="container-alerta" style="display: none">
+        <div class="titulo-alerta">
+          <i class="fa-solid fa-triangle-exclamation" style="color: red;"></i> Alerta de Métrica Irregular!
+        </div>
+        <div id="alertModal" class="conteudo-alerta">
+
+        </div>
+        <div class="buttons-alerta">
+          <button onclick="telaAlertas()">Ver Lista de Alertas</button><button onclick="fecharAlerta()">Fechar</button>
+        </div>
+      </div>
   </main>
 </body>
 
 <script src="../js/sessao.js"></script>
 <script src="../js/configHeader.js"></script>
 <script src="../js/headerDash.js"></script>
+
 </html>
 <script>
+  function telaAlertas() {
+    window.location = "./tela-dos-alertas.html"
+  }
+
+  function fecharAlerta(){
+    containerModal.style.display = 'none'
+  }
+
   var corTexto = getComputedStyle(document.body).getPropertyValue('--cor-texto');
 
   // ------------------- Dados de exemplo
@@ -267,7 +291,7 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-            resposta.json().then(function (res) {
+          resposta.json().then(function (res) {
 
             console.log(`Dados recebidos: ${JSON.stringify(res)}`);
             tempMax.innerHTML = res[0].tempMax + 'ºC'
@@ -329,6 +353,56 @@
       });
   }
 
+  function mostarUltimoAlerta() {
+
+    fetch("/medidas/ultimoAlerta", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        idSilo: idSilo
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta grafico: ", resposta);
+
+        if (resposta.status == 200) {
+          resposta.json().then(function (res) {
+
+            console.log(`Dados recebidos ultimo alerta: ${JSON.stringify(res)}`);
+            
+            if(resposta.length != 0){
+              containerModal.style.display = 'flex'
+
+              alertModal.innerHTML = `
+              O <span class="text-destaque"> sensor  ${res[0].idSensor}</span> alertou que as métricas chegaram em um estado perigoso, onde a Temperatura foi: <span class="text-destaque">${res[0].temperatura}ºC </span> e a umidade foi de <span class="text-destaque">${res[0].umidade}%</span>.
+              `
+            }
+
+
+            // alertModal.innerHTML = `
+            // <div style="display: flex; justify-content: center; gap: 20px">
+            // <div>Temperatura: <h2>${res[0].temperatura}ºC</h2></div>
+            // <div>Umidade: <h2>${res[0].umidade}%</h2> </div>
+            // </div>
+            // ${res[0].dataHora}
+            // `
+
+
+          });
+        } else {
+          console.error(`Nenhum dado encontrado para o id ${idSilo} ou erro na API`);
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+
+      });
+  }
+
 
   function plotarGrafico(resposta, idSilo) {
 
@@ -365,4 +439,6 @@
     botaoGrafico.classList.remove("section-active");
     botaoKpi.classList.add("section-active");
   })
+
+
 </script>
